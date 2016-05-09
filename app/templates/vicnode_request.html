@@ -1,0 +1,118 @@
+<div ng-include="'templates/site_authen_header.html'"></div>
+<div class="main-container">
+    <div ng-include="'templates/nav_title_bar.html'"></div>
+    <div class="display-body col-md-10">
+        <div ng-include="'templates/error_display.html'"></div>
+        <div>
+            <crams-request-questions-responses parent-call="vm.setRequestQuestionController">
+                <h1>VicNode Storage Request Allocation Form</h1>
+
+                <p>By submitting this application, you verify that VicNode has the right to share the information
+                    contained in this form with any people, institutions, or systems involved in processing this
+                    application, and that VicNode may retain this application.</p>
+                <span class="alert-info"> <strong>Info: </strong></span>Required fields are marked with an
+                <i class="glyphicon glyphicon-asterisk text-primary"></i>
+                <br/><br/>
+
+                <crams-question-dropdown-widget question-key="vn_authorization"></crams-question-dropdown-widget>
+                <br/><br/>
+
+                <h2>Section 1: Contact Detail</h2>
+
+                <h3>Technical Contact</h3>
+
+                <p>The Technical Contact may be required to work with VicNode on technical issues related to this
+                    application and its implementation. The Technical Contact may be the Data Custodian.</p>
+                <label>Technical Contact</label><i class="glyphicon glyphicon-asterisk text-primary"></i>
+                <div class="row" >
+                    <div class="col-md-5" ng-class="{'has-error': vm.contact_invalid}">
+                        <crams-contact contact-email="{{ vm.technical_contact.contact.email }}"
+                                       read-only="true"></crams-contact>
+                        <span class="help-block" ng-show="vm.contact_invalid">No contact selected</span>
+                        <br>
+                    </div>
+                </div>
+
+                <div class="row" ng-controller="ContactSearchFormController as vm">
+                    <div class="col-md-5" class="form-group"
+                         ng-class="{'has-error': vm.contact_form_errors['too_many_results_status']}">
+                        <input type="text" class="form-control" id="id-technical_contact" name="technical_contact"
+                               placeholder="To change contact, search for e-mail or name here."
+                               ng-model="vm.technical_contact_search"/>
+                        <span class="help-block" ng-show="vm.contact_form_errors['too_many_results_status']">{{ vm.contact_form_errors['too_many_results_message'] }}</span>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="row">
+                            <button type="button"
+                                    class="btn btn-default"
+                                    ng-click="vm.searchForContact(vm.technical_contact_search)">
+                                Search
+                            </button>
+                            </span>
+                        </div>
+                    </div>
+
+                </div><br/>
+
+
+                <h2>Section 2: Collection Details</h2>
+                <!-- project title & description //should use widget but haven't made widget -->
+                <div ng-include="'templates/vn_project_form.html'"></div>
+                <!-- FOR codes //should use widget but haven't made widget -->
+                <div ng-include="'templates/for_code_domain.html'"></div>
+
+
+                <h2>Section 3: Storage Requirements</h2>
+
+                <h3>Data Storage Requirements</h3>
+                <crams-vicnode-storage-request-form parent-call="vm.setStorageRequestController"
+                                                    storage-requests="{{vm.storage_requests}}">
+                </crams-vicnode-storage-request-form>
+                <!-- storage_requests quota -->
+                <!-- storage_request_questions_response -->
+
+
+                <h3>Data Migration</h3>
+                <crams-question-text-widget question-key="vn_data_migration_src"></crams-question-text-widget>
+                <crams-question-dropdown-widget question-key="vn_data_migration_assistance"></crams-question-dropdown-widget>
+
+                <h3>User Interface</h3>
+                <crams-question-text-widget question-key="vn_current_access_method"></crams-question-text-widget>
+                <crams-question-text-widget question-key="vn_preferred_access_method"></crams-question-text-widget>
+
+
+                <h2>Section 5: Technical Details</h2>
+
+                <h3>Data Format</h3>
+                <crams-question-text-widget question-key="vn_data_format"></crams-question-text-widget>
+
+                <h3>Data Loss Management</h3>
+                <crams-question-dropdown-widget question-key="vn_only_copy"></crams-question-dropdown-widget>
+                <crams-question-dropdown-widget question-key="vn_can_be_regenerated"></crams-question-dropdown-widget>
+                <crams-question-text-widget question-key="vn_loss_impact"></crams-question-text-widget>
+
+            </crams-request-questions-responses>
+
+            </span>
+
+
+            <form name="vm.request_form" ng-submit="vm.submitForm()" novalidate>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <input class="btn bg-primary" type="submit" value="Submit Request">
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+
+        </div>
+        <br/>
+        <br/>
+    </div>
+</div>
+<div class="clearfix visible-lg"></div>
+</div>
+<div style="clear:both"/>
+<div ng-include="'templates/site_footer.html'"></div>

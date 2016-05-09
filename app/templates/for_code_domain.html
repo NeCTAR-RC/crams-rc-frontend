@@ -1,0 +1,118 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3>Fields of Research (FOR)</h3>
+        <span class="alert-info"> <strong>Note: </strong></span> Please select up to 3 Fields of Research (FOR)
+        codes describing your work, adding up to a total of 100%. For more information on FOR codes please
+        refer to the following
+        <a href="http://www.abs.gov.au/Ausstats/abs@.nsf/Latestproducts/6BB427AB9696C225CA2574180004463E?opendocument" target="_blank">
+            website
+        </a>
+        <hr/>
+        <div ng-class="{'has-error': vm.sum_for_gt_100_invalid || vm.sum_for_lt_100_invalid }">
+            <span class="help-block has-error" ng-show="vm.sum_for_gt_100_invalid">
+                Sum of Field Of Research percentages greater than 100
+            </span>
+            <span class="help-block has-error" ng-show="vm.sum_for_lt_100_invalid">
+                Sum of Field Of Research percentages less than 100
+            </span>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <label for="id-for_code0">
+            First Field Of Research
+        </label>
+        <div class="form-group" ng-class="{'has-error': vm.for_code0_invalid || vm.for_code0_duplicated}">
+            <select name="for_code0" id="id-for_code0" class="form-control"
+                    ng-model="vm.domains[0].for_code.id"
+                    ng-options="for_code.id as for_code.desc for for_code in vm.for_codes"
+                    ng-change="vm.checkFORDuplicate(this, 0)">
+                <option value="">--- Select ---</option>
+            </select>
+            <span class="help-block" ng-show="vm.for_code0_invalid">
+                Please select Field Of Research
+            </span>
+            <span class="help-block" ng-show="vm.for_code0_duplicated">
+                Duplicated Field Of Research
+            </span>
+        </div>
+        <div class="form-group" ng-class="{'has-error': vm.for_percentage0_invalid}">
+            <select name="for_percentage0" id="id-for_percentage0" class="form-control"
+                    ng-model="vm.domains[0].percentage"
+                    ng-options="for_percentage.value as for_percentage.label for for_percentage in vm.for_percentages">
+                <option value="">--- Select ---</option>
+            </select>
+            <span class="help-block" ng-show="vm.for_percentage0_invalid">
+                Please select percentage for Field Of Research
+            </span>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <label for="id-for_code1">
+            Second Field Of Research
+        </label>
+
+        <div class="form-group" ng-class="{'has-error': vm.for_code1_invalid || vm.for_code1_duplicated}">
+            <select name="for_code1" id="id-for_code1" class="form-control"
+                    ng-model="vm.domains[1].for_code.id"
+                    ng-options="for_code.id as for_code.desc for for_code in vm.for_codes"
+                    ng-change="vm.checkFORDuplicate(this, 1)">
+                <option value="">--- Select ---</option>
+            </select>
+            <span class="help-block" ng-show="vm.for_code1_invalid">
+                Please select Field Of Research
+            </span>
+            <span class="help-block" ng-show="vm.for_code1_duplicated">
+                Duplicated Field Of Research
+            </span>
+        </div>
+        <div class="form-group" ng-class="{'has-error': vm.for_percentage1_invalid}">
+            <select name="for_percentage1" id="id-for_percentage1" class="form-control"
+                    ng-model="vm.domains[1].percentage"
+                    ng-options="for_percentage.value as for_percentage.label for for_percentage in vm.for_percentages">
+            </select>
+            <span class="help-block" ng-show="vm.for_percentage1_invalid">
+                Please select percentage for Field Of Research
+            </span>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <label for="id-for_code2">
+            Third Field Of Research
+        </label>
+
+        <div class="form-group" ng-class="{'has-error': vm.for_code2_invalid || vm.for_code2_duplicated}">
+            <select name="for_code2" id="id-for_code2" class="form-control"
+                    ng-model="vm.domains[2].for_code.id"
+                    ng-options="for_code.id as for_code.desc for for_code in vm.for_codes"
+                    ng-change="vm.checkFORDuplicate(this, 2)">
+                <option value="">--- Select ---</option>
+            </select>
+            <span class="help-block" ng-show="vm.for_code2_invalid">
+                Please select Field Of Research
+            </span>
+            <span class="help-block" ng-show="vm.for_code2_duplicated">
+                Duplicated Field Of Research
+            </span>
+        </div>
+        <div class="form-group" ng-class="{'has-error': vm.for_percentage2_invalid}">
+            <select name="for_percentage2" id="id-for_percentage2" class="form-control"
+                    ng-model="vm.domains[2].percentage"
+                    ng-options="for_percentage.value as for_percentage.label for for_percentage in vm.for_percentages">
+                <option value="">--- Select ---</option>
+            </select>
+            <span class="help-block" ng-show="vm.for_percentage2_invalid">
+                Please select percentage for Field Of Research
+            </span>
+        </div>
+    </div>
+</div>

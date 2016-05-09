@@ -1,0 +1,285 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="m_title">
+            <i class="fa fa-folder-open"></i> {{vm.alloc_project_request.title}}
+        </div>
+    </div>
+    <div class="blank_separator"></div>
+
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <div class="sub_title">
+                <i class="fa fa-users"></i> Project Contacts
+            </div>
+            <table class="data_tab">
+                <tr ng-repeat="contact in vm.alloc_project_request.project_contacts">
+                    <th width="50%">{{ contact.contact_role.name }}</th>
+                    <td width="50%">{{ contact.contact.email }}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <div class="sub_title">
+                <i class="fa fa-crosshairs"></i> System IDs
+            </div>
+            <table class="data_tab">
+                <tr ng-repeat="projid in vm.alloc_project_request.project_ids">
+                    <th width="50%">{{ projid.identifier }}</th>
+                    <td width="50%">{{ projid.system.system }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="blank_separator"></div>
+
+    <div class="col-md-12">
+        <div class="sub_title">
+            <span class="sub_title"><i class="fa fa-paper-plane-o"></i> For Code</span>
+        </div>
+        <table class="data_tab">
+            <thead>
+            <tr>
+                <th width="30%">For Code</th>
+                <th width="30%">Description</th>
+                <th width="40%">Percentage</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="dom in vm.alloc_project_request.domains">
+                <td>{{dom.for_code.code}}</td>
+                <td>{{dom.for_code.description}}</td>
+                <td>{{dom.percentage}} %</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="blank_separator"></div>
+
+    <div class="col-md-12">
+        <div class="sub_title">
+            <span class="sub_title"><i class="fa fa-th-list"></i> Supported Institutions</span>
+        </div>
+        <table class="data_tab">
+            <tbody>
+            <tr ng-repeat="ins in vm.alloc_project_request.institutions">
+                <td>{{ins.institution}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-12">
+        <div class="sub_title">
+            <span class="sub_title"><i class="fa fa-book"></i> Publications</span>
+        </div>
+        <table class="data_tab">
+            <tbody>
+            <tr ng-repeat="pub in vm.alloc_project_request.publications">
+                <td>{{pub.reference}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="blank_separator"></div>
+
+    <div class="col-md-12">
+        <div class="sub_title">
+            <span class="sub_title"><i class="fa fa-money"></i> Grants </span>
+        </div>
+        <table class="data_tab">
+            <tbody>
+            <tr ng-repeat="grant in vm.alloc_project_request.grants">
+                <td>{{grant.grant_type.description}} - {{ grant.funding_body_and_scheme }} -
+                    {{grant.grant_id}} -
+                    {{grant.start_year}} - AUD: {{grant.total_funding}}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="blank_separator"></div>
+
+    <div class="col-md-12">
+        <div class="sub_title">
+            <span class="sub_title"><i class="fa fa-comments"></i> Additional Information </span>
+        </div>
+        <table class="data_tab">
+            <tbody>
+            <tr ng-repeat="pqresp in vm.alloc_project_request.project_question_responses">
+                <th width="30%">{{pqresp.question.question}}</th>
+                <td width="70%">{{ pqresp.question_response}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="blank_separator"></div>
+
+<div class="row" ng-repeat="req in vm.alloc_project_request.requests">
+    <div class="col-md-12">
+        <div class="sub_title">
+            Request Id: {{req.id}} [ {{req.request_status.status}} ( {{req.request_status.code}} ) ]
+        </div>
+    </div>
+    <div class="col-md-12">
+        <table class="data_tab">
+            <tbody>
+            <tr>
+                <th width="30%">Requested duration:</th>
+                <td width="70%">{{req.start_date}} <i class="fa fa-long-arrow-right"></i>
+                    {{req.end_date}}
+                </td>
+            </tr>
+            <tr>
+                <th width="30%">Funding Scheme:</th>
+                <td width="70%">{{req.funding_scheme.funding_scheme}}</td>
+            </tr>
+            <tr ng-repeat="reqresponse in req.request_question_responses">
+                <th width="30%">{{reqresponse.question.question}}</th>
+                <td width="70%">{{reqresponse.question_response}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="blank_separator"></div>
+
+    <div class="col-md-12">
+        <div class="sub_title">
+            <span class="sub_title"><i class="fa fa-desktop"></i> Compute Resources </span>
+        </div>
+        <div>
+            <table class="data_tab">
+                <thead>
+                <tr>
+                    <th width="30%">&nbsp;</th>
+                    <th width="30%">Requested</th>
+                    <th width="40%">Approved</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+        <table width="100%">
+            <tr ng-repeat="compute in req.compute_requests">
+                <td>
+                    <table class="data_tab">
+                        <tr>
+                            <td colspan="3">{{compute.compute_product.name}}</td>
+                        </tr>
+                        <tr>
+                            <th width="30%">Instances</th>
+                            <td width="30%">{{compute.instances}}</td>
+                            <td width="40%">{{compute.approved_instances}}</td>
+                        </tr>
+                        <tr>
+                            <th>Core</th>
+                            <td>{{compute.cores}}</td>
+                            <td>{{compute.approved_cores}}</td>
+                        </tr>
+                        <tr>
+                            <th>Core Hours</th>
+                            <td>{{compute.core_hours}}</td>
+                            <td>{{compute.approved_core_hours}}</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="blank_separator">&nbsp;</div>
+
+    <div class="col-md-12">
+        <div class="sub_title">
+            <span class="sub_title"><i class="fa fa-database"></i> Storage Resources </span>
+        </div>
+        <div>
+            <table class="data_tab">
+                <thead>
+                <tr>
+                    <th width="30%">&nbsp;</th>
+                    <th width="30%">Requested</th>
+                    <th width="40%">Approved</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+        <table width="100%">
+            <tr ng-repeat="storage in req.storage_requests">
+                <td>
+                    <table class="data_tab">
+                        <tr>
+                            <td colspan="3">{{storage.storage_product.name}}</td>
+                        </tr>
+                        <tr>
+                            <th width="30%">Quota</th>
+                            <td width="30%">{{storage.quota}}</td>
+                            <td width="40%">{{storage.approved_quota}}</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="blank_separator">&nbsp;</div>
+    <div ng-show="req.approval_notes">
+        <div class="col-md-12">
+            <div class="sub_title">
+                <span class="sub_title"><i class="fa fa-comment"></i> {{req.request_status.status}} <i class="fa fa-long-arrow-right"></i> Note </span>
+            </div>
+            <div>
+                <textarea name="approval_notes" id="id-approval_notes"
+                          ng-model="req.approval_notes" class="form-control"
+                          rows="5" style="height:120px; width:480px" readonly="readonly"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="blank_separator"></div>
+    <div class="col-md-12">
+        <div class="sub_title">
+            <span class="sub_title"><i class="fa fa-codepen"></i> Actions </span>
+        </div>
+        <div class="col-md-2"  ng-if="vm.isEditable(nav.first_path)">
+            <div class="form-group">
+                <span ng-if="req.request_status.code =='E' && !req.parent_request">
+                    <span ng-if="req.funding_scheme.funding_scheme.indexOf('NeCTAR') > -1">
+                        <a href="#/allocations/edit_request/{{vm.alloc_project_request.id}}/{{req.id}}">
+                            <input class="btn bg-primary" type="button" value="Edit Request">
+                        </a>
+                    </span>
+                    <span ng-if="req.funding_scheme.funding_scheme.indexOf('VicNode') > -1">
+                        <a href="#/allocations/edit_vicnode_request/{{vm.alloc_project_request.id}}/{{req.id}}">
+                            <input class="btn bg-primary" type="button" value="Edit Request">
+                        </a>
+                    </span>
+                </span>
+                 <span ng-if="req.request_status.code !='E' && req.request_status.code !='A' && !req.parent_request">
+                     <span ng-if="req.funding_scheme.funding_scheme.indexOf('NeCTAR') > -1">
+                         <a href="#/allocations/edit_request/{{vm.alloc_project_request.id}}/{{req.id}}">
+                            <input class="btn bg-primary" type="button" value="Amend/Extend allocation">
+                         </a>
+                     </span>
+                     <span ng-if="req.funding_scheme.funding_scheme.indexOf('VicNode') > -1">
+                         <a href="#/allocations/edit_vicnode_request/{{vm.alloc_project_request.id}}/{{req.id}}">
+                             <input class="btn bg-primary" type="button" value="Amend/Extend allocation">
+                         </a>
+                     </span>
+                 </span>
+            </div>
+        </div>
+        <div class="col-md-2" ng-if="vm.isApprovable(req.request_status.code, nav.first_path) && !req.parent_request" >
+            <a href="#/approval/approve_request/{{req.id}}">
+                <input class="btn bg-primary" type="button" value="Approve Request"/>
+            </a>
+        </div>
+        <div class="col-md-2" ng-if="vm.isDeclinable(req.request_status.code, nav.first_path) && !req.parent_request" >
+            <a href="#/approval/decline_request/{{req.id}}">
+                <input class="btn bg-primary" type="button" value="Decline Request"/>
+            </a>
+        </div>
+        <div class="col-md-2" ng-if="!req.parent_request">
+            <a href="#/{{ nav.first_path }}/history/{{req.id}}">
+                <input class="btn bg-primary" type="button" value="Request History">
+            </a>
+        </div>
+    </div>
+</div>

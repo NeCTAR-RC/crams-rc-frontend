@@ -1,0 +1,14 @@
+<div ng-include="'templates/site_header.html'"></div>
+<div class="main-container">
+   <div ng-controller="NavController" ng-include="'templates/nav_title_bar.html'" ng-class="{ active: isCurrentPath('/') }"></div>
+    <div style="clear:both"></div>
+    <div class="display-body">
+        <div>
+            <div class="crams-image-container">
+                <h1>NeCTAR Cloud platforms for researchers by researchers</h1>
+                <img src="images/nectar_cloud.jpg">
+            </div>
+        </div>
+    </div>
+</div>
+<div ng-include="'templates/site_footer.html'"></div>

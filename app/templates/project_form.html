@@ -1,0 +1,125 @@
+<div class="row">
+    <div class="col-md-3">
+        <label for="id-project_project_ids_0_identifier">
+            Project Identifier <i class="glyphicon glyphicon-asterisk text-primary"></i>
+        </label>
+        <span ng-controller="PopupController">
+            <span ng-click="showHelp()" class="help-icon-sp"><img class="help-icon" src="images/help.png"></span>
+            <modal title="{{ help.project_identifier.title }}" visible="showModal">
+                <span ng-bind-html="help.project_identifier.text"></span>
+            </modal>
+        </span>
+
+        <div class="form-group" ng-class="{'has-error': vm.project_ids_identifier_invalid}">
+            <input type="text" name="project_identifier" id="id-project_project_ids_0_identifier" class="form-control"
+                   ng-model="vm.alloc.project_ids[0].identifier" ng-readonly="vm.readyOnlyField"
+                   ng-pattern="/^[a-zA-Z][-_a-zA-Z0-9]{1,31}$/"required maxlength="32"/>
+            <input type="hidden" ng-model="vm.alloc.project_ids[0].system"
+                   value="{{vm.alloc.project_ids[0].system}}"/>
+            <span class="help-block" ng-show="vm.project_ids_identifier_invalid">
+                Invalid project identifier. (Letters, numbers, underscores and hyphens only. Must start with a letter and be less than 32 characters)
+            </span>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <label for="id-project_description">
+            Project Allocation Title <i class="glyphicon glyphicon-asterisk text-primary"></i>
+        </label>
+
+       <span ng-controller="PopupController">
+            <span ng-click="showHelp()" class="help-icon-sp"><img class="help-icon" src="images/help.png"></span>
+            <modal title="{{ help.project_description.title }}" visible="showModal">
+                <span ng-bind-html="help.project_description.text"></span>
+            </modal>
+        </span>
+
+        <div class="form-group" ng-class="{'has-error': vm.project_description_invalid}">
+            <input type="text" name="project_description" id="id-project_description" class="form-control"
+                   ng-model="vm.alloc.description" ng-readonly="vm.readyOnlyField" required/>
+            <span class="help-block" ng-show="vm.project_description_invalid">Please enter project description</span>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <label for="id-start_date">
+            Start Date <i class="glyphicon glyphicon-asterisk text-primary"></i>
+        </label>
+
+         <span ng-controller="PopupController">
+            <span ng-click="showHelp()" class="help-icon-sp"><img class="help-icon" src="images/help.png"></span>
+            <modal title="{{ help.start_date.title }}" visible="showModal">
+                <span ng-bind-html="help.start_date.text"></span>
+            </modal>
+        </span>
+
+        <p class="input-group">
+            <input type="text" name="start_date" id="id-start_date" class="form-control"
+                   data-ng-model="vm.alloc.requests[0].start_date" readonly="readonly"
+                   datepicker-popup='yyyy-MM-dd' is-open="vm.opened" ng-click="vm.openCalendar($event)"
+                   ng-change="vm.updateCoreHours()" datepicker-options="vm.date_options" show-button-bar="false"
+                   ng-change="vm.closeCalendar()"/>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="vm.openCalendar($event)">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                    </button>
+                </span>
+        </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <label for="id-estimated_duration">
+            Estimated Project Duration <i class="glyphicon glyphicon-asterisk text-primary"></i>
+        </label>
+
+        <span ng-controller="PopupController">
+            <span ng-click="showHelp()" class="help-icon-sp"><img class="help-icon" src="images/help.png"></span>
+            <modal title="{{ help.estimated_duration.title }}" visible="showModal">
+                <span ng-bind-html="help.estimated_duration.text"></span>
+            </modal>
+        </span>
+
+        <div class="form-group" ng-class="{'has-error': vm.estimated_duration_invalid}">
+            <select name="estimated_duration" id="id-estimated_duration" class="form-control"
+                    ng-model="vm.alloc.requests[0].request_question_responses[0].question_response" ng-change="vm.updateCoreHours()"
+                    ng-options="key as value for (key,value) in vm.durations" required>
+                <option value="">--- Select ---</option>
+            </select>
+            <span class="help-block"
+                  ng-show="vm.estimated_duration_invalid">Please select estimated project duration</span>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <label for="id-convert_project_trial">
+            Convert Trial Project ?
+        </label>
+
+        <span ng-controller="PopupController">
+            <span ng-click="showHelp()" class="help-icon-sp"><img class="help-icon" src="images/help.png"></span>
+            <modal title="{{ help.convert_project_trial.title }}" visible="showModal">
+                <span ng-bind-html="help.convert_project_trial.text"></span>
+            </modal>
+        </span>
+
+        <div class="form-group" ng-class="{'has-error': vm.convert_project_trial_invalid}">
+            <select name="convert_project_trial" id="id-convert_project_trial" class="form-control"
+                    ng-model="vm.alloc.requests[0].request_question_responses[1].question_response"
+                    ng-options="obj.value as obj.label for obj in vm.project_trial_options" required>
+                <option value="">--- Select ---</option>
+            </select>
+                        <span class="help-block" ng-show="vm.convert_project_trial_invalid">
+                            Please indicate whether move resources from my pt- project to this new project
+                        </span>
+        </div>
+    </div>
+</div>
+

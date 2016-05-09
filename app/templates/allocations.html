@@ -1,0 +1,67 @@
+
+<div class="row" ng-repeat="project in vm.nc_projects  track by $index">
+    <div class="col-md-12">
+        <div class="m_title">{{project.title}}</div>
+    </div>
+    <div class="col-md-12">
+        <table class="display_data_tab">
+            <thead>
+            <tr>
+                <th width="20%">Status</th>
+                <th width="30%">Resources</th>
+                <th width="10%">Expiry</th>
+                <th width="20%">Funding</th>
+                <th width="20%">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="nc_req in project.requests">
+                <td width="20%">
+                    {{nc_req.request_status.status}} [{{nc_req.request_status.code}}]
+                    <provision-details projectid="{{ project.id }}" project="project"></provision-details>
+                </td>
+                <td>
+                    <div class="row" ng-repeat="comp_request in nc_req.compute_requests">
+                        <div class="col-md-12">
+                            {{comp_request.compute_product.name}}: {{comp_request.cores}} Cores,
+                            {{comp_request.core_hours}} VCPU Hours
+                        </div>
+                    </div>
+                    <div class="row" ng-repeat="storage_request in nc_req.storage_requests">
+                        <div class="col-md-12">
+                            {{storage_request.storage_product.name}}: {{storage_request.quota}} GB
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    {{nc_req.end_date}}
+                </td>
+                <td>
+                    {{nc_req.funding_scheme.funding_scheme}}
+                </td>
+                <td>
+                    <a href="#/{{ nav.first_path }}/view_request/{{nc_req.id}}">View</a> |
+                    <span ng-if="nc_req.request_status.code =='E' || nc_req.request_status.code =='N'">
+                        <span ng-if="nc_req.funding_scheme.funding_scheme.indexOf('NeCTAR') > -1">
+                            <a href="#/{{ nav.first_path }}/edit_request/{{nc_req.project}}/{{nc_req.id}}">Edit</a> |
+                        </span>
+                        <span ng-if="nc_req.funding_scheme.funding_scheme.indexOf('VicNode') > -1">
+                            <a href="#/{{ nav.first_path }}/edit_vicnode_request/{{nc_req.project}}/{{nc_req.id}}">Edit</a> |
+                        </span>
+                    </span>
+                    <span ng-if="nc_req.request_status.code !='N' && nc_req.request_status.code !='E' && nc_req.request_status.code !='A'">
+                        <span ng-if="nc_req.funding_scheme.funding_scheme.indexOf('NeCTAR') > -1">
+                            <a href="#/{{ nav.first_path }}/edit_request/{{nc_req.project}}/{{nc_req.id}}">Amend/Extend allocation</a> |
+                        </span>
+                        <span ng-if="nc_req.funding_scheme.funding_scheme.indexOf('VicNode') > -1">
+                            <a href="#/{{ nav.first_path }}/edit_vicnode_request/{{nc_req.project}}/{{nc_req.id}}">Amend/Extend allocation</a> |
+                        </span>
+                    </span>
+                    <a href="#/{{ nav.first_path }}/history/{{nc_req.id}}">History</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div style="clear: both"/>

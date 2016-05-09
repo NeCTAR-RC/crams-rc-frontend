@@ -1,0 +1,12 @@
+<div class="navbar-title-div">
+    <div class="navbar-inline">
+        <a href="#/"> Home </a>
+    </div>
+    <div class="navbar-inline" ng-show="nav.has_first_level">
+        <i class="fa fa-angle-double-right"></i> <a href="#/{{ nav.first_path }}">{{ nav.first_level_title }}</a>
+    </div>
+    <div class="navbar-inline" ng-show="nav.has_second_level">
+        <i class="fa fa-angle-double-right"></i> <a href="#/{{ nav.first_path }}/{{ nav.second_path }}">{{ nav.second_level_title }}</a>
+    </div>
+</div>
+<div style="clear:both"></div>

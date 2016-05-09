@@ -1,0 +1,57 @@
+<div ng-include="'templates/site_authen_header.html'"></div>
+<div class="main-container">
+    <div ng-include="'templates/nav_title_bar.html'"></div>
+    <div class="display-body">
+        <div ng-include="'templates/error_display.html'"></div>
+        <div class="row">
+            <div class="col-md-12">
+                <p>
+                    This form allows you to request a project specific allocation on the research cloud.
+                </p>
+
+                <p>
+                    Allocations take up to 2 to 3 weeks to process. If you have any questions please email
+                    allocations@nectar.org.au
+                </p>
+
+                <p>
+                    <span class="alert-info"><strong>Note: </strong></span>If you would like to request an extension or
+                    amendment of an existing allocation, please use the Edit request action on the existing allocation
+                    request
+                    on the My Requests page.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <span class="alert-info"> <strong>Info: </strong></span>Required fields are marked with an
+                <i class="glyphicon glyphicon-asterisk text-primary"></i>
+                sign
+            </div>
+        </div>
+        <hr/>
+        <form name="vm.request_form" ng-submit="vm.submitReq()" novalidate>
+            <div ng-include="'templates/project_form.html'"></div>
+            <div ng-include="'templates/compute_form.html'"></div>
+            <div ng-include="'templates/storage_product_form.html'"></div>
+            <div ng-include="'templates/usage_info.html'"></div>
+            <div ng-include="'templates/for_code_domain.html'"></div>
+            <div ng-include="'templates/supported_institution.html'"></div>
+            <div ng-include="'templates/chief_investigator.html'"></div>
+            <div ng-include="'templates/publication_form.html'"></div>
+            <div ng-include="'templates/research_grant.html'"></div>
+            <div ng-include="'templates/project_support.html'"></div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input class="btn bg-primary" type="submit" value="Submit">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="clearfix visible-lg"></div>
+</div>
+<div style="clear:both"/>
+<div ng-include="'templates/site_footer.html'"></div>

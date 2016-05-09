@@ -1,0 +1,56 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3>Supported Institutions</h3>
+        <span class="alert-info"> <strong>Note: </strong></span>Specify which universities or research institutions
+        will be supported by the application or specify 'all'.
+        <hr/>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <label>
+            Supported Institutions <i class="glyphicon glyphicon-asterisk text-primary"></i>
+        </label>
+        <span ng-controller="PopupController">
+            <span ng-click="showHelp()" class="help-icon-sp"><img class="help-icon" src="images/help.png"></span>
+            <modal title="{{ help.supported_institution.title }}" visible="showModal">
+                <span ng-bind-html="help.supported_institution.text"></span>
+            </modal>
+        </span>
+
+        <div ng-class="{'has-error': vm.instForm_institution_invalid}">
+            <span class="help-block has-error" ng-show="vm.instForm_institution_invalid">
+               Please enter supported institution
+            </span>
+        </div>
+
+        <div ng-repeat="inst in vm.alloc.institutions track by $index"
+             ng-class="{'has-error': instForm.institution.$dirty && instForm.institution.$invalid}">
+            <ng-form name="instForm">
+                <span class="input-append">
+                    <input type="text" name="institution" ng-model="inst.institution" class="form-control"
+                           style="float:left;width: 74%" ng-change="vm.resetInstInvalidFlag()" required/> &nbsp;&nbsp;
+                        <button class="mbtn" ng-if="$index > 0" ng-click="vm.removeInst($index)" type="button" title="Remove">
+                            <i class="remove-icon glyphicon glyphicon-remove text-danger"></i>
+                        </button>
+                </span>
+                <span class="help-block" ng-show="instForm.institution.$dirty && instForm.institution.$invalid">
+                    <br/>Please enter supported institution
+                </span>
+
+                <div style="clear: both"/>
+                <br/>
+            </ng-form>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="form-group">
+            <input class="btn btn-default" type="button" value="Add Supported Institution" ng-click="vm.addInst($event)">
+        </div>
+    </div>
+</div>
+
+

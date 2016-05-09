@@ -1,0 +1,128 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3>Storage Resources</h3>
+        There are 2 types of storage quota currently available on the NeCTAR Research Cloud. They are Volume and Object.
+        <br/>
+        <table class="table">
+            <tr>
+                <th>Volume</th>
+                <td>
+                    A persistent volume looks and acts like a hard drive that can be attached to your virtual
+                    machines. The data on it will persist between runs of your virtual machine. Specify the total
+                    size in gigabytes that the project will need. More information is available on the
+                    <a href="http://support.rc.nectar.org.au/docs/volumes" target="_blank">
+                        Persistent Volumes support page
+                    </a>.
+                </td>
+            </tr>
+            <tr>
+                <th>Object</th>
+                <td>
+                    Object Storage is a large accessible online storage location that you can reach from most
+                    machines with internet connectivity. Object Storage
+                    requires cloud native applications for access. Specify the total size in
+                    gigabytes that the project will need. More information is available on the
+                    <a href="http://support.rc.nectar.org.au/docs/object-storage" target="_blank">
+                        Object Storage support page
+                    </a>.
+                </td>
+            </tr>
+        </table>
+
+        <div ng-class="{'has-error': vm.storageForm_sp_invalid}">
+            <span class="help-block has-error" ng-show="vm.storageForm_sp_invalid">
+                Please select a storage product
+            </span>
+        </div>
+
+        <div ng-class="{'has-error': vm.storageForm_sp_quota_invalid}">
+            <span class="help-block has-error" ng-show="vm.storageForm_sp_quota_invalid">
+                Please specify the total size in gigabytes
+            </span>
+        </div>
+    </div>
+</div>
+
+<table width="60%">
+    <tbody>
+    <tr ng-repeat="storage_request in vm.alloc.requests[0].storage_requests track by $index">
+        <td width="50%">
+            <ng-form name="storageForm">
+                <div class="border_div">
+                    <div class="col-md-10">
+                        <label for="id-nectar_sp">
+                            Storage Product <i class="glyphicon glyphicon-asterisk text-primary"></i>
+                        </label>
+                        <span ng-controller="PopupController">
+                            <span ng-click="showHelp()" class="help-icon-sp">
+                                <img class="help-icon" src="images/help.png">
+                            </span>
+                            <modal title="{{ help.nectar_sp.title }}" visible="showModal">
+                                <span ng-bind-html="help.nectar_sp.text"></span>
+                            </modal>
+                        </span>
+
+                        <div class="form-group"
+                             ng-class="{'has-error': storageForm.nectar_sp.$invalid || storageForm.$error.isdup}">
+                            <select name="nectar_sp" id="id-nectar_sp" class="form-control"
+                                    ng-model="storage_request.storage_product.id"
+                                    ng-options="nc_sp.id as nc_sp.name for nc_sp in vm.ncStorageProducts"
+                                    ng-change="vm.checkNcSpDuplicate(this, $index)" required>
+                                <option value="">--- Select ---</option>
+                            </select>
+                            <span class="help-block"
+                                  ng-show="storageForm.nectar_sp.$invalid && !storageForm.$error.isdup">
+                                Please select a storage product
+                            </span>
+                            <span class="help-block" ng-show="storageForm.$error.isdup">
+                                Duplicated storage product
+                            </span>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-10">
+                        <label for="id-nectar_sp_quota">
+                            Requested Quota <i class="glyphicon glyphicon-asterisk text-primary"></i>
+                        </label>
+                        <span ng-controller="PopupController">
+                            <span ng-click="showHelp()" class="help-icon-sp">
+                                <img class="help-icon" src="images/help.png">
+                            </span>
+                            <modal title="{{ help.nectar_sp_quota.title }}" visible="showModal">
+                                <span ng-bind-html="help.nectar_sp_quota.text"></span>
+                            </modal>
+                        </span>
+
+                        <div class="form-group"
+                              ng-class="{'has-error':storageForm.nectar_sp_quota.$dirty && storageForm.nectar_sp_quota.$invalid}">
+                            <input type="number" name="nectar_sp_quota" id="id-nectar_sp_quota"
+                                   class="form-control" ng-model="storage_request.quota" style="float:left;width: 84%" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn">GB</button>
+                            </span>
+                            <span class="help-block"
+                                  ng-show="storageForm.nectar_sp_quota.$dirty && storageForm.nectar_sp_quota.$invalid">
+                            Specify the total size in gigabytes that the project will need
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </ng-form>
+        </td>
+        <td>
+            <button class="btn btn-default" id="delete-grant" type="button" ng-click="vm.removeNcSpQuota($index)">
+                Delete
+            </button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div class="row">
+    <div class="col-md-3">
+        <div class="form-group">
+            <input class="btn btn-default" type="button" value="Add storage quota" ng-click="vm.addNcSpQutoa($event)">
+        </div>
+    </div>
+</div>
+

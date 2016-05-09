@@ -1,0 +1,22 @@
+<form role="form">
+    <label>Name</label>
+    <input type="text" class="form-control" placeholder="No contact selected"
+           ng-readonly="{{ readOnly }}"
+           ng-model="vm.displayed_contact.displayedname">
+    <label>Email Address</label>
+    <input type="text" class="form-control" placeholder="No contact selected"
+           ng-readonly="{{ readOnly }}"
+           ng-model="vm.displayed_contact.emailaddress">
+    <span ng-show="vm.displayed_contact.phonenumber">
+    <label>Phone Number</label>
+    <input type="text" class="form-control" placeholder="No contact selected"
+           ng-readonly="{{ readOnly }}"
+           ng-model="vm.displayed_contact.phonenumber">
+        </span>
+    <span ng-show="vm.displayed_contact.organisation">
+    <label>Organisation</label>
+    <input type="text" class="form-control" placeholder="No contact selected"
+           ng-readonly="{{ readOnly }}"
+           ng-model="vm.displayed_contact.organisation">
+        </span>
+</form>

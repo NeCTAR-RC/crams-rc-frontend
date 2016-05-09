@@ -1,0 +1,125 @@
+<div class="row">
+    <div class="col-md-9">
+        <form name="vicnode_storage_requests" ng-controller="VicnodeStorageRequestsController"
+              ng-class="{'has-error': vm.storage_selection_invalid}">
+
+<span><p>Identify the storage volume for your collection in gigabytes, and the preferred storage type.
+    <a target="_blank" href="http://vicnode.org.au/products/">Detailed descriptions</a> of each storage type are
+    available on the VicNode
+    website.</p></span>
+
+            <p>
+                <span class="alert-info"> <strong>Note: </strong></span>Please select at least one storage type
+            </p>
+
+            <h4><label for="storage_fundingbody"> Location of storage volume: </label></h4>
+            <select ng-init="vm.storage_fundingbody = 'monash'" id="storage_fundingbody" ng-model="vm.storage_fundingbody">
+                <option value="melbourne">University of Melbourne</option>
+                <option value="monash">Monash University</option>
+            </select><br><br>
+            <div>
+                <h4>
+                    <label>
+                        Vault (VST1)
+                        <input type="checkbox" ng-model="vm.vst1_checked">
+                    </label>
+                </h4>
+                <span class="help-block" ng-show="vm.storage_selection_invalid">No storage selected</span>
+                <fieldset ng-disabled="!vm.vst1_checked" class="form-group">
+
+                    <div class="col-md-3" ng-class="{'has-error': vm.vst1_current_invalid}">
+                        <label for="vst1_current">Current size of data:</label>
+
+                        <div class="input-group">
+                            <input id="vst1_current" type="number" ng-model="vm.vst1_current" class="form-control">
+                            <span class="input-group-addon">GB</span>
+                        </div>
+                        <span class="help-block" ng-show="vm.vst1_current_invalid">Required field</span>
+                    </div>
+
+                    <div class="col-md-3" ng-class="{'has-error': vm.vst1_requested_invalid}">
+                        <label for="vst1_quota">Requested Quota:</label>
+
+                        <div class="input-group">
+                            <input id="vst1_quota" type="number" ng-model="vm.vst1_requested" class="form-control">
+                            <span class="input-group-addon">GB</span>
+                        </div>
+                        <span class="help-block" ng-show="vm.vst1_requested_invalid">Required field</span>
+                    </div>
+                </fieldset>
+            </div>
+
+            <br>
+
+            <div>
+                <h4>
+                    <label>
+                        Market (VST2)
+                        <input type="checkbox" ng-model="vm.vst2_checked">
+                    </label>
+                </h4>
+                <span class="help-block" ng-show="vm.storage_selection_invalid">No storage selected</span>
+                <fieldset ng-disabled="!vm.vst2_checked" class="form-group">
+
+                    <div class="col-md-3" ng-class="{'has-error': vm.vst2_current_invalid}">
+                        <label for="vst2_current">Current size of data:</label>
+
+                        <div class="input-group">
+                            <input id="vst2_current" type="number" ng-model="vm.vst2_current" class="form-control">
+                            <span class="input-group-addon">GB</span>
+                        </div>
+                        <span class="help-block" ng-show="vm.vst2_current_invalid">Required field</span>
+                    </div>
+
+                    <div class="col-md-3" ng-class="{'has-error': vm.vst2_requested_invalid}">
+                        <label for="vst2_quota">Requested Quota:</label>
+
+                        <div class="input-group">
+                            <input id="vst2_quota" type="number" ng-model="vm.vst2_requested" class="form-control">
+                            <span class="input-group-addon">GB</span>
+                        </div>
+                        <span class="help-block" ng-show="vm.vst2_requested_invalid">Required field</span>
+                    </div>
+
+                </fieldset>
+            </div>
+
+            <br>
+
+            <div>
+                <h4>
+                    <label>
+                        Computational (VST3)
+                        <input type="checkbox" ng-model="vm.vst3_checked">
+                    </label>
+                </h4>
+                <span class="help-block" ng-show="vm.storage_selection_invalid">No storage selected</span>
+                <fieldset ng-disabled="!vm.vst3_checked" class="form-group">
+
+                    <div class="col-md-3" ng-class="{'has-error': vm.vst3_current_invalid}">
+                        <label for="vst3_current">Current size of data:</label>
+
+                        <div class="input-group">
+                            <input id="vst3_current" type="number" ng-model="vm.vst3_current" class="form-control">
+                            <span class="input-group-addon">GB</span>
+                        </div>
+                        <span class="help-block" ng-show="vm.vst3_current_invalid">Required field</span>
+                    </div>
+
+                    <div class="col-md-3" ng-class="{'has-error': vm.vst3_requested_invalid}">
+                        <label for="vst3_quota">Requested Quota:</label>
+
+                        <div class="input-group">
+                            <input id="vst3_quota" type="number" ng-model="vm.vst3_requested" class="form-control">
+                            <span class="input-group-addon">GB</span>
+                        </div>
+                        <span class="help-block" ng-show="vm.vst3_requested_invalid">Required field</span>
+                    </div>
+
+                </fieldset>
+            </div>
+            <br>
+        </form>
+    </div>
+    <br><br>
+</div>

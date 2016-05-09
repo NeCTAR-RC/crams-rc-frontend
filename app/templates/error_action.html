@@ -1,0 +1,38 @@
+<div ng-include="'templates/site_header.html'"></div>
+<div class="main-container">
+    <div ng-controller="NavController" ng-include="'templates/nav_title_bar.html'"
+         ng-class="{ active: isCurrentPath('/') }"></div>
+    <div style="clear:both"></div>
+    <div class="display-body">
+        <div>
+            <br/>
+
+            <div class="col-md-12">
+                <div class="error-template">
+                    <h1>Oops!</h1>
+                    <p>Sorry, an error has occured!</p>
+                    <div class="error-details" ng-if="flash">
+                        <p>{{flash.message}}</p>
+                    </div>
+                    <br/>
+                    <div class="col-lg-4 col-lg-offset-4 text-center">
+                        <div class="col-lg-12 error-actions">
+                            <div class="col-md-6">
+                                <a href="#/allocations"><i class="fa fa-tasks"></i> Go to My Allocations </a>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="#/contact_us"><i class="fa fa-fax"></i> Contact Support </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="clear:both"/>
+                    <br>
+                </div>
+
+            </div>
+            <div style="clear:both"/>
+            <br/>
+        </div>
+    </div>
+</div>
+<div ng-include="'templates/site_footer.html'"></div>

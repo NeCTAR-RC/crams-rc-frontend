@@ -1,0 +1,35 @@
+<div class="site-top-div">
+    <div class="logo-div">
+        <div class="row">
+            <div class="col-md-4 col-sm-3 col-xs-12">
+                <div class="navbar-logo ">
+                    <a class="" href="#/"><img class="img-responsive image_brand" src="images/nectar-logo.png"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="nav-menu-div"></div>
+        <div class="nav-menu-right">
+            <div class="user_login_div" ng-hide="globals.isLoggedIn">
+                <a href="#/login"> Login </a>
+            </div>
+            <div ng-show="globals.isLoggedIn">
+                <div class="collapse navbar-collapse navbar-responsive-collapse" ng-controller="AAFLoginController as loginCtr">
+                    <ul class="nav navbar-nav navbar-right" id="user_menu">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown">
+                                {{ globals.currentUser.username }}<b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#/allocations">My Allocations</a></li>
+                                <li><a ng-click="loginCtr.logout()"> Logout </a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div style="clear: both"/>
+    </div>
+</div>

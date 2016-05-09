@@ -1,0 +1,85 @@
+<div class="row">
+    <div class="col-md-12">
+        <h3>Chief Investigator</h3>
+        <span class="alert-info"> <strong>Note: </strong></span> For research projects specify the first investigator.
+        For higher degree research projects specify the primary supervisor. For other activities specify the academic
+        sponsor or head of the managing organisation unit.
+        <hr/>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+
+        <label for="id-chief_investigator">
+            Chief Investigator <i class="glyphicon glyphicon-asterisk text-primary"></i>
+        </label>
+
+
+        <span ng-controller="PopupController">
+            <span ng-click="showHelp()" class="help-icon-sp"><img class="help-icon" src="images/help.png"></span>
+            <modal title="{{ help.chief_investigator.title }}" visible="showModal">
+                <span ng-bind-html="help.chief_investigator.text"></span>
+            </modal>
+        </span>
+        <br>
+
+        <!-- custom directive for displaying contact card - refer to contactcard.controller.js or hit F1 with the element highlighted in webstorm -->
+
+        <div class="row">
+            <div class="col-md-6">
+        <crams-contact contact-email="{{ vm.alloc.project_contacts[0].contact.email }}"
+                       read-only="true"></crams-contact>
+        <br>
+        </div>
+        </div>
+
+        <div class="row" ng-controller="ContactSearchFormController as vm">
+            <div class="col-md-6" class="form-group"
+                 ng-class="{'has-error': vm.contact_form_errors['too_many_results_status']}">
+                <input type="text" class="form-control" id="id-chief_investigator" name="chief_investigator"
+                       placeholder="To change CI, search for e-mail or name here."
+                       ng-model="vm.selected_contact_email"/>
+                <span class="help-block" ng-show="vm.contact_form_errors['too_many_results_status']">{{ vm.contact_form_errors['too_many_results_message'] }}</span>
+
+
+            </div>
+
+            <div class="col-md-6">
+                <div class="row">
+                    <button type="button"
+                            class="btn btn-default"
+                            ng-click="vm.searchForContact(vm.selected_contact_email)">
+                        Search
+                    </button>
+                        </span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-6">
+        <div>&nbsp;</div>
+        <label for="id-additional_researchers">
+            Please list all other primary investigators, partner investigators and other research collaborators
+        </label>
+
+        <span ng-controller="PopupController">
+            <span ng-click="showHelp()" class="help-icon-sp"><img class="help-icon" src="images/help.png"></span>
+            <modal title="{{ help.additional_researchers.title }}" visible="showModal">
+                <span ng-bind-html="help.additional_researchers.text"></span>
+            </modal>
+        </span>
+
+        <div class="form-group">
+             <textarea name="additional_researchers" id="id-additional_researchers"
+                       class="form-control" rows="5" style="height:120px; width:420px"
+                       ng-model="vm.alloc.project_question_responses[0].question_response">
+             </textarea>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="col-md-5">
+        <label for="id-nectar_support">
+            List any NeCTAR Virtual Laboratories supporting this request
+        </label>
+
+        <span ng-controller="PopupController">
+            <span ng-click="showHelp()" class="help-icon-sp"><img class="help-icon" src="images/help.png"></span>
+            <modal title="{{ help.nectar_support.title }}" visible="showModal">
+                <span ng-bind-html="help.nectar_support.text"></span>
+            </modal>
+        </span>
+
+        <div class="form-group medium_width">
+            <input name="nectar_support" id="id-nectar_support" class="form-control"
+                   ng-model="vm.alloc.project_question_responses[1].question_response" />
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-5">
+        <label for="id-ncris_support">
+            List NCRIS capabilities supporting this request
+        </label>
+
+        <span ng-controller="PopupController">
+            <span ng-click="showHelp()" class="help-icon-sp"><img class="help-icon" src="images/help.png"></span>
+            <modal title="{{ help.ncris_support.title }}" visible="showModal">
+                <span ng-bind-html="help.ncris_support.text"></span>
+            </modal>
+        </span>
+
+        <div class="form-group medium_width">
+            <input name="ncris_support" id="id-ncris_support" class="form-control"
+                   ng-model="vm.alloc.project_question_responses[2].question_response" />
+        </div>
+    </div>
+</div>

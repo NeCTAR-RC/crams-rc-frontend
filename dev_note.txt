@@ -1,0 +1,54 @@
+# Install Node.js with Ubuntu Package Manager
+
+# To install Node.js, open a terminal and type the following command:
+
+sudo apt-get install nodejs
+
+# Then install the node package manager, npm:
+
+sudo apt-get install npm
+
+# Create a symbolic link for node, as many Node.js tools use this name to execute.
+
+sudo ln -s /usr/bin/nodejs /usr/bin/node
+
+# Now we should have both the node and npm commands working:
+
+$ node -v
+$ npm -v
+
+# install grunt-cli globally
+npm install -g grunt-cli
+
+
+# Angular Style Guide
+Using the John_papa angular style guide, reference at https://github.com/johnpapa/angular-styleguide
+
+# Install the required node modules. Under the project root directory
+   npm install
+
+# how to run test
+
+$ grunt utest
+
+
+# Build the development environment
+$ grunt dev
+
+# Build the staging environment
+$ grunt staging
+
+#Build the production environment
+$ grunt prod
+
+# Run the development test server
+$ grunt
+
+# Run the staging test server
+$ grunt runstaging
+
+$ Run the production test server
+$ grunt runprod
+
+
+

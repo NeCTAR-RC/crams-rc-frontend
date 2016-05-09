@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="span7 center">
+        <div class="col-md-2 col-md-offset-4">
+            <label>
+                Selected Funding Body:
+            </label>
+            <select name="funding_body" id="id-funding_body" class="form-control"
+                    ng-model="vm.selected_funding_body" ng-change="vm.filterAllocations()"
+                    ng-options="funding_body.id as funding_body.name for funding_body in vm.funding_bodies">
+            </select>
+        </div>
+    </div>
+</div>
+<br/>
+<div class="center_div">
+    <div class="col-md6 col-md-offset-3">
+        <div class="quick-btn" ng-class="{'active': vm.isAwa}" ng-click="vm.isActive('awa')">
+            <i class="fa fa-check-square-o fa-2x"></i>
+            <span>Applications waiting approval</span>
+            <span class="label label-danger">{{vm.counter.new}}</span>
+        </div>
+        <div class="quick-btn" ng-class="{'active': vm.isAbp}" ng-click="vm.isActive('abp')">
+            <i class="fa fa-adn fa-2x"></i>
+            <span>Applications being provisioned</span>
+            <span class="label label-warning">{{vm.counter.approved}}</span>
+        </div>
+        <div class="quick-btn" ng-class="{'active': vm.isAa}" ng-click="vm.isActive('aa')">
+            <i class="fa fa-server fa-2x"></i>
+            <span>Active Allocations</span>
+            <span class="label label-success">{{vm.counter.active}}</span>
+        </div>
+        <div class="quick-btn" ng-class="{'active': vm.isEa}" ng-click="vm.isActive('ea')">
+            <i class="fa fa-empire fa-2x"></i>
+            <span>Expired Allocations</span>
+            <span class="label label-default">{{vm.counter.expired}}</span>
+        </div>
+        <div style="clear: both"/>
+    </div>
+</div>

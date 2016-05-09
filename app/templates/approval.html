@@ -1,0 +1,50 @@
+<div class="row" ng-repeat="project in vm.nc_projects">
+    <div class="col-md-12">
+        <div class="m_title">{{project.title}}</div>
+    </div>
+    <div class="col-md-12">
+        <table class="display_data_tab">
+            <thead>
+            <tr>
+                <th width="20%">Status</th>
+                <th width="30%">Resources</th>
+                <th width="10%">Expiry</th>
+                <th width="25%">Funding</th>
+                <th width="15%">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="req in project.requests">
+                <td>
+                    {{req.status}}
+                    <provision-details projectid="{{ project.id }}" project="project"></provision-details>
+                </td>
+                <td>
+                    <div class="row" ng-repeat="compute_req in req.compute_requests">
+                        <div class="col-md-12">
+                            {{compute_req.compute_product.name}}: {{compute_req.cores}} Cores,
+                            {{compute_req.core_hours}} VCPU Hours
+                        </div>
+                    </div>
+                    <div class="row" ng-repeat="storage_req in req.storage_requests">
+                        <div class="col-md-12">
+                            {{storage_req.storage_product.name}}: {{storage_req.quota}} GB
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    {{req.expiry}}
+                </td>
+                <td>
+                    {{req.funding}}
+                </td>
+                <td>
+                    <a href="#/{{ nav.first_path }}/view_request/{{req.id}}">View</a> |
+                    <a href="#/{{ nav.first_path }}/history/{{req.id}}">History</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div style="clear: both"/>

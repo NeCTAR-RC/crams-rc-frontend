@@ -1,0 +1,32 @@
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="display_data_tab">
+            <thead>
+            <tr>
+                <th width="15%">Status</th>
+                <th width="35%">Project</th>
+                <th width="10%">Modification Date</th>
+                <th width="15%">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="nc_req in vm.history_list">
+                <td>
+                    {{nc_req.request_status.status}} [{{nc_req.request_status.code}}]
+                </td>
+                <td>
+                    {{nc_req.project.title}}
+                </td>
+                <td>
+                    {{nc_req.last_modified_ts | date:"MM/dd/yyyy 'at' h:mma"}}
+                </td>
+                <td>
+                    <a href="#/{{ nav.first_path }}/view_request/{{nc_req.id}}">View</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div style="clear: both"/>
