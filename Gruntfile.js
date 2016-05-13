@@ -28,7 +28,7 @@ module.exports = function (grunt) {
                 constants: {
                     ENV: {
                         name: 'staging',
-                        apiEndpoint: 'http://crams-staging.erc.monash.edu.au/api/v1/'
+                        apiEndpoint: 'https://crams-staging.erc.monash.edu.au/api/v1/'
                     }
                 }
             },
