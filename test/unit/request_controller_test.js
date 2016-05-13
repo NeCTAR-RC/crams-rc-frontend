@@ -3,14 +3,15 @@
  */
 describe("Test RequestController", function () {
     var $location, $scope, $routeParams, requestCtrl;
-    var $filter, FlashService, NectarRequestService,  LookupService, ContactService
+    var $filter, FlashService, NectarRequestService,  LookupService, ContactService, CramsUtils;
     beforeEach(module("crams.nectar"));
 
-    beforeEach(inject(function (_$location_, _$routeParams_, _FlashService_, _NectarRequestService_, _LookupService_, _ContactService_,$rootScope, _$filter_, _$controller_) {
+    beforeEach(inject(function (_$location_, _$routeParams_, _FlashService_, _NectarRequestService_, _LookupService_, _ContactService_, _CramsUtils_, $rootScope, _$filter_, _$controller_) {
         FlashService = _FlashService_;
         NectarRequestService = _NectarRequestService_;
         LookupService = _LookupService_;
         ContactService = _ContactService_;
+        CramsUtils = _CramsUtils_;
         $filter = _$filter_;
         $location = _$location_;
         $routeParams = _$routeParams_;
@@ -24,6 +25,7 @@ describe("Test RequestController", function () {
             'NectarRequestService': NectarRequestService,
             'LookupService': LookupService,
             'ContactService': ContactService,
+            'CramsUtils': CramsUtils,
             '$filter': $filter
         });
     }));

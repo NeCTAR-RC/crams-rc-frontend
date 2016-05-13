@@ -15,7 +15,6 @@ module.exports = function (config) {
             'app/bower_components/angular-sanitize/angular-sanitize.js',
             'app/bower_components/angular-cookies/angular-cookies.js',
             'app/bower_components/ng-dialog/js/ngDialog.js',
-            'app/components/**/*.js',
             'app/js/crams.config.js',
             'app/app.js',
             'app/js/service/crams_utils.js',
@@ -52,6 +51,8 @@ module.exports = function (config) {
 
         // enable / disable colors in the output (reporters and logs)
         colors: true,
+
+        singleRun: true,
 
         // level of logging
         // possible values: config.LOG_DISABLE || config.LOG_ERROR ||

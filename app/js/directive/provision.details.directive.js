@@ -118,7 +118,7 @@
                     });
                 }
                 // replace the project
-                console.log(JSON.stringify($scope.project.provisions));
+                //console.log(JSON.stringify($scope.project.provisions));
                 $scope.vm.nc_projects[index] = $scope.project;
             }
         }
