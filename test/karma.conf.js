@@ -15,7 +15,6 @@ module.exports = function (config) {
             'app/bower_components/angular-sanitize/angular-sanitize.js',
             'app/bower_components/angular-cookies/angular-cookies.js',
             'app/bower_components/ng-dialog/js/ngDialog.js',
-            'app/components/**/*.js',
             'app/js/crams.config.js',
             'app/app.js',
             'app/js/service/crams_utils.js',
