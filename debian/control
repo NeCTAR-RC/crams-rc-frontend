@@ -1,0 +1,12 @@
+Source: crams-rc-frontend
+Maintainer: Sam Morrison <sorrison@gmail.com
+Section: misc
+Priority: optional
+Standards-Version: 3.9.2
+Build-Depends: debhelper (>= 9), npm, nodejs, nodejs-legacy, git
+
+Package: crams-rc-frontend
+Architecture: any
+Depends: ${misc:Depends}, nodejs, nodejs-legacy
+Description: CRAMS frontend for NeCTAR Research Cloud
+ CRAMS frontend for NeCTAR Research Cloud
