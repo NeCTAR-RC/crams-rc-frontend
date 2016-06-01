@@ -10,7 +10,7 @@
 
         var service = {};
         service.sortQuestionResponseInFormOrder = sortQuestionResponseInFormOrder;
-
+        service.sortReqQuestionResponseInFormOrder = sortReqQuestionResponseInFormOrder;
         return service;
 
         // sort question response in form order
@@ -19,9 +19,9 @@
             var sorted_project_question_responses = [];
             var project_question_response_list = alloc.project_question_responses;
             var proj_question_keys = ['additionalresearchers', 'nectarvls', 'ncris'];
-            _.each(proj_question_keys, function(key){
+            _.each(proj_question_keys, function (key) {
                 var proj_question_response = find_question_response(project_question_response_list, key);
-                if(proj_question_response != undefined){
+                if (proj_question_response != undefined) {
                     sorted_project_question_responses.push(proj_question_response);
                 }
             });
@@ -30,10 +30,27 @@
 
             var sorted_req_question_responses = [];
             var req_question_response_list = alloc.requests[0].request_question_responses;
-            var req_question_keys = ['duration', 'ptconversion','researchcase','usagepattern', 'homenode', 'homerequirements', 'estimatedusers'];
-            _.each(req_question_keys, function(key){
+            var req_question_keys = ['duration', 'ptconversion', 'researchcase', 'usagepattern', 'homenode', 'homerequirements', 'estimatedusers'];
+            _.each(req_question_keys, function (key) {
                 var req_question_response = find_question_response(req_question_response_list, key);
-                if(req_question_response != undefined){
+                if (req_question_response != undefined) {
+                    sorted_req_question_responses.push(req_question_response);
+                }
+            });
+            question_responses['request_question_responses'] = sorted_req_question_responses;
+            return question_responses;
+        }
+        
+        // sort question response in form order
+        function sortReqQuestionResponseInFormOrder(alloc) {
+            var question_responses = {};
+
+            var sorted_req_question_responses = [];
+            var req_question_response_list = alloc.requests[0].request_question_responses;
+            var req_question_keys = ['vn_authorization', 'vn_data_migration_src', 'vn_data_migration_assistance', 'vn_current_access_method', 'vn_preferred_access_method', 'vn_data_format', 'vn_only_copy', 'vn_can_be_regenerated', 'vn_loss_impact'];
+            _.each(req_question_keys, function (key) {
+                var req_question_response = find_question_response(req_question_response_list, key);
+                if (req_question_response != undefined) {
                     sorted_req_question_responses.push(req_question_response);
                 }
             });

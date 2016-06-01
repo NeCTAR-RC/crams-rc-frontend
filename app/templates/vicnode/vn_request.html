@@ -1,0 +1,49 @@
+<div ng-include="'templates/site_authen_header.html'"></div>
+<div class="main-container">
+    <div ng-include="'templates/nav_title_bar.html'"></div>
+    <div class="display-body">
+        <div ng-include="'templates/error_display.html'"></div>
+        <div class="row">
+            <div class="col-md-12">
+                <h1>VicNode Storage Request Allocation Form</h1>
+
+                <p>By submitting this application, you verify that VicNode has the right to share the information
+                    contained in this form with any people, institutions, or systems involved in processing this
+                    application, and that VicNode may retain this application.</p>
+                <span class="alert-info"> <strong>Info: </strong></span>Required fields are marked with an
+                <i class="glyphicon glyphicon-asterisk text-primary"></i>
+            </div>
+        </div>
+
+        <hr/>
+        <form name="vm.vicnode_form" ng-submit="vm.submitVnReq()" novalidate>
+            <div ng-include="'templates/vicnode/vn_authority_form.html'"></div>
+            <div ng-include="'templates/vicnode/vn_contact_details.html'"></div>
+            <h2>Section 2: Collection Details</h2>
+            <div ng-include="'templates/vicnode/vn_project_form.html'"></div>
+            <div ng-include="'templates/for_code_domain.html'"></div>
+            <h2>Section 3: Storage Requirements</h2>
+            <h3>Data Storage Requirements</h3>
+            <div ng-include="'templates/vicnode/vn_storage_product.html'"></div>
+            <div ng-include="'templates/vicnode/vn_data_migration.html'"></div>
+            <div ng-include="'templates/vicnode/vn_user_interface.html'"></div>
+            <h2>Section 5: Technical Details</h2>
+            <div ng-include="'templates/vicnode/vn_data_management.html'"></div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input class="btn bg-primary" type="submit" value="Submit">
+                    </div>
+                </div>
+            </div>
+        </form>
+
+
+
+
+    </div>
+    <div class="clearfix visible-lg"></div>
+</div>
+<div style="clear:both"/>
+<div ng-include="'templates/site_footer.html'"></div>

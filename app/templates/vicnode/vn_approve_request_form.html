@@ -1,0 +1,136 @@
+<div class="row">
+    <div class="col-md-12">
+        <p>
+            This form allows you to approve an allocation request, enter the quotas for the tenant to be created.
+        </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <span class="alert-info"> <strong>Info: </strong></span>Required fields are marked with an
+        <i class="glyphicon glyphicon-asterisk text-primary"></i>
+        sign
+    </div>
+</div>
+<hr/>
+<form name="vn_approve_form" ng-submit="vm.vn_approve_alloc()" novalidate>
+
+    <div class="row">
+        <div class="col-md-5">
+            <label for="id-project_identifier">
+                Project Identifier <i class="glyphicon glyphicon-asterisk text-primary"></i>
+            </label>
+
+           <span ng-controller="PopupController">
+                <span ng-click="showHelp()" class="help-icon-sp"><img class="help-icon" src="images/help.png"></span>
+                <modal title="{{ help.project_identifier.title }}" visible="showModal">
+                    <span ng-bind-html="help.project_identifier.text"></span>
+                </modal>
+            </span>
+
+            <div class="form-group">
+                <input type="text" name="project_description" id="id-project_identifier" class="form-control"
+                       ng-model="vm.alloc.project_ids[0].identifier" readonly="readonly"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-5">
+            <label for="id-project_description">
+                Project Allocation Title <i class="glyphicon glyphicon-asterisk text-primary"></i>
+            </label>
+
+       <span ng-controller="PopupController">
+            <span ng-click="showHelp()" class="help-icon-sp"><img class="help-icon" src="images/help.png"></span>
+            <modal title="{{ help.project_description.title }}" visible="showModal">
+                <span ng-bind-html="help.project_description.text"></span>
+            </modal>
+        </span>
+
+            <div class="form-group">
+                <input type="text" name="project_description" id="id-project_description" class="form-control"
+                       ng-model="vm.alloc.description" readonly="readonly"/>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-5">
+            <div class="sub_title">
+                <span class="sub_title"><i class="fa fa-database"></i> Storage Resources </span>
+            </div>
+            <div>
+                <table class="data_tab">
+                    <thead>
+                    <tr>
+                        <th width="50%">Storage</th>
+                        <th width="25%">Requested (GB)</th>
+                        <th width="25%">Approved (GB)</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+            <div class="form-group">
+                <table width="100%">
+                    <tr ng-repeat="storage in vm.alloc.requests[0].storage_requests track by $index">
+                        <td>
+                            <table class="data_tab">
+                                <tr>
+                                    <td width="50%">
+                                        <div class="form-group"
+                                             ng-class="{'has-error': vn_approve_form.vicnode_sp.$invalid || vn_approve_form.$error.isdup}">
+                                            <select name="vicnode_sp" id="id-vicnode_sp" class="form-control"
+                                                    ng-model="storage.storage_product.id"
+                                                    ng-options="vn_sp.id as vn_sp.name for vn_sp in vm.vnStorageProducts"
+                                                    ng-change="vm.changeStorageProduct(this, $index)"
+                                                    required>
+                                            </select>
+                                            <span class="help-block" ng-show="vn_approve_form.$error.isdup">
+                                                Duplicated storage product
+                                            </span>
+                                        </div>
+                                    </td>
+                                    <td width="25%">{{storage.quota}}</td>
+                                    <td width="25%">
+                                        <input type="text" class="form-control" id="approved_quota"
+                                               ng-model="storage.approved_quota"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5">
+            <label for="id-approval_notes">
+                Comment
+            </label>
+            <span ng-controller="PopupController">
+                <span ng-click="showHelp()" class="help-icon-sp"><img class="help-icon" src="images/help.png"></span>
+                <modal title="{{ help.approve_comment.title }}" visible="showModal">
+                    <span ng-bind-html="help.approve_comment.text"></span>
+                </modal>
+            </span>
+
+            <div class="form-group">
+                <textarea name="approval_notes" id="id-approval_notes"
+                          ng-model="vm.alloc.requests[0].approval_notes" class="form-control"
+                          rows="5" style="height:120px; width:480px"></textarea>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div>
+                <button type="submit" class="btn bg-primary">Submit</button>
+            </div>
+        </div>
+    </div>
+</form>

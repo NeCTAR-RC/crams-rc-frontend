@@ -7,9 +7,9 @@
         </label>
         <i class="glyphicon glyphicon-asterisk text-primary"></i>
 
-        <div class="form-group" ng-class="{'has-error': vm.project_title_invalid}">
-            <input type="text"  class="form-control" ng-model="vm.projectModel.title" required/>
-            <span class="help-block" ng-show="vm.project_title_invalid">Required field</span>
+        <div class="form-group" ng-class="{'has-error': vm.title_invalid}">
+            <input type="text"  class="form-control" ng-model="vm.project.title" name="title" required/>
+            <span class="help-block" ng-show="vm.title_invalid">Required field</span>
         </div>
     </div>
 </div>
@@ -23,9 +23,9 @@
         </label>
         <i class="glyphicon glyphicon-asterisk text-primary"></i>
 
-        <div class="form-group" ng-class="{'has-error': vm.project_description_invalid}">
-            <input type="textarea"  class="form-control" ng-model="vm.projectModel.description" required/>
-            <span class="help-block" ng-show="vm.project_description_invalid">Required field</span>
+        <div class="form-group" ng-class="{'has-error': vm.description_invalid}">
+            <input type="textarea"  class="form-control" ng-model="vm.project.description" name="description" required/>
+            <span class="help-block" ng-show="vm.description_invalid">Please enter description</span>
         </div>
     </div>
 </div>

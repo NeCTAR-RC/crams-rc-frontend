@@ -1,0 +1,120 @@
+<p>Identify the storage volume for your collection in gigabytes, and the preferred storage type.
+    <a target="_blank" href="http://vicnode.org.au/products/">Detailed descriptions</a> of each storage type are
+    available on the VicNode
+    website.
+</p>
+
+<p>
+    <span class="alert-info"> <strong>Note: </strong></span>Please add at least one storage product
+</p>
+<div class="row">
+    <div class="col-md-8">
+        <div ng-class="{'has-error': vm.vicnodeSpForm_sp_invalid}">
+            <span class="help-block has-error" ng-show="vm.vicnodeSpForm_sp_invalid">
+                Please select a storage product
+            </span>
+        </div>
+
+        <div ng-class="{'has-error': vm.vicnodeSpForm_sp_current_size_invalid}">
+            <span class="help-block has-error" ng-show="vm.vicnodeSpForm_sp_current_size_invalid">
+                Please specify the current size of data
+            </span>
+        </div>
+
+        <div ng-class="{'has-error': vm.vicnodeSpForm_sp_quota_invalid}">
+            <span class="help-block has-error" ng-show="vm.vicnodeSpForm_sp_quota_invalid">
+                Please specify the requested quota size
+            </span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8">
+        <table width="100%">
+            <tbody>
+            <tr ng-repeat="storage_request in vm.project.requests[0].storage_requests track by $index">
+                <td width="55%">
+                    <ng-form name="vicnodeSpForm">
+                        <div class="border_div">
+                            <div class="col-md-9">
+                                <label>
+                                    Storage Product <i class="glyphicon glyphicon-asterisk text-primary"></i>
+                                </label>
+                                <div class="form-group"
+                                     ng-class="{'has-error': vicnodeSpForm.vicnode_sp.$invalid || vicnodeSpForm.$error.isdup}">
+                                    <select name="vicnode_sp" class="form-control"
+                                            ng-model="storage_request.storage_product.id"
+                                            ng-options="vn_sp.id as vn_sp.name for vn_sp in vm.vnStorageProducts"
+                                            ng-change="vm.changeVicNodeSp(this, $index)"
+                                            required>
+                                        <option value="">--- Select ---</option>
+                                    </select>
+                            <span class="help-block"
+                                  ng-show="vicnodeSpForm.vicnode_sp.$invalid && !vicnodeSpForm.$error.isdup">
+                                        Please select a storage product
+                                    </span>
+                            <span class="help-block" ng-show="vicnodeSpForm.$error.isdup">
+                                Duplicated storage product
+                            </span>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label>
+                                    Current Size of Data <i class="glyphicon glyphicon-asterisk text-primary"></i>
+                                </label>
+                                <div class="form-group"
+                                     ng-class="{'has-error':vicnodeSpForm.vicnode_sp_current_size.$dirty && vicnodeSpForm.vicnode_sp_current_size.$invalid}">
+                                    <input class="form-control" type="number" name="vicnode_sp_current_size"
+                                           ng-model="storage_request.storage_question_responses[0].question_response"
+                                           style="float:left;width: 84%" />
+                                    <span class="input-group-btn">
+                                        <button class="btn" type="button">GB</button>
+                                    </span>
+                                    <span class="help-block"
+                                          ng-show="vicnodeSpForm.vicnode_sp_current_size.$dirty && vicnodeSpForm.vicnode_sp_current_size.$invalid">
+                                    Specify the current size of data
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label>
+                                    Requested Quota <i class="glyphicon glyphicon-asterisk text-primary"></i>
+                                </label>
+                                <div class="form-group"
+                                     ng-class="{'has-error':vicnodeSpForm.vicnode_sp_quota.$dirty && vicnodeSpForm.vicnode_sp_quota.$invalid}">
+                                    <input class="form-control" type="number" name="vicnode_sp_quota"
+                                           ng-model="storage_request.quota" style="float:left;width: 84%" />
+
+                                    <span class="input-group-btn">
+                                        <button class="btn" type="button">GB</button>
+                                    </span>
+
+                                    <div class="help-block"
+                                         ng-show="vicnodeSpForm.vicnode_sp_quota.$dirty && vicnodeSpForm.vicnode_sp_quota.$invalid">
+                                        Specify the requested quota
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-form>
+                </td>
+                <td>
+                    <button class="btn btn-default" id="delete-grant" type="button"
+                            ng-click="vm.removeVicNodeSp($index)" ng-if="$index > 0">
+                        Delete
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="form-group">
+            <input class="btn btn-default" type="button" value="Add Another Storage" ng-click="vm.addVicNodeSp($event)">
+        </div>
+    </div>
+</div>

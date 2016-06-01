@@ -68,7 +68,7 @@
          * @param newContact Refer to createNewContact()'s documentation for schema
          */
         vm.setContact = function (newContact) {
-            $log.debug("Setting contact to: " + JSON.stringify(newContact));
+            // $log.debug("Setting contact to: " + JSON.stringify(newContact));
             /*
              * TODO: would like to use a service for managing state of current request, but for now using $scope.emit to pass results back to NectarRequestController - RJ
              * read http://ilikekillnerds.com/2014/11/angularjs-call-controller-another-controller/
@@ -104,7 +104,7 @@
          *       though currently only using server-side validation
          */
         vm.raiseFormError = function (fieldName, errorMessage) {
-            $log.debug("Error in " + fieldName + ": " + errorMessage);
+            // $log.debug("Error in " + fieldName + ": " + errorMessage);
 
             switch (fieldName) {
                 <!-- error handling for too many results case -->
