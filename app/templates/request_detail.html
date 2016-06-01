@@ -223,7 +223,8 @@
     <div ng-show="req.approval_notes">
         <div class="col-md-12">
             <div class="sub_title">
-                <span class="sub_title"><i class="fa fa-comment"></i> {{req.request_status.status}} <i class="fa fa-long-arrow-right"></i> Note </span>
+                <span class="sub_title"><i class="fa fa-comment"></i> {{req.request_status.status}} <i
+                        class="fa fa-long-arrow-right"></i> Note </span>
             </div>
             <div>
                 <textarea name="approval_notes" id="id-approval_notes"
@@ -238,7 +239,7 @@
         <div class="sub_title">
             <span class="sub_title"><i class="fa fa-codepen"></i> Actions </span>
         </div>
-        <div class="col-md-2"  ng-if="vm.isEditable(nav.first_path)">
+        <div class="col-md-2" ng-if="vm.isEditable(nav.first_path)">
             <div class="form-group">
                 <span ng-if="req.request_status.code =='E' && !req.parent_request">
                     <span ng-if="req.funding_scheme.funding_scheme.indexOf('NeCTAR') > -1">
@@ -255,7 +256,7 @@
                  <span ng-if="req.request_status.code !='E' && req.request_status.code !='A' && !req.parent_request">
                      <span ng-if="req.funding_scheme.funding_scheme.indexOf('NeCTAR') > -1">
                          <a href="#/allocations/edit_request/{{vm.alloc_project_request.id}}/{{req.id}}">
-                            <input class="btn bg-primary" type="button" value="Amend/Extend allocation">
+                             <input class="btn bg-primary" type="button" value="Amend/Extend allocation">
                          </a>
                      </span>
                      <span ng-if="req.funding_scheme.funding_scheme.indexOf('VicNode') > -1">
@@ -266,15 +267,29 @@
                  </span>
             </div>
         </div>
-        <div class="col-md-2" ng-if="vm.isApprovable(req.request_status.code, nav.first_path) && !req.parent_request" >
-            <a href="#/approval/approve_request/{{req.id}}">
-                <input class="btn bg-primary" type="button" value="Approve Request"/>
-            </a>
+        <div class="col-md-2" ng-if="vm.isApprovable(req.request_status.code, nav.first_path) && !req.parent_request">
+            <span ng-if="req.funding_scheme.funding_scheme.indexOf('NeCTAR') > -1">
+                <a href="#/approval/approve_request/{{req.id}}">
+                    <input class="btn bg-primary" type="button" value="Approve Request"/>
+                </a>
+            </span>
+            <span ng-if="req.funding_scheme.funding_scheme.indexOf('VicNode') > -1">
+                <a href="#/approval/approve_vicnode_request/{{req.id}}">
+                    <input class="btn bg-primary" type="button" value="Approve Request"/>
+                </a>
+            </span>
         </div>
-        <div class="col-md-2" ng-if="vm.isDeclinable(req.request_status.code, nav.first_path) && !req.parent_request" >
-            <a href="#/approval/decline_request/{{req.id}}">
-                <input class="btn bg-primary" type="button" value="Decline Request"/>
-            </a>
+        <div class="col-md-2" ng-if="vm.isDeclinable(req.request_status.code, nav.first_path) && !req.parent_request">
+            <span ng-if="req.funding_scheme.funding_scheme.indexOf('NeCTAR') > -1">
+                <a href="#/approval/decline_request/{{req.id}}">
+                    <input class="btn bg-primary" type="button" value="Decline Request"/>
+                </a>
+            </span>
+            <span ng-if="req.funding_scheme.funding_scheme.indexOf('VicNode') > -1">
+                 <a href="#/approval/decline_vicnode_request/{{req.id}}">
+                     <input class="btn bg-primary" type="button" value="Decline Request"/>
+                 </a>
+            </span>
         </div>
         <div class="col-md-2" ng-if="!req.parent_request">
             <a href="#/{{ nav.first_path }}/history/{{req.id}}">

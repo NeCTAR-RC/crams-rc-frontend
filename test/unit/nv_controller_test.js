@@ -21,7 +21,7 @@ describe('NavController', function () {
         expect(navController).toBeDefined();
     });
 
-    it('should have a method to check if the path is active', function() {
+    it('should have a method to check if the path is active', function () {
         $location.path('/allocations');
         expect($location.path()).toBe('/allocations');
         expect($scope.isCurrentPath('/allocations')).toBe(true);

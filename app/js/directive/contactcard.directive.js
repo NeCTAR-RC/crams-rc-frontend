@@ -26,8 +26,8 @@ function cramsContact() {
             contactEmail: '@',
             readOnly: '@'
         },
-        link:function(scope, elem, attrs, vm){
-            scope.$watch('contactEmail', function(contactEmail){
+        link: function (scope, elem, attrs, vm) {
+            scope.$watch('contactEmail', function (contactEmail) {
                 vm.retrieveContactByEmail(contactEmail);
             });
         }

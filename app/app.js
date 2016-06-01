@@ -41,14 +41,14 @@
                 templateUrl: 'templates/nectar_request.html',
                 controllerAs: 'vm'
             })
-            .when('/allocations/vicnode_request', {
-                controller: 'VicnodeRequestController',
-                templateUrl: 'templates/vicnode_request.html',
+            .when('/allocations/vn_request', {
+                controller: 'VNRequestController',
+                templateUrl: 'templates/vicnode/vn_request.html',
                 controllerAs: 'vm'
             })
             .when('/allocations/edit_vicnode_request/:project_id/:id', {
-                controller: 'VicnodeRequestController',
-                templateUrl: 'templates/vicnode_request.html',
+                controller: 'VNRequestController',
+                templateUrl: 'templates/vicnode/vn_request.html',
                 controllerAs: 'vm'
             })
             .when('/allocations/view_request/:request_id', {
@@ -91,12 +91,21 @@
                 templateUrl: 'templates/decline_alloc_request.html',
                 controllerAs: 'vm'
             })
+            .when('/approval/approve_vicnode_request/:request_id', {
+                controller: 'VNDeclineApproveController',
+                templateUrl: 'templates/vicnode/vn_approve_alloc_request.html',
+                controllerAs: 'vm'
+            })
+            .when('/approval/decline_vicnode_request/:request_id', {
+                controller: 'VNDeclineApproveController',
+                templateUrl: 'templates/vicnode/vn_decline_alloc_request.html',
+                controllerAs: 'vm'
+            })
             .when('/approval/history/:id', {
                 controller: 'AllocationsHistoryController',
                 templateUrl: 'templates/list_allocations_history.html',
                 controllerAs: 'vm'
             })
-
             .when('/reports', {
                 controller: 'ReportController',
                 templateUrl: 'templates/alloc_reports.html',

@@ -350,9 +350,9 @@
             }
 
             /*
-            if (!vm.request_form.requester_contact.$valid) {
-                vm.requester_contact_invalid = true;
-            }*/
+             if (!vm.request_form.requester_contact.$valid) {
+             vm.requester_contact_invalid = true;
+             }*/
 
             if (!vm.request_form.project_description.$valid) {
                 vm.project_description_invalid = true;

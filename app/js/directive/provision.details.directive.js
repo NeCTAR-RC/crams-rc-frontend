@@ -43,11 +43,11 @@
 
                         var proj_prov_status = project_prov.status;
                         var tmp_proj_provision = {};
-                        if (proj_prov_status == 'F'){
+                        if (proj_prov_status == 'F') {
                             tmp_proj_provision['status_str'] = 'Provision Failed';
-                        }else if (proj_prov_status == 'P'){
+                        } else if (proj_prov_status == 'P') {
                             tmp_proj_provision['status_str'] = 'Provisioned';
-                        }else{
+                        } else {
                             tmp_proj_provision['status_str'] = 'In Progress';
                         }
 
@@ -71,11 +71,11 @@
                                 //console.log(JSON.stringify(comp_prov));
                                 var compute_prov_status = comp_prov.status;
                                 var tmp_compute_prov = {};
-                                if (compute_prov_status == 'F'){
+                                if (compute_prov_status == 'F') {
                                     tmp_compute_prov['status_str'] = 'Provision Failed';
-                                }else if (compute_prov_status == 'P'){
+                                } else if (compute_prov_status == 'P') {
                                     tmp_compute_prov['status_str'] = 'Provisioned';
-                                }else{
+                                } else {
                                     tmp_compute_prov['status_str'] = 'In Progress';
                                 }
                                 if (provisions['status'] != 'F') {
@@ -97,11 +97,11 @@
                                 //console.log(JSON.stringify(storage_req_prov));
                                 var storage_req_prov_status = storage_req_prov.status;
                                 var tmp_storage_prov = {};
-                                if (storage_req_prov_status == 'F'){
+                                if (storage_req_prov_status == 'F') {
                                     tmp_storage_prov['status_str'] = 'Provision Failed';
-                                }else if (storage_req_prov_status == 'P'){
+                                } else if (storage_req_prov_status == 'P') {
                                     tmp_storage_prov['status_str'] = 'Provisioned';
-                                }else{
+                                } else {
                                     tmp_storage_prov['status_str'] = 'In Progress';
                                 }
                                 if (provisions['status'] != 'F') {

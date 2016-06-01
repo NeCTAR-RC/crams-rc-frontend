@@ -88,7 +88,7 @@
                 "title": "Storage Product",
                 "text": "Please select the storage product."
             },
-            "nectar_sp_quota":{
+            "nectar_sp_quota": {
                 "title": "Storage Quota",
                 "text": "Specify the total size in gigabytes that the project will need"
             },
@@ -142,39 +142,39 @@
                     "For example, should they only be run on a node in a specific state, or can they be run on any ",
                     "available node? If you leave this blank we will assume that any node is acceptable."].join("")
             },
-            "grant_type":{
+            "grant_type": {
                 "title": "Type",
                 "text": "Choose the grant type from the dropdown options."
             },
-            "funding_body_scheme":{
+            "funding_body_scheme": {
                 "title": "Funding Body and Scheme",
                 "text": "For example, ARC Discovery Project."
             },
-            "grant_id":{
+            "grant_id": {
                 "title": "Grant ID",
                 "text": "Please enter the grant id."
             },
-            "start_year":{
+            "start_year": {
                 "title": "First Year Funded",
                 "text": "Please enter the first year funded"
             },
-            "total_funding":{
+            "total_funding": {
                 "title": "Total Funding (AUD)",
                 "text": "Total funding amount in AUD."
             },
-            "nectar_support":{
+            "nectar_support": {
                 "title": "List any NeCTAR Virtual Laboratories supporting this request",
                 "text": "Specify any NeCTAR Virtual Laboratories supporting this request."
             },
-            "ncris_support":{
+            "ncris_support": {
                 "title": "List NCRIS capabilities supporting this request",
                 "text": "Specify NCRIS capabilities supporting this request."
             },
-            "decline_reason":{
+            "decline_reason": {
                 "title": "Reason",
                 "text": "A brief explanation of the reason the request has been sent back to the user for changes."
             },
-            "approve_comment":{
+            "approve_comment": {
                 "title": "Comment",
                 "text": "Approver comment."
             }

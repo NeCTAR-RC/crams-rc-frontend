@@ -3,7 +3,7 @@
  */
 describe("Test RequestController", function () {
     var $location, $scope, $routeParams, requestCtrl;
-    var $filter, FlashService, NectarRequestService,  LookupService, ContactService, CramsUtils;
+    var $filter, FlashService, NectarRequestService, LookupService, ContactService, CramsUtils;
     beforeEach(module("crams.nectar"));
 
     beforeEach(inject(function (_$location_, _$routeParams_, _FlashService_, _NectarRequestService_, _LookupService_, _ContactService_, _CramsUtils_, $rootScope, _$filter_, _$controller_) {
@@ -20,7 +20,7 @@ describe("Test RequestController", function () {
         requestCtrl = _$controller_("NectarRequestController", {
             '$location': $location,
             '$scope': $scope,
-            '$routeParams':$routeParams,
+            '$routeParams': $routeParams,
             'FlashService': FlashService,
             'NectarRequestService': NectarRequestService,
             'LookupService': LookupService,

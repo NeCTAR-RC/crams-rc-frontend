@@ -22,26 +22,30 @@
          * @param contactEmail String containing contact's email address
          */
         vm.retrieveContactByEmail = function (contactEmail) {
-            $log.debug("Retrieving contact by email: " + contactEmail);
-            $log.debug("Read only: " + $scope.readOnly);
+            // $log.debug("Retrieving contact by email: " + contactEmail);
+            // $log.debug("Read only: " + $scope.readOnly);
             ContactService.findContact(contactEmail).then(function (response) {
                 if (response.success) {
-                    if (response.data.length == 1) { $log.debug("Contact found, populating with: " + JSON.stringify(response.data)) ; vm.populateContactCardFields(response.data[0]);  }
-                    else
-                        {
-                            //do nothing; show empty field and log error
-                            if (response.data.length == 0) { $log.error("Contact card unable to be filled because more than one user by that email was found. Database inconsistent!") }
-                            else {
-                                $log.debug("Contact card unable to be filled because no user by that email was found.")
-                            }
+                    if (response.data.length == 1) {
+                        $log.debug("Contact found, populating with: " + JSON.stringify(response.data));
+                        vm.populateContactCardFields(response.data[0]);
+                    }
+                    else {
+                        //do nothing; show empty field and log error
+                        if (response.data.length == 0) {
+                            $log.error("Contact card unable to be filled because more than one user by that email was found. Database inconsistent!")
                         }
-
-
-                    } else {
-                        $log.error("retrieveContactByEmail failed with: " + response.message);
+                        else {
+                            $log.debug("Contact card unable to be filled because no user by that email was found.")
+                        }
                     }
 
-                });
+
+                } else {
+                    $log.error("retrieveContactByEmail failed with: " + response.message);
+                }
+
+            });
         }
 
         /**
@@ -57,13 +61,14 @@
          */
         vm.populateContactCardFields = function (contactDetails) {
             // replace null value with empty string
-            function showEmptyString (obj){
+            function showEmptyString(obj) {
                 if (obj == null) {
                     return "";
                 } else {
                     return obj;
                 }
             }
+
             vm.displayed_contact.displayedname = showEmptyString(contactDetails.title) + " " + showEmptyString(contactDetails.given_name) + " " + showEmptyString(contactDetails.surname);
             vm.displayed_contact.emailaddress = contactDetails.email;
             vm.displayed_contact.phonenumber = contactDetails.phone;

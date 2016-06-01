@@ -1,7 +1,7 @@
 "use strict";
 
- angular.module('cramsConfig', [])
+angular.module('cramsConfig', [])
 
-.constant('ENV', {name:'development',apiEndpoint:'http://localhost:8080/api/v1/'})
+    .constant('ENV', {name: 'development', apiEndpoint: 'http://localhost:8080/api/v1/'})
 
 ;

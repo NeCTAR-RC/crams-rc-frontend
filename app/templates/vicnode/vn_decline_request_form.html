@@ -1,0 +1,87 @@
+<div class="row">
+    <div class="col-md-12">
+        <p>
+            Reject a request, or specify changes a user needs to make to an allocation request before it can be
+            accepted.
+        </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <span class="alert-info"> <strong>Info: </strong></span>Required fields are marked with an
+        <i class="glyphicon glyphicon-asterisk text-primary"></i>
+        sign
+    </div>
+</div>
+<hr/>
+
+<form name="decline_form" ng-submit="vm.vn_decline_alloc()" novalidate>
+    <div class="row">
+        <div class="col-md-3">
+            <label for="id-project_identifier">
+                Project Identifier <i class="glyphicon glyphicon-asterisk text-primary"></i>
+            </label>
+
+       <span ng-controller="PopupController">
+            <span ng-click="showHelp()" class="help-icon-sp"><img class="help-icon" src="images/help.png"></span>
+            <modal title="{{ help.project_identifier.title }}" visible="showModal">
+                <span ng-bind-html="help.project_identifier.text"></span>
+            </modal>
+        </span>
+
+            <div class="form-group">
+                <input type="text" name="project_description" id="id-project_identifier" class="form-control"
+                       ng-model="vm.alloc.project_ids[0].identifier" readonly="readonly"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <label for="id-project_description">
+                Project Allocation Title <i class="glyphicon glyphicon-asterisk text-primary"></i>
+            </label>
+
+       <span ng-controller="PopupController">
+            <span ng-click="showHelp()" class="help-icon-sp"><img class="help-icon" src="images/help.png"></span>
+            <modal title="{{ help.project_description.title }}" visible="showModal">
+                <span ng-bind-html="help.project_description.text"></span>
+            </modal>
+        </span>
+
+            <div class="form-group">
+                <input type="text" name="project_description" id="id-project_description" class="form-control"
+                       ng-model="vm.alloc.description" readonly="readonly"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <label for="id-approval_notes">
+                Reason
+            </label>
+            <span ng-controller="PopupController">
+                <span ng-click="showHelp()" class="help-icon-sp"><img class="help-icon" src="images/help.png"></span>
+                <modal title="{{ help.decline_reason.title }}" visible="showModal">
+                    <span ng-bind-html="help.decline_reason.text"></span>
+                </modal>
+            </span>
+
+            <div class="form-group">
+                <textarea name="approval_notes" id="id-approval_notes"
+                          ng-model="vm.declineParams.approval_notes" class="form-control"
+                          rows="5" style="height:120px; width:395px"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <div>
+                <button type="submit" class="btn bg-primary"> Submit</button>
+            </div>
+        </div>
+    </div>
+</form>

@@ -5,7 +5,7 @@
     'use strict';
     angular.module('crams.nectar').controller('AllocDetailController', AllocDetailController);
 
-    AllocDetailController.$inject = ['$location', '$route', '$scope', '$routeParams','NectarRequestService', 'LookupService', 'FlashService'];
+    AllocDetailController.$inject = ['$location', '$route', '$scope', '$routeParams', 'NectarRequestService', 'LookupService', 'FlashService'];
     function AllocDetailController($location, $route, $scope, $routeParams, NectarRequestService, LookupService, FlashService) {
         var vm = this;
 
@@ -15,11 +15,11 @@
         var current_path = request_paths[1];
 
 
-        vm.isEditable = function(path) {
+        vm.isEditable = function (path) {
             return path == 'allocations';
         };
 
-        vm.isApprovable = function(status_code, path) {
+        vm.isApprovable = function (status_code, path) {
             if (path != 'approval')  return false;
 
             var approvableStatusCodes = ['X', 'E', 'Q'];

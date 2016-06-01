@@ -36,8 +36,8 @@
          * Informs the controller about the dialog - this is used for closing dialogs that haven't been opened by this controller
          * @param dialogHandle An ngDialog returned dialog handle
          */
-        vm.setDialogHandler = function(dialogHandle) {
-            $log.debug("Setting dialog handle to: " + dialogHandle);
+        vm.setDialogHandler = function (dialogHandle) {
+            // $log.debug("Setting dialog handle to: " + dialogHandle);
             vm.dialogHandler = dialogHandle;
         }
 
@@ -67,11 +67,11 @@
 
             ContactService.createContact(newContact).then(function (response) {
                 if (response.success) {
-                    $log.debug("Success - " + JSON.stringify({data: response.data}));
+                    // $log.debug("Success - " + JSON.stringify({data: response.data}));
                     vm.setContact(response.data);
                     vm.dialogHandler.close();
                 } else {
-                    $log.debug("Failure, server error - " + JSON.stringify(response.message));
+                    // $log.debug("Failure, server error - " + JSON.stringify(response.message));
 
                     for (var errorField in response.data) { // raise a form error for every field error in the response
                         vm.raiseFormError(errorField, response.data[errorField].toString());
@@ -87,7 +87,7 @@
          * @param newContact Refer to createNewContact()'s documentation for schema
          */
         vm.setContact = function (newContact) {
-            $log.debug("Setting contact to: " + JSON.stringify(newContact));
+            // $log.debug("Setting contact to: " + JSON.stringify(newContact));
             /*
              * TODO: would like to use a service for managing state of current request, but for now using $scope.emit to pass results back to NectarRequestController - RJ
              * read http://ilikekillnerds.com/2014/11/angularjs-call-controller-another-controller/
@@ -105,7 +105,7 @@
          *       though currently only using server-side validation
          */
         vm.raiseFormError = function (fieldName, errorMessage) {
-            $log.debug("Error in " + fieldName + ": " + errorMessage);
+            // $log.debug("Error in " + fieldName + ": " + errorMessage);
 
             switch (fieldName) {
                 case "title":

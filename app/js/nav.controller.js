@@ -18,7 +18,7 @@
                     second_path: "",
                     second_level_title: ""
                 };
-                if (current_paths[1] == ''){
+                if (current_paths[1] == '') {
                     $rootScope.nav.has_first_level = false;
                 }
             }
@@ -29,17 +29,17 @@
                     first_level_title: findNavTitle(current_paths[1]),
                     has_second_level: true,
                     second_path: current_paths[2],
-                    second_level_title: findNavTitle(current_paths[2]),
+                    second_level_title: findNavTitle(current_paths[2])
                 };
             }
-            if (path_lens >3){
+            if (path_lens > 3) {
                 $rootScope.nav = {
                     has_first_level: true,
                     first_path: current_paths[1],
                     first_level_title: findNavTitle(current_paths[1]),
                     has_second_level: true,
                     second_path: current_paths[2] + "/" + current_paths[3],
-                    second_level_title: findNavTitle(current_paths[2]),
+                    second_level_title: findNavTitle(current_paths[2])
                 };
             }
             return '/' + current_paths[1] == path;

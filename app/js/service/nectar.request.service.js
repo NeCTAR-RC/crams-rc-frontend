@@ -82,7 +82,7 @@
                     request_url = request_url + "&req_status=" + request_status
                 }
             } else {
-                if (request_status != null || request_status != undefined){
+                if (request_status != null || request_status != undefined) {
                     request_url = request_url + "?req_status=" + request_status
                 }
             }
@@ -97,7 +97,7 @@
                     request_url = request_url + "&req_status=" + request_status
                 }
             } else {
-                if (request_status != null || request_status != undefined){
+                if (request_status != null || request_status != undefined) {
                     request_url = request_url + "?req_status=" + request_status
                 }
             }
@@ -142,7 +142,7 @@
 
         function handleError(response) {
             var msg = response.status + " " + response.statusText;
-            if ((response.status == 400)  && (response.data)) {
+            if ((response.status == 400) && (response.data)) {
                 msg = JSON.stringify(response.data);
             }
             return {

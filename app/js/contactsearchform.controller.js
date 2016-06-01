@@ -52,14 +52,13 @@
         }
 
 
-        vm.showCreateContactDialog = function() {
+        vm.showCreateContactDialog = function () {
             vm.showingCreateContactDialog = true;
         }
 
-        vm.hideCreateContactDialog = function() {
+        vm.hideCreateContactDialog = function () {
             vm.showingCreateContactDialog = false;
         }
-
 
 
         /**
@@ -68,7 +67,7 @@
          * @param newContact Refer to createNewContact()'s documentation for schema
          */
         vm.setContact = function (newContact) {
-            $log.debug("Setting contact to: " + JSON.stringify(newContact));
+            // $log.debug("Setting contact to: " + JSON.stringify(newContact));
             /*
              * TODO: would like to use a service for managing state of current request, but for now using $scope.emit to pass results back to NectarRequestController - RJ
              * read http://ilikekillnerds.com/2014/11/angularjs-call-controller-another-controller/
@@ -85,8 +84,12 @@
             vm.contact_form_errors = {} // clear errors
             ContactService.findContact(contactSearchString).then(function (response) {
                 if (response.success) {
-                    if (response.data.length > SHOW_NUMBER_OF_RESULTS) { vm.raiseFormError('too_many_results', 'Your search criteria returned too many results, please be more specific.') }
-                    else { vm.openSearchResultsDialog(response.data); }
+                    if (response.data.length > SHOW_NUMBER_OF_RESULTS) {
+                        vm.raiseFormError('too_many_results', 'Your search criteria returned too many results, please be more specific.')
+                    }
+                    else {
+                        vm.openSearchResultsDialog(response.data);
+                    }
                 } else {
                     $log.error("searchForContact failed with: " + response.message);
                     FlashService.Error("Failed to search for contact: " + response.message);
@@ -104,7 +107,7 @@
          *       though currently only using server-side validation
          */
         vm.raiseFormError = function (fieldName, errorMessage) {
-            $log.debug("Error in " + fieldName + ": " + errorMessage);
+            // $log.debug("Error in " + fieldName + ": " + errorMessage);
 
             switch (fieldName) {
                 <!-- error handling for too many results case -->

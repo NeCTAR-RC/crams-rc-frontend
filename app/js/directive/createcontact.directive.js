@@ -24,8 +24,8 @@ function cramsCreateContactForm() {
         scope: {
             parentDialog: '=',
         },
-        link:function(scope, elem, attrs, vm){
-            scope.$watch('parentDialog', function(parentDialog){
+        link: function (scope, elem, attrs, vm) {
+            scope.$watch('parentDialog', function (parentDialog) {
                 vm.setDialogHandler(parentDialog);
             });
         }

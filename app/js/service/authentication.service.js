@@ -30,7 +30,7 @@
             ).then(handleSuccess, handleError);
         }
 
-        function checkPerms(){
+        function checkPerms() {
             return $http.get(crams_check_perm_url).then(handleSuccess, handleError);
         }
 
@@ -62,13 +62,13 @@
             $cookieStore.put('globals', $rootScope.globals);
         }
 
-        function setUserPerms(permissions){
-            if(_.isEmpty(permissions)){
+        function setUserPerms(permissions) {
+            if (_.isEmpty(permissions)) {
                 $rootScope.globals.isApprover = false;
-            }else{
+            } else {
                 var roles = permissions.roles;
-                if (!_.isUndefined(roles)){
-                    if(_.contains(roles, 'nectar_approver')){
+                if (!_.isUndefined(roles)) {
+                    if (_.contains(roles, 'nectar_approver')) {
                         // set user is an approver
                         $rootScope.globals.isApprover = true;
                     }

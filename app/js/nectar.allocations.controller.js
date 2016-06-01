@@ -25,7 +25,7 @@
             });
         }
 
-        vm.dummyprojects = function(){
+        vm.dummyprojects = function () {
             return [
                 {
                     "id": 13703,

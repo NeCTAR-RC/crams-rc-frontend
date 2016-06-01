@@ -60,7 +60,7 @@ module.exports = function (config) {
         logLevel: config.LOG_DEBUG,
 
         autoWatch: true,
-      
+
         frameworks: ['jasmine'],
 
         // browsers to test against, be sure to install the correct browser launcher plugins

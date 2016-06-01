@@ -1,7 +1,7 @@
 /**
  * Created by simonyu on 23/11/15.
  */
-describe('List Approved Allocation For Funding Body Allocation', function(){
+describe('List Approved Allocation For Funding Body Allocation', function () {
     beforeEach(module("crams.nectar"));
     // After every spec, do the following:
     //afterEach(inject(function ($httpBackend) {
@@ -46,7 +46,7 @@ describe('List Approved Allocation For Funding Body Allocation', function(){
     }));
 
     it('Get the funding body allocations counter', inject(function (NectarRequestService, $httpBackend, $rootScope) {
-        var mockResponse = {"counter":{"active":1,"new":6,"approved":3,"expired":0}};
+        var mockResponse = {"counter": {"active": 1, "new": 6, "approved": 3, "expired": 0}};
         // Every time we hit the specified url,
         // respond with mockResponse( in this case an empty array).
         $httpBackend.when('GET', 'http://localhost:8080/crams/alloc_counter').respond(mockResponse);

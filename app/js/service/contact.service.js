@@ -43,7 +43,7 @@
         function makeNewChiefInvestigator() {
             var newContact = {};
             newContact.contact = makeNewContactTemplate();
-            newContact.contact_role = { "id": 2 }
+            newContact.contact_role = {"id": 2}
 
             return newContact;
         }
@@ -51,7 +51,7 @@
         function makeNewTechnicalContact() {
             var newContact = {};
             newContact.contact = makeNewContactTemplate();
-            newContact.contact_role = { "id": 3 }
+            newContact.contact_role = {"id": 3}
 
             return newContact;
         }
