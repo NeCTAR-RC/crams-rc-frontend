@@ -15,7 +15,6 @@ module.exports = function (config) {
             'app/bower_components/angular-sanitize/angular-sanitize.js',
             'app/bower_components/angular-cookies/angular-cookies.js',
             'app/bower_components/ng-dialog/js/ngDialog.js',
-            'app/js/crams.config.js',
             'app/app.js',
             'app/js/service/crams_utils.js',
             'app/js/service/flash.service.js',
@@ -25,6 +24,7 @@ module.exports = function (config) {
             'app/js/service/nectar.request.service.js',
             'app/js/nectar.request.controller.js',
             'app/js/nav.controller.js',
+            'test/crams.config.js',
             'test/unit/**/*.js'
         ],
         // list of files to exclude
