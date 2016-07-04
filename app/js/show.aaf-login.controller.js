@@ -12,7 +12,7 @@
         var path = $location.url();
         var fullUrl = $location.absUrl();
         var rc_shib_redirect = 'redirect-to-rc-shib?ks_login_url=';
-        var ks_login_url = fullUrl.replace(path, '') + '/ks_login_url';
+        var ks_login_url = fullUrl.replace(path, '') + '/ks-login';
         vm.rc_shib_url = ENV.apiEndpoint + rc_shib_redirect + ks_login_url;
         function logout() {
             //just clear the credentials
