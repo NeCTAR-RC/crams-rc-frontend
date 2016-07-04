@@ -16,6 +16,24 @@
       "revId": "d313a99815c7efbc7f8a72339a870bb0156168a9",
       "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bad4c104_5382fb94",
+        "filename": "app/templates/show_aaf_login.html",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2016-07-04T06:09:13Z",
+      "side": 1,
+      "message": "What bit won\u0027t work? It seems to work fine for me?\n\nIt gets rid of the links to the login url on the page (no point in linking to yourself) and removes some of the borders and extra nectar logo",
+      "parentUuid": "bad4c104_137873c3",
+      "revId": "d313a99815c7efbc7f8a72339a870bb0156168a9",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
     }
   ]
 }
