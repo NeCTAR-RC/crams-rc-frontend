@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bad4c104_137873c3",
+        "filename": "app/templates/show_aaf_login.html",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000133
+      },
+      "writtenOn": "2016-07-04T05:37:06Z",
+      "side": 1,
+      "message": "it\u0027s an angular js tag. if removed, it won\u0027t work",
+      "revId": "d313a99815c7efbc7f8a72339a870bb0156168a9",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
