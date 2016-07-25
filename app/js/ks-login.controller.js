@@ -5,8 +5,8 @@
     'use strict';
     angular.module('crams.nectar').controller('KsLoginController', KsLoginController);
 
-    KsLoginController.$inject = ['$scope', '$routeParams', '$location', '$templateCache', 'CRAMSAAService', 'FlashService'];
-    function KsLoginController($scope, $routeParams, $location, $templateCache, CRAMSAAService, FlashService) {
+    KsLoginController.$inject = ['$window', '$scope', '$routeParams', '$location', '$templateCache', 'CRAMSAAService', 'FlashService'];
+    function KsLoginController($window, $scope, $routeParams, $location, $templateCache, CRAMSAAService, FlashService) {
         var username = $routeParams.username;
         var token = $routeParams.rest_token;
         //console.log($routeParams.username);
@@ -23,6 +23,10 @@
                     var roles = _.pick(permission, 'roles');
                     CRAMSAAService.setUserPerms(roles);
                     $location.path('/allocations');
+                    var abs_url = $location.absUrl();
+                    var base_url = abs_url.substring(0, abs_url.indexOf('#'));
+                    // load the allocations pageq
+                    $window.location.href = base_url + '/#/allocations';
                 } else {
                     var msg = "Failed to get user permissions, " + response.message;
                     FlashService.Error(msg);
