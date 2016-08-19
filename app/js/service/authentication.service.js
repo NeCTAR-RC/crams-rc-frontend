@@ -10,8 +10,8 @@
     function CRAMSAAService($http, $cookieStore, $rootScope, ENV) {
 
         var crams_authen_api_url = ENV.apiEndpoint + "api-token-auth/";
-
-        var crams_check_perm_url = ENV.apiEndpoint + "user_roles/";
+ 
+        var crams_check_perm_url = ENV.apiEndpoint + "user_funding_body/";
 
         var service = {};
         service.authen = authen;
@@ -66,12 +66,12 @@
             if (_.isEmpty(permissions)) {
                 $rootScope.globals.isApprover = false;
             } else {
-                var roles = permissions.roles;
-                if (!_.isUndefined(roles)) {
-                    if (_.contains(roles, 'nectar_approver')) {
-                        // set user is an approver
-                        $rootScope.globals.isApprover = true;
-                    }
+                if (!_.isUndefined(permissions)) {
+                    _.find(permissions, function (user_perm) {
+                        if (user_perm.approver) { 
+                            $rootScope.globals.isApprover = true;
+                        }
+                    });
                 }
             }
             //set the globals in cookie to make sure the authen info exist after page refresh
