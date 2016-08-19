@@ -24,7 +24,7 @@
                     CRAMSAAService.setUserPerms(roles);
                     $location.path('/allocations');
                     var abs_url = $location.absUrl();
-                    var base_url = abs_url.substring(0, abs_url.indexOf('#'));
+                    var base_url = abs_url.substring(0, abs_url.indexOf('#') - 1);
                     // load the allocations pageq
                     $window.location.href = base_url + '/#/allocations';
                 } else {
