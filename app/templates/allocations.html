@@ -17,7 +17,7 @@
             <tbody>
             <tr ng-repeat="nc_req in project.requests">
                 <td width="20%">
-                    {{nc_req.request_status.status}} [{{nc_req.request_status.code}}]
+                    {{nc_req.request_status.status}}
                     <provision-details projectid="{{ project.id }}" project="project"></provision-details>
                 </td>
                 <td>
