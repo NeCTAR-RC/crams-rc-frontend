@@ -1,20 +1,20 @@
-<div class="row" ng-repeat="project in vm.nc_projects">
-    <div class="col-md-12">
-        <div class="m_title">{{project.title}}</div>
-    </div>
+<div class="row">
     <div class="col-md-12">
         <table class="display_data_tab">
             <thead>
             <tr>
-                <th width="20%">Status</th>
+                <th width="10%">Name</th>
+                <th width="10%">Status</th>
                 <th width="30%">Resources</th>
                 <th width="10%">Expiry</th>
                 <th width="25%">Funding</th>
                 <th width="15%">Actions</th>
             </tr>
             </thead>
-            <tbody>
-            <tr ng-repeat="req in project.requests">
+            <tbody ng-repeat="project in vm.nc_projects">
+              <tr ng-repeat="req in project.requests">
+                <td> <a href="#/{{ nav.first_path }}/view_request/{{req.id}}">{{project.title}}</a>
+                </td>
                 <td>
                     {{req.status}}
                     <provision-details projectid="{{ project.id }}" project="project"></provision-details>
@@ -39,7 +39,6 @@
                     {{req.funding}}
                 </td>
                 <td>
-                    <a href="#/{{ nav.first_path }}/view_request/{{req.id}}">View</a> |
                     <a href="#/{{ nav.first_path }}/history/{{req.id}}">History</a>
                 </td>
             </tr>
