@@ -1,0 +1,176 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7adec928_e0c36888",
+        "filename": "app/js/nav.controller.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2016-09-12T03:44:15Z",
+      "side": 1,
+      "message": "can remove?",
+      "range": {
+        "startLine": 11,
+        "startChar": 12,
+        "endLine": 11,
+        "endChar": 142
+      },
+      "revId": "dd11b806bddaa0b2998da527201a9cce1fb4ccd6",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7adec928_00c13480",
+        "filename": "app/js/nav.controller.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2016-09-12T03:44:15Z",
+      "side": 1,
+      "message": "whitespace",
+      "revId": "dd11b806bddaa0b2998da527201a9cce1fb4ccd6",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7adec928_20be3000",
+        "filename": "app/js/nectar.request.controller.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2016-09-12T03:44:15Z",
+      "side": 1,
+      "message": "why don\u0027t you just lower the identifier and check if it is pt- that way you also catch Pt- and pT-",
+      "range": {
+        "startLine": 354,
+        "startChar": 12,
+        "endLine": 356,
+        "endChar": 13
+      },
+      "revId": "dd11b806bddaa0b2998da527201a9cce1fb4ccd6",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7adec928_40bb3c0e",
+        "filename": "app/js/nectar.request.controller.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2016-09-12T03:44:15Z",
+      "side": 1,
+      "message": "can go?",
+      "range": {
+        "startLine": 358,
+        "startChar": 7,
+        "endLine": 361,
+        "endChar": 16
+      },
+      "revId": "dd11b806bddaa0b2998da527201a9cce1fb4ccd6",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7adec928_603758b1",
+        "filename": "app/js/service/nectar.request.service.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2016-09-12T03:44:15Z",
+      "side": 1,
+      "message": "can be removed?",
+      "range": {
+        "startLine": 68,
+        "startChar": 12,
+        "endLine": 68,
+        "endChar": 69
+      },
+      "revId": "dd11b806bddaa0b2998da527201a9cce1fb4ccd6",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7adec928_803c6495",
+        "filename": "app/js/show.aaf-login.controller.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2016-09-12T03:44:15Z",
+      "side": 1,
+      "message": "whitespace",
+      "revId": "dd11b806bddaa0b2998da527201a9cce1fb4ccd6",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7adec928_a041600d",
+        "filename": "app/templates/project_form.html",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2016-09-12T03:44:15Z",
+      "side": 1,
+      "message": "Change to \"Project names cannot start with \u0027pt-\u0027\"",
+      "range": {
+        "startLine": 23,
+        "startChar": 45,
+        "endLine": 23,
+        "endChar": 91
+      },
+      "revId": "dd11b806bddaa0b2998da527201a9cce1fb4ccd6",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7adec928_c0466c23",
+        "filename": "app/templates/show_aaf_login.html",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2016-09-12T03:44:15Z",
+      "side": 1,
+      "message": "double slash here not needed",
+      "range": {
+        "startLine": 26,
+        "startChar": 65,
+        "endLine": 26,
+        "endChar": 67
+      },
+      "revId": "dd11b806bddaa0b2998da527201a9cce1fb4ccd6",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
