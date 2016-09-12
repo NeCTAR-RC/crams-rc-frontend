@@ -547,6 +547,21 @@ a.muted:hover, a.muted:focus {
     color: #c9302c;
 }
 
+.alert-warning {
+    background-image: none !important;
+    border-color: #e9e9e9 !important;
+}
+
+.alert-danger {
+    background-image: none !important;
+    border-color: #e9e9e9 !important;
+}
+
+.alert-success {
+    background-image: none !important;
+    border-color: #e9e9e9 !important;
+}
+
 .error-template {
     padding: 40px 15px;
     text-align: center;
@@ -676,7 +691,7 @@ a.muted:hover, a.muted:focus {
     text-align: center;
 }
 
-.mp_content_inner{
+.mp_content_inner {
     border: solid 1px #d9d9d9;
     -moz-border-radius: 5px;
     border-radius: 5px;
@@ -725,6 +740,7 @@ a.muted:hover, a.muted:focus {
     text-align: justify;
     margin-left: 160px;
 }
+
 .line_separator {
     margin: 0 auto;
     width: 100%;

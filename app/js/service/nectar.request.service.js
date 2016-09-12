@@ -65,7 +65,6 @@
 
         function updateProjectRequest(allocation_request, project_id) {
             var update_request_url = nectar_api_url + project_id + "/";
-            console.log('--- update url : ' + update_request_url);
             return $http({
                     url: update_request_url,
                     method: 'PUT',

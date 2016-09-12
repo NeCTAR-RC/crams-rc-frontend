@@ -18,8 +18,6 @@
         var current_path = request_paths[1];
         vm.readyOnlyField = false;
         if (project_id != undefined) {
-            //console.log('--- start to load the existed project for id: ' + project_id);
-
             NectarRequestService.getProjectRequestById(request_id).then(function (response) {
                 if (response.success) {
                     vm.alloc = response.data[0];
@@ -267,12 +265,9 @@
                 //alert(JSON.stringify(vm.alloc));
 
                 if (project_id != undefined) {
-                    //console.log("start to update a request");
                     NectarRequestService.updateProjectRequest(vm.alloc, project_id).then(function (response) {
                         if (response.success) {
                             FlashService.Success('Updating request successfully', true);
-                            //alert('Successfully updated request -  ' + JSON.stringify({data: response.data}));
-                            //console.log("Success - " + JSON.stringify({data: response.data}));
                             $location.path('/' + current_path);
                         } else {
                             var msg = "Failed to update request, server error - " + response.message;
@@ -282,12 +277,9 @@
                         }
                     });
                 } else {
-                    //console.log("start to create a request");
                     NectarRequestService.createProjectRequest(vm.alloc).then(function (response) {
                         if (response.success) {
                             FlashService.Success('Creating request successfully', true);
-                            //alert('Successfully created request -  ' + JSON.stringify({data: response.data}));
-                            //console.log("Success - " + JSON.stringify({data: response.data}));
                             $location.path('/' + current_path);
                         } else {
                             var msg = "Failed to create request, server error - " + response.message;
@@ -309,7 +301,6 @@
         });
 
         vm.setContact = function (newContact) {
-            // console.log("Received new contact selection, setting contact to: " + JSON.stringify(newContact));
             vm.alloc.project_contacts[0].contact.id = newContact.id;
             vm.alloc.project_contacts[0].contact.email = newContact.email;
         };
@@ -325,6 +316,8 @@
 
         function validateForm() {
             vm.project_ids_identifier_invalid = false;
+            vm.project_ids_identifier_start_pt_invalid = false;
+
             // Disabled because some contacts don't have all the contact
             //vm.requester_contact_invalid = false;
             vm.project_description_invalid = false;
@@ -349,10 +342,9 @@
                 vm.project_ids_identifier_invalid = true;
             }
 
-            /*
-             if (!vm.request_form.requester_contact.$valid) {
-             vm.requester_contact_invalid = true;
-             }*/
+            if (vm.alloc.project_ids[0].identifier.toLowerCase().startsWith('pt-')) {
+                vm.project_ids_identifier_start_pt_invalid = true;
+            }
 
             if (!vm.request_form.project_description.$valid) {
                 vm.project_description_invalid = true;
@@ -546,7 +538,6 @@
             });
 
             var d_lens = vm.domains.length;
-            //console.log('domains lens: ' + d_lens);
             if (d_lens < 3) {
                 for (var i = 0; i < (3 - d_lens); i++) {
                     var dom = {

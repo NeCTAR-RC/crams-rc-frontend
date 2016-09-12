@@ -9,13 +9,28 @@
         $httpProvider.defaults.xsrfCookieName = 'csrftoken';
         $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
         $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+        // provide an interceptor to checkout 401 error:
+        $httpProvider.interceptors.push(function ($q, $location, $rootScope, $cookieStore) {
+            return {
+                'responseError': function (rejection) {
+                    if (rejection.status === 401) {
+                        var msg = rejection.data.detail;
+                        // console.log('token expired msg: ' + msg);
+                        $rootScope.token_expired = true;
+                        // clean any previous login status first if any
+                        // empty the globals in rootScope
+                        $rootScope.globals = {};
+                        // remove the globals from cookie
+                        $cookieStore.remove('globals');
+                        // force to login again
+                        $location.path('/login');
+                    }
+                    return $q.reject(rejection)
+                }
+            };
+        });
 
         $routeProvider
-            .when('/', {
-                controller: "HomeController",
-                templateUrl: 'templates/home.html',
-                controllerAs: 'vm'
-            })
             .when('/login', {
                 controller: "AAFLoginController",
                 templateUrl: 'templates/show_aaf_login.html',
@@ -131,7 +146,7 @@
                 templateUrl: 'templates/error_action.html',
                 controllerAs: 'vm'
             })
-            .otherwise({redirectTo: '/'});
+            .otherwise({redirectTo: '/allocations'});
     }
 
     run.$inject = ['$rootScope', '$location', '$cookieStore', '$http', 'FlashService'];
@@ -144,7 +159,7 @@
 
         $rootScope.$on('$locationChangeStart', function (event, next, current) {
             // redirect to login page if not logged in and trying to access a restricted page
-            var restrictedPage = $.inArray($location.path(), ['/login', '/ks-login/', '/crams-login', '/show_error', '/terms_condtions', '/']) === -1;
+            var restrictedPage = $.inArray($location.path(), ['/login', '/ks-login/', '/crams-login', '/show_error', '/terms_condtions']) === -1;
             var loggedIn = $rootScope.globals.currentUser;
             if (restrictedPage && !loggedIn) {
                 $location.path('/login');
