@@ -1,9 +1,8 @@
-
 <div class="row">
     <div class="col-md-12">
         <table class="display_data_tab">
             <thead>
-              <tr>
+            <tr>
                 <th width="10%">Name</th>
                 <th width="10%">Status</th>
                 <th width="30%">Resources</th>
@@ -13,9 +12,9 @@
             </tr>
             </thead>
             <tbody ng-repeat="project in vm.nc_projects  track by $index">
-              <tr ng-repeat="nc_req in project.requests">
+            <tr ng-repeat="nc_req in project.requests">
                 <td width="10%">
-                  <a href="#/{{ nav.first_path }}/view_request/{{nc_req.id}}">{{project.title}}</a>
+                    <a href="#/{{ nav.first_path }}/view_request/{{nc_req.id}}">{{project.title}}</a>
                 </td>
                 <td width="10%">
                     {{nc_req.request_status.status}}
@@ -30,7 +29,14 @@
                     </div>
                     <div class="row" ng-repeat="storage_request in nc_req.storage_requests">
                         <div class="col-md-12">
-                            {{storage_request.storage_product.name}}: {{storage_request.quota}} GB
+                            {{storage_request.storage_product.name}}:
+                            <span ng-if="nc_req.request_status.code !='N' && nc_req.request_status.code !='E' && nc_req.request_status.code !='X'">
+                            {{storage_request.approved_quota}}
+                            </span>
+                            <span ng-if="nc_req.request_status.code =='N' || nc_req.request_status.code =='E' || nc_req.request_status.code =='X'">
+                            {{storage_request.quota}}
+                            </span>
+                            GB
                         </div>
                     </div>
                 </td>

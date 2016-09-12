@@ -325,6 +325,8 @@
 
         function validateForm() {
             vm.project_ids_identifier_invalid = false;
+            vm.project_ids_identifier_start_pt_invalid = false;
+
             // Disabled because some contacts don't have all the contact
             //vm.requester_contact_invalid = false;
             vm.project_description_invalid = false;
@@ -347,6 +349,10 @@
 
             if (!vm.request_form.project_identifier.$valid) {
                 vm.project_ids_identifier_invalid = true;
+            }
+
+            if (vm.alloc.project_ids[0].identifier.startsWith('pt-') || vm.alloc.project_ids[0].identifier.startsWith('PT-')) {
+                vm.project_ids_identifier_start_pt_invalid = true;
             }
 
             /*

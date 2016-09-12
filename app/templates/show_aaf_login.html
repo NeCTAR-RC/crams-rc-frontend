@@ -3,6 +3,13 @@
     <div>
         <div ng-include="'templates/error_display.html'"></div>
         <br/>
+        <div class="row">
+            <div class="col-lg-4 col-lg-offset-4 text-center">
+                <div class="alert alert-danger" ng-if="vm.token_expired">
+                     {{vm.token_expired_msg}}
+                </div>
+            </div>
+        </div>
         <br/>
         <div class="row">
             <div class="col-lg-4 col-lg-offset-4 text-center">
@@ -15,7 +22,9 @@
                         NeCTAR uses the Australian Access Federation (AAF) for its authentication.
 
                         <p>
-                            <a target="_blank" href="http://support.nectar.org.au//support/solutions/articles/6000055377-getting-an-account">Having trouble logging in?</a>
+                            <a target="_blank"
+                               href="http://support.nectar.org.au//support/solutions/articles/6000055377-getting-an-account">Having
+                                trouble logging in?</a>
                         </p>
                     </div>
 

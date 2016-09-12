@@ -8,7 +8,7 @@
         $scope.isCurrentPath = function (path) {
             var current_paths = $location.path().split('/');
             var path_lens = current_paths.length;
-            //console.log('path lens: '+ path_lens + " - current_path[0]: " + current_paths[0] + " - curent_paths[1]: "+ current_paths[1]);
+            // console.log('path lens: ' + path_lens + " - current_path[0]: " + current_paths[0] + " - curent_paths[1]: " + current_paths[1]);
             if (path_lens == 2) {
                 $rootScope.nav = {
                     has_first_level: true,
@@ -22,23 +22,17 @@
                     $rootScope.nav.has_first_level = false;
                 }
             }
-            if (path_lens == 3) {
+            if (path_lens >= 3) {
+                var sencond_path = "";
+                for (var i = 2; i < path_lens; i++) {
+                    sencond_path += current_paths[i] + "/";
+                } 
                 $rootScope.nav = {
                     has_first_level: true,
                     first_path: current_paths[1],
                     first_level_title: findNavTitle(current_paths[1]),
                     has_second_level: true,
-                    second_path: current_paths[2],
-                    second_level_title: findNavTitle(current_paths[2])
-                };
-            }
-            if (path_lens > 3) {
-                $rootScope.nav = {
-                    has_first_level: true,
-                    first_path: current_paths[1],
-                    first_level_title: findNavTitle(current_paths[1]),
-                    has_second_level: true,
-                    second_path: current_paths[2] + "/" + current_paths[3],
+                    second_path: sencond_path,
                     second_level_title: findNavTitle(current_paths[2])
                 };
             }
