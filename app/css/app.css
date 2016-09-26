@@ -625,6 +625,20 @@ a.muted:hover, a.muted:focus {
     display: inline-block;
 }
 
+.add-on .input-group-btn > .btn {
+    border-left-width: 0;
+    left: -2px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+/* stop the glowing blue shadow */
+.add-on .form-control:focus {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    border-color: #cccccc;
+}
+
 .mp_header {
     padding-left: 5px;
     padding-right: 5px;
@@ -685,6 +699,21 @@ a.muted:hover, a.muted:focus {
     z-index: 999;
 }
 
+.mp_body_div {
+    box-shadow: 0px 0px 10px #b5b5b5;
+    -moz-box-shadow: 0 0 10px #bababa;
+    -webkit-box-shadow: 0 0 10px #bababa;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 10px;
+    border: solid 2px #bababa;
+    position: absolute;
+    width: 550px;
+    background-color: #ffffff;
+    overflow: visible;
+    z-index: 999;
+}
+
 .mp_content {
     margin: 0 auto;
     padding: 5px;
@@ -700,12 +729,26 @@ a.muted:hover, a.muted:focus {
     margin: auto 5px;
 }
 
+.mp_content_noborder {
+    text-align: left;
+    padding: 5px;
+    margin: auto 5px;
+}
+
 .mp_status_section {
     margin: 5px;
 }
 
 .mp_details_section {
     margin: 5px;
+}
+
+.data_display_row {
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    border: solid 1px #ccc;
+    padding: 5px;
+    min-height: 34px;
 }
 
 .each_field_row {

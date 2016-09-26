@@ -19,7 +19,7 @@ angular
 function cramsContact() {
     return {
         restrict: 'E',
-        templateUrl: 'templates/contactcard.html',
+        templateUrl: 'templates/vicnode/contactcard.html',
         controller: 'ContactCardController',
         controllerAs: 'vm',
         scope: {
