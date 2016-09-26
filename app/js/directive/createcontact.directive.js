@@ -18,7 +18,7 @@ angular
 function cramsCreateContactForm() {
     return {
         restrict: 'E',
-        templateUrl: 'templates/createcontact_form.html',
+        templateUrl: 'templates/vicnode/createcontact_form.html',
         controller: 'CreateContactFormController',
         controllerAs: 'vm',
         scope: {

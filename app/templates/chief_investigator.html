@@ -11,10 +11,9 @@
 <div class="row">
     <div class="col-md-6">
 
-        <label for="id-chief_investigator">
+        <label>
             Chief Investigator <i class="glyphicon glyphicon-asterisk text-primary"></i>
         </label>
-
 
         <span ng-controller="PopupController">
             <span ng-click="showHelp()" class="help-icon-sp"><img class="help-icon" src="images/help.png"></span>
@@ -23,46 +22,35 @@
             </modal>
         </span>
         <br>
-
-        <!-- custom directive for displaying contact card - refer to contactcard.controller.js or hit F1 with the element highlighted in webstorm -->
-
-        <div class="row">
-            <div class="col-md-6">
-        <crams-contact contact-email="{{ vm.alloc.project_contacts[0].contact.email }}"
-                       read-only="true"></crams-contact>
-        <br>
-        </div>
-        </div>
-
-        <div class="row" ng-controller="ContactSearchFormController as vm">
-            <div class="col-md-6" class="form-group"
-                 ng-class="{'has-error': vm.contact_form_errors['too_many_results_status']}">
-                <input type="text" class="form-control" id="id-chief_investigator" name="chief_investigator"
-                       placeholder="To change CI, search for e-mail or name here."
-                       ng-model="vm.selected_contact_email"/>
-                <span class="help-block" ng-show="vm.contact_form_errors['too_many_results_status']">{{ vm.contact_form_errors['too_many_results_message'] }}</span>
-
-
-            </div>
-
-            <div class="col-md-6">
-                <div class="row">
-                    <button type="button"
-                            class="btn btn-default"
-                            ng-click="vm.searchForContact(vm.selected_contact_email)">
-                        Search
-                    </button>
-                        </span>
-                </div>
-            </div>
-
+        <div ng-class="{'has-error': vm.chief_investigator_invalid}">
+            <span class="help-block has-error" ng-show="vm.chief_investigator_invalid">
+                 Please add an chief investigator
+            </span>
         </div>
     </div>
 </div>
 
-
+<div class="row">
+    <div class="col-md-3">
+        <div class="form-group" ng-repeat="proj_contact in vm.alloc.project_contacts">
+            <div ng-if="proj_contact.contact_role.id == 2">
+                <input type="text" name="vm.display_ci" id="id-display_ci" class="form-control"
+                       value='{{(proj_contact.contact.title || "") + " " + (proj_contact.contact.given_name || "") + " " +
+            (proj_contact.contact.surname || "") + " " + proj_contact.contact.email}}' readonly="readonly"
+                       ng-if="proj_contact.contact.email">
+            </div>
+        </div>
+    </div>
+</div>
+<br/>
 <div class="row">
     <div class="col-md-6">
+        <project-contact></project-contact>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-7">
         <div>&nbsp;</div>
         <label for="id-additional_researchers">
             Please list all other primary investigators, partner investigators and other research collaborators

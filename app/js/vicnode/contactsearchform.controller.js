@@ -44,7 +44,7 @@
         vm.openSearchResultsDialog = function (searchResultArray) {
             vm.hideCreateContactDialog();
             vm.dialogHandler = ngDialog.open({
-                template: 'templates/contactsearch_form.html',
+                template: 'templates/vicnode/contactsearch_form.html',
                 className: 'ngdialog-theme-default',
                 scope: $scope,
                 data: searchResultArray

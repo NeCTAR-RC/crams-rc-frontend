@@ -48,9 +48,6 @@
         //set end_date
         initEndDate();
 
-        //load contacts
-        loadContacts();
-
         //load FOR Codes
         loadFORCodes();
 
@@ -104,19 +101,6 @@
                 console.error(msg);
             }
         });
-
-        function loadContacts() {
-            //Populate Contacts
-            LookupService.contacts().then(function (response) {
-                if (response.success) {
-                    vm.contacts = response.data;
-                } else {
-                    var msg = "Failed to load contacts, " + response.message;
-                    FlashService.Error(msg);
-                    console.error(msg);
-                }
-            });
-        }
 
         function loadFORCodes() {
             //Populate FORCodes
@@ -262,8 +246,6 @@
                     each_storage_req.approved_quota = each_storage_req.quota;
                 });
 
-                //alert(JSON.stringify(vm.alloc));
-
                 if (project_id != undefined) {
                     NectarRequestService.updateProjectRequest(vm.alloc, project_id).then(function (response) {
                         if (response.success) {
@@ -289,20 +271,28 @@
                         }
                     });
                 }
+            } else {
+                var msg = "Please fix up the below errors";
+                FlashService.Error(msg);
             }
         };
 
-        // new contact
-        vm.contact = newEmptyContact();
-
-        // listener for new contact, refer to contactsearchformcontroller.js for why this is here
-        $scope.$on('contact-form-return', function (event, newContact) {
-            vm.setContact(newContact);
+        // subscribe the event to get the selected ci contact.
+        $scope.$on('selected_project_ci', function (event, contact) {
+            vm.updateProjectContact(contact);
         });
 
-        vm.setContact = function (newContact) {
-            vm.alloc.project_contacts[0].contact.id = newContact.id;
-            vm.alloc.project_contacts[0].contact.email = newContact.email;
+        vm.updateProjectContact = function (contact) {
+            _.find(vm.alloc.project_contacts, function (p_contact, index) {
+                // only check if it's chief investigator
+                if (p_contact.contact_role.id == 2) {
+                    vm.alloc.project_contacts[index].contact.id = contact.id;
+                    vm.alloc.project_contacts[index].contact.title = contact.title;
+                    vm.alloc.project_contacts[index].contact.given_name = contact.given_name;
+                    vm.alloc.project_contacts[index].contact.surname = contact.surname;
+                    vm.alloc.project_contacts[index].contact.email = contact.email;
+                }
+            });
         };
 
         // set the end_date when page loaded
@@ -317,9 +307,6 @@
         function validateForm() {
             vm.project_ids_identifier_invalid = false;
             vm.project_ids_identifier_start_pt_invalid = false;
-
-            // Disabled because some contacts don't have all the contact
-            //vm.requester_contact_invalid = false;
             vm.project_description_invalid = false;
             vm.estimated_duration_invalid = false;
             vm.convert_project_trial_invalid = false;
@@ -340,10 +327,12 @@
 
             if (!vm.request_form.project_identifier.$valid) {
                 vm.project_ids_identifier_invalid = true;
+                vm.request_form.$valid = false;
             }
 
-            if (vm.alloc.project_ids[0].identifier.toLowerCase().startsWith('pt-')) {
+            if (vm.alloc.project_ids[0].identifier != null && vm.alloc.project_ids[0].identifier.toLowerCase().startsWith('pt-')) {
                 vm.project_ids_identifier_start_pt_invalid = true;
+                vm.request_form.$valid = false;
             }
 
             if (!vm.request_form.project_description.$valid) {
@@ -411,14 +400,12 @@
                 });
             }
 
-            if (!vm.request_form.chief_investigator.$valid) {
-                vm.chief_investigator_invalid = true;
-            } else {
-                if (vm.request_form.chief_investigator.$modelValue == 0) {
-                    vm.request_form.chief_investigator.$valid = false;
+            angular.forEach(vm.alloc.project_contacts, function (p_contact, index) {
+                if (p_contact.contact.email == undefined || p_contact.contact.email == null) {
                     vm.chief_investigator_invalid = true;
+                    vm.request_form.$valid = false;
                 }
-            }
+            });
 
             if (!vm.request_form.use_case.$valid) {
                 vm.use_case_invalid = true;
@@ -495,7 +482,7 @@
             });
 
             return vm.request_form.$valid;
-        };
+        }
 
         //check duplicated FOR Code
         vm.checkFORDuplicate = function (scope, index) {
@@ -619,18 +606,6 @@
                 }
             }
         ]
-    }
-
-    function newEmptyContact() {
-        return {
-            "title": null,
-            "given_name": null,
-            "surname": null,
-            "email": null,
-            "phone": null,
-            "organisation": null,
-            "contact_role": 2
-        }
     }
 
     function newEmptyAlloc() {

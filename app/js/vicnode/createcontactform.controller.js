@@ -46,7 +46,7 @@
          */
         vm.showNewContactDialog = function () {
             vm.setDialogHandler(ngDialog.open({
-                template: 'templates/createcontact_form.html',
+                template: 'templates/vicnode/createcontact_form.html',
                 className: 'ngdialog-theme-default',
                 scope: $scope,
             }));
