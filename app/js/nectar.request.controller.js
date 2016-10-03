@@ -410,9 +410,11 @@
             if (!vm.request_form.use_case.$valid) {
                 vm.use_case_invalid = true;
             }
+
             if (!vm.request_form.allocation_home.$valid) {
                 vm.allocation_home_invalid = true;
             }
+
             if (!vm.request_form.estimated_users.$valid) {
                 vm.estimated_users_invalid = true;
             }
@@ -427,7 +429,7 @@
 
                 sumfor += each_domain.percentage;
 
-                if (each_domain.for_code != undefined && each_domain.for_code.id != 0) {
+                if (each_domain.for_code != undefined && each_domain.for_code.id != 0 && each_domain.for_code.id != null) {
                     if (each_domain.percentage == undefined || each_domain.percentage == 0) {
                         for_percentage_missed = true;
                     }
@@ -702,7 +704,7 @@
                             }
                         },
                         {
-                            "question_response": "National",
+                            "question_response": "",
                             "question": {
                                 "key": "homenode"
                             }

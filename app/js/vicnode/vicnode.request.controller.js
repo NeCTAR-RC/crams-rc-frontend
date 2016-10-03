@@ -254,7 +254,7 @@
 
                 sumfor += each_domain.percentage;
 
-                if (each_domain.for_code != undefined && each_domain.for_code.id != 0) {
+                if (each_domain.for_code != undefined && each_domain.for_code.id != 0 && each_domain.for_code.id != null) {
                     if (each_domain.percentage == undefined || each_domain.percentage == 0) {
                         for_percentage_missed = true;
                     }

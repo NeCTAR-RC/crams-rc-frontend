@@ -4,7 +4,8 @@
         <span class="alert-info"> <strong>Note: </strong></span> Please select up to 3 Fields of Research (FOR)
         codes describing your work, adding up to a total of 100%. For more information on FOR codes please
         refer to the following
-        <a href="http://www.abs.gov.au/Ausstats/abs@.nsf/Latestproducts/6BB427AB9696C225CA2574180004463E?opendocument" target="_blank">
+        <a href="http://www.abs.gov.au/Ausstats/abs@.nsf/Latestproducts/6BB427AB9696C225CA2574180004463E?opendocument"
+           target="_blank">
             website
         </a>
         <hr/>
@@ -76,6 +77,7 @@
             <select name="for_percentage1" id="id-for_percentage1" class="form-control"
                     ng-model="vm.domains[1].percentage"
                     ng-options="for_percentage.value as for_percentage.label for for_percentage in vm.for_percentages">
+                <option value="">--- Select ---</option>
             </select>
             <span class="help-block" ng-show="vm.for_percentage1_invalid">
                 Please select percentage for Field Of Research
