@@ -1,6 +1,12 @@
+<div class="center_div">
+    <div class="loading_div" ng-show="!vm.loaded">
+        <img style="display:block; margin:0 auto;" src="images/page-loader.gif">
+        <div class="loading_text">Loading ...</div>
+    </div>
+</div>
 <div class="row">
     <div class="col-md-12">
-        <table class="display_data_tab">
+        <table class="display_data_tab" ng-show="vm.nc_projects.length > 0">
             <thead>
             <tr>
                 <th width="10%">Name</th>
@@ -12,8 +18,8 @@
             </tr>
             </thead>
             <tbody ng-repeat="project in vm.nc_projects">
-              <tr ng-repeat="req in project.requests">
-                <td> <a href="#/{{ nav.first_path }}/view_request/{{req.id}}">{{project.title}}</a>
+            <tr ng-repeat="req in project.requests">
+                <td><a href="#/{{ nav.first_path }}/view_request/{{req.id}}">{{project.title}}</a>
                 </td>
                 <td>
                     {{req.status}}
@@ -47,3 +53,12 @@
     </div>
 </div>
 <div style="clear: both"/>
+
+
+<script type="text/javascript">
+    //    if(document.readyState === 'complete') {
+    //        var element = document.getElementById("page-loading");
+    //        alert(element);
+    //        element.parentNode.removeChild(element);
+    //    }
+</script>

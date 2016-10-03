@@ -22,7 +22,7 @@
                     vm.funding_bodies = response.data;
                     vm.funding_bodies.unshift({"id": -1, "name": "All", "reviewer": true, "approver": true});
                 } else {
-                    var msg = "Failed to load user funding body, " + response.message;
+                    var msg = "Failed to load user funding body";
                     FlashService.Error(msg);
                     console.error(msg);
                 }
@@ -30,10 +30,10 @@
         }
 
         //get funding body allocation requests
-        //console.log('start to call getFundingBodyRequests.');
         getApprovalRequests();
-        //console.log('finished to call loading funding body.');
         function getApprovalRequests() {
+            vm.loaded = false;
+            vm.nc_projects = [];
             //Call Funding Body allocations counter
             NectarRequestService.ApprovalCounter(vm.selected_funding_body, vm.req_status).then(function (response) {
                 if (response.success) {
@@ -54,11 +54,12 @@
                     FlashService.Error(msg);
                     console.error(msg);
                 }
+            }).finally(function () {
+                vm.loaded = true;
             });
         }
 
         vm.filterAllocations = function () {
-            //console.log('------- filterAllocations - selected funding body: ' + vm.selected_funding_body);
             getApprovalRequests();
         };
 

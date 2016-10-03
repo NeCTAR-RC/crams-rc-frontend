@@ -333,6 +333,14 @@ img.help-icon {
     text-align: center;
 }
 
+.c-offset-3 {
+    margin-left: 30%;
+}
+
+.c-offset-4 {
+    margin-left: 38%;
+}
+
 .btn {
     -moz-user-select: none;
     background-image: none;
@@ -789,4 +797,26 @@ a.muted:hover, a.muted:focus {
     width: 100%;
     height: 4px;
     border-bottom: solid 1px #f0f0f0;
+}
+
+.loading_text {
+    color: #e9a600;
+    font-weight: normal;
+}
+
+.loading_div {
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0px 0px 15px #b5b5b5;
+    -moz-box-shadow: 0 0 15px #bababa;
+    -webkit-box-shadow: 0 0 15px #bababa;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 10px;
+    border: solid 1px #e1e1db;
+    background-color: #ffffff;
+    z-index: 1100;
+    position: relative;
+    margin-bottom: 10px;
+    overflow: auto;
 }

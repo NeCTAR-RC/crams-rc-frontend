@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="m_title">
-            Poject Name: {{vm.alloc_project_request.title}}
+            Project Name: {{vm.alloc_project_request.title}}
         </div>
     </div>
     <div class="blank_separator"></div>
@@ -253,7 +253,7 @@
                         </a>
                     </span>
                 </span>
-                 <span ng-if="req.request_status.code !='E' && req.request_status.code !='A' && !req.parent_request">
+                <span ng-if="req.request_status.code !='E' && req.request_status.code !='A' && !req.parent_request">
                      <span ng-if="req.funding_scheme.funding_scheme.indexOf('NeCTAR') > -1">
                          <a href="#/allocations/edit_request/{{vm.alloc_project_request.id}}/{{req.id}}">
                              <input class="btn bg-primary" type="button" value="Amend/Extend allocation">
