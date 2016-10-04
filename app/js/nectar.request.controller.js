@@ -478,7 +478,7 @@
             vm.alloc.domains = [];
             //copy vm.domains to vm.alloc.project.domains
             angular.forEach(vm.domains, function (each_domain, key) {
-                if (each_domain.for_code != undefined && each_domain.for_code.id != 0) {
+                if (each_domain.for_code != undefined && each_domain.for_code.id != 0 && each_domain.for_code.id != null) {
                     vm.alloc.domains.push(each_domain);
                 }
             });
@@ -492,7 +492,7 @@
             var current_domain = vm.domains[index];
             angular.forEach(vm.domains, function (each_domain, key) {
                 if (key != index) {
-                    if (each_domain.for_code != undefined && each_domain.for_code.id != 0) {
+                    if (each_domain.for_code != undefined && each_domain.for_code.id != 0 && each_domain.for_code.id != null) {
                         if (each_domain.for_code.id == current_domain.for_code.id) {
                             duplicated = true;
                         }
@@ -515,7 +515,7 @@
             vm.domains = [];
             //copy to vm.alloc.domains to vm.domains
             angular.forEach(vm.alloc.domains, function (each_domain, key) {
-                if (each_domain.for_code != undefined && each_domain.for_code.id != 0) {
+                if (each_domain.for_code != undefined && each_domain.for_code.id != 0 && each_domain.for_code.id != null) {
                     var dom = {
                         "percentage": each_domain.percentage,
                         "for_code": {
