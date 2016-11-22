@@ -18,7 +18,7 @@
 
 <form name="decline_form" ng-submit="vm.decline_alloc()" novalidate>
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-4">
             <label for="id-project_identifier">
                 Project Identifier <i class="glyphicon glyphicon-asterisk text-primary"></i>
             </label>
@@ -38,7 +38,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-4">
             <label for="id-project_description">
                 Project Allocation Title <i class="glyphicon glyphicon-asterisk text-primary"></i>
             </label>
@@ -90,7 +90,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-4">
             <label for="id-approval_notes">
                 Reason
             </label>
@@ -103,8 +103,8 @@
 
             <div class="form-group">
                 <textarea name="approval_notes" id="id-approval_notes"
-                          ng-model="vm.declineParams.approval_notes" class="form-control"
-                          rows="5" style="height:120px; width:395px"></textarea>
+                          ng-model="vm.approval_notes" class="form-control"
+                          rows="5" style="height:120px; width:450px"></textarea>
             </div>
         </div>
     </div>

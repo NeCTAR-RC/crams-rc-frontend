@@ -19,17 +19,18 @@
 
         <div class="form-group" ng-class="{'has-error': vm.use_case_invalid}">
             <textarea name="use_case" id="id-use_case"
-                      ng-model="vm.alloc.requests[0].request_question_responses[2].question_response" class="form-control"
-                      rows="5" style="height:120px; width:420px" required></textarea>
+                      ng-model="vm.alloc.requests[0].request_question_responses[2].question_response"
+                      class="form-control"
+                      rows="5" style="height:120px; width:450px" required></textarea>
             <span class="help-block" ng-show="vm.use_case_invalid">Please enter research use case</span>
         </div>
     </div>
 </div>
 
 <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-7">
         <label for="id-usage_pattern">
-            Instance, Object Storage and Volumes Storage Usage Patterns
+            Virtual Machine Instances, Object Storage and Volumes Storage Usage Patterns
         </label>
         <span ng-controller="PopupController">
             <span ng-click="showHelp()" class="help-icon-sp"><img class="help-icon" src="images/help.png"></span>
@@ -40,14 +41,15 @@
 
         <div class="form-group">
             <textarea name="usage_pattern" id="id-usage_pattern"
-                      ng-model="vm.alloc.requests[0].request_question_responses[3].question_response" class="form-control"
-                      rows="5" style="height:120px; width:420px"></textarea>
+                      ng-model="vm.alloc.requests[0].request_question_responses[3].question_response"
+                      class="form-control"
+                      rows="5" style="height:120px; width:450px"></textarea>
         </div>
     </div>
 </div>
 
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-4">
         <label for="id-alloc_home">
             Allocation Home Location <i class="glyphicon glyphicon-asterisk text-primary"></i>
         </label>
@@ -85,13 +87,13 @@
         <div class="form-group">
             <textarea name="location" id="id-additional_location"
                       ng-model="vm.alloc.requests[0].request_question_responses[5].question_response"
-                      class="form-control" rows="5" style="height:120px; width:420px"></textarea>
+                      class="form-control" rows="5" style="height:120px; width:450px"></textarea>
         </div>
     </div>
 </div>
 
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-4">
         <label for="id-estimated_users">
             Estimated Number Of Users <i class="glyphicon glyphicon-asterisk text-primary"></i>
         </label>
@@ -102,10 +104,12 @@
             </modal>
         </span>
 
-        <div class="form-group" ng-class="{'has-error':vm.estimated_users_invalid || (vm.request_form.estimated_users.$dirty && vm.request_form.estimated_users.$invalid)}">
+        <div class="form-group"
+             ng-class="{'has-error':vm.estimated_users_invalid || (vm.request_form.estimated_users.$dirty && vm.request_form.estimated_users.$invalid)}">
             <input type="number" min="1" name="estimated_users" id="id-estimated_users" class="form-control"
                    ng-model="vm.alloc.requests[0].request_question_responses[6].question_response" required/>
-            <span class="help-block" ng-show="vm.estimated_users_invalid || (vm.request_form.estimated_users.$dirty && vm.request_form.estimated_users.$invalid)">
+            <span class="help-block"
+                  ng-show="vm.estimated_users_invalid || (vm.request_form.estimated_users.$dirty && vm.request_form.estimated_users.$invalid)">
                 Please enter the estimated number of users
             </span>
         </div>

@@ -1,18 +1,18 @@
 <div class="row">
     <div class="col-md-12">
         <h3>Compute Resources</h3>
-        <span class="alert-info"> <strong>Note: </strong></span>  Specify the maximum compute infrastructure that your
-            project will need access to. This quota can be extended at a later date if more resources are required.
-            The overall availability of resources may vary over time and at different locations. Resource may not
-            always be available.
+        <span class="alert-info"> <strong>Note: </strong></span> Specify the maximum compute infrastructure that your
+        project will need access to. This quota can be extended at a later date if more resources are required.
+        The overall availability of resources may vary over time and at different locations. Resource may not
+        always be available.
         <hr/>
     </div>
 </div>
 
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-4">
         <label for="id-instances">
-            Number Of Instances <i class="glyphicon glyphicon-asterisk text-primary"></i>
+            Number Of Virtual Machine Instances <i class="glyphicon glyphicon-asterisk text-primary"></i>
         </label>
         <span ng-controller="PopupController">
             <span ng-click="showHelp()" class="help-icon-sp"><img class="help-icon" src="images/help.png"></span>
@@ -21,18 +21,20 @@
             </modal>
         </span>
 
-        <div class="form-group" ng-class="{'has-error': vm.instances_invalid || (vm.request_form.instances.$dirty && vm.request_form.instances.$invalid)}">
+        <div class="form-group"
+             ng-class="{'has-error': vm.instances_invalid || (vm.request_form.instances.$dirty && vm.request_form.instances.$invalid)}">
             <input type="number" min="1" name="instances" id="id-instances" class="form-control"
                    ng-model="vm.alloc.requests[0].compute_requests[0].instances" required/>
-            <span class="help-block" ng-show="vm.instances_invalid || (vm.request_form.instances.$dirty && vm.request_form.instances.$invalid)">
-                Please enter the maximum number of instances
+            <span class="help-block"
+                  ng-show="vm.instances_invalid || (vm.request_form.instances.$dirty && vm.request_form.instances.$invalid)">
+                Please enter the maximum number of virtual machine instances
             </span>
         </div>
     </div>
 </div>
 
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-4">
         <label for="id-cores">
             Number Of Cores <i class="glyphicon glyphicon-asterisk text-primary"></i>
         </label>
@@ -43,18 +45,23 @@
             </modal>
         </span>
 
-        <div class="form-group" ng-class="{'has-error': vm.cores_invalid || (vm.request_form.cores.$dirty && vm.request_form.cores.$invalid)}">
+        <div class="form-group"
+             ng-class="{'has-error': vm.cores_invalid || vm.cores_less_invalid || (vm.request_form.cores.$dirty && vm.request_form.cores.$invalid)}">
             <input type="number" min="1" name="cores" id="id-cores" class="form-control"
                    ng-model="vm.alloc.requests[0].compute_requests[0].cores" ng-change="vm.updateCoreHours()" required/>
-            <span class="help-block" ng-show="vm.cores_invalid || (vm.request_form.cores.$dirty && vm.request_form.cores.$invalid)">
+            <span class="help-block"
+                  ng-show="vm.cores_invalid || (vm.request_form.cores.$dirty && vm.request_form.cores.$invalid)">
                 Please enter the maximum number of cores
+            </span>
+            <span class="help-block" ng-show="vm.cores_less_invalid">
+                Cores can't be less than instances
             </span>
         </div>
     </div>
 </div>
 
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-4">
         <label for="id-core_hours">
             Number Of Core Hours <i class="glyphicon glyphicon-asterisk text-primary"></i>
         </label>
@@ -65,10 +72,12 @@
             </modal>
         </span>
 
-        <div class="form-group" ng-class="{'has-error': vm.core_hours_invalid || (vm.request_form.core_hours.$dirty && vm.request_form.core_hours.$invalid)}">
+        <div class="form-group"
+             ng-class="{'has-error': vm.core_hours_invalid || (vm.request_form.core_hours.$dirty && vm.request_form.core_hours.$invalid)}">
             <input type="number" min="1" name="core_hours" id="id-core_hours" class="form-control"
                    ng-model="vm.alloc.requests[0].compute_requests[0].core_hours" required/>
-            <span class="help-block" ng-show="vm.core_hours_invalid || (vm.request_form.core_hours.$dirty && vm.request_form.core_hours.$invalid)">
+            <span class="help-block"
+                  ng-show="vm.core_hours_invalid || (vm.request_form.core_hours.$dirty && vm.request_form.core_hours.$invalid)">
                 Please enter the number of core hours
             </span>
 

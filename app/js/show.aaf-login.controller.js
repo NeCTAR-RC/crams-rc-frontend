@@ -9,10 +9,11 @@
     function AAFLoginController($scope, $rootScope, $location, CRAMSAAService, FlashService, ENV) {
         var vm = this;
         vm.logout = logout;
-        var path = $location.url();
-        var fullUrl = $location.absUrl();
         var rc_shib_redirect = 'redirect-to-rc-shib?ks_login_url=';
-        var ks_login_url = fullUrl.replace(path, '') + '/ks-login';
+        var abs_url = $location.absUrl();
+        var base_url = abs_url.substring(0, abs_url.indexOf('#') - 1);
+        // encode the '#' into %23 to avoid losing #/ks-login
+        var ks_login_url = base_url + '/%23/ks-login';
         vm.rc_shib_url = ENV.apiEndpoint + rc_shib_redirect + ks_login_url;
         // listen for the token expired event in the relevant $scope
         vm.token_expired = false;

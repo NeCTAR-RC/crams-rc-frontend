@@ -60,15 +60,15 @@
                     "A new trial project will be created in its place."].join("")
             },
             "instances": {
-                "title": "Number Of Instances",
-                "text": ["The maximum number of instances that you think your project will ",
+                "title": "Number Of Virtual Machine Instances",
+                "text": ["The maximum number of virtual machine instances that you think your project will ",
                     "require at any one time."].join("")
             },
             "cores": {
                 "title": "Number Of Cores",
                 "text": ["This is the maximum number of cores you'd like to use at any one time across all ",
                     "virtual machines. For example, if you'd like to be able to run two 'XXL Sized' VMs at once ",
-                    "each has 16 CPU cores), you should specify 32 here."].join("")
+                    "(each has 16 CPU cores), you should specify 32 here."].join("")
             },
             "core_hours": {
                 "title": "Number Of Core Hours",
@@ -117,18 +117,18 @@
             },
             "use_case": {
                 "title": "Research Use Case",
-                "text": ["A short write up on how you intend to to use your cloud instances ",
+                "text": ["A short write up on how you intend to to use your cloud virtual machine instances ",
                     "will help us in our decision making."].join("")
             },
             "usage_pattern": {
-                "title": "Instance, Object Storage and Volumes Storage Usage Patterns",
+                "title": "Virtual Machine Instances, Object Storage and Volumes Storage Usage Patterns",
                 "text": ["Will your project have many users and small data sets? Or will it have large data ",
                     "sets with a small number of users? Your answers here will help us."].join("")
             },
             "alloc_home": {
                 "title": "Allocation Home Location",
                 "text": ["You can provide a primary location where you expect to use most resources, effectively ",
-                    "the main NeCTAR node for your allocation. Use of other locations is still possible. This can ",
+                    "the main NeCTAR Node for your allocation. Use of other locations is still possible. This can ",
                     "also indicate a specific arrangement with a NeCTAR Node, for example where you obtain support, ",
                     "or if your institution is a supporting member of that Node. "].join("")
             },
@@ -138,9 +138,9 @@
             },
             "additional_location": {
                 "title": "Additional Location Requirements",
-                "text": ["Are there any geographic requirements governing your cloud instances? ",
-                    "For example, should they only be run on a node in a specific state, or can they be run on any ",
-                    "available node? If you leave this blank we will assume that any node is acceptable."].join("")
+                "text": ["Are there any geographic requirements governing your cloud virtual machine instances? ",
+                    "For example, should they only be run on a Node in a specific state, or can they be run on any ",
+                    "available Node? If you leave this blank we will assume that any Node is acceptable."].join("")
             },
             "grant_type": {
                 "title": "Type",

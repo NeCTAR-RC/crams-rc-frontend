@@ -5,8 +5,8 @@
     'use strict';
     angular.module('crams.nectar').controller('NectarRequestController', NectarRequestController);
 
-    NectarRequestController.$inject = ['$location', '$scope', '$routeParams', 'FlashService', 'NectarRequestService', 'LookupService', 'ContactService', 'CramsUtils', '$filter'];
-    function NectarRequestController($location, $scope, $routeParams, FlashService, NectarRequestService, LookupService, ContactService, CramsUtils, $filter) {
+    NectarRequestController.$inject = ['$location', '$scope', '$routeParams', 'FlashService', 'NectarRequestService', 'LookupService', 'ContactService', 'CramsUtils', '$filter', '$anchorScroll'];
+    function NectarRequestController($location, $scope, $routeParams, FlashService, NectarRequestService, LookupService, ContactService, CramsUtils, $filter, $anchorScroll) {
         var vm = this;
         vm.alloc = newEmptyAlloc();
         //create new domains for FOR codes
@@ -17,10 +17,14 @@
         var request_paths = $location.path().split('/');
         var current_path = request_paths[1];
         vm.readyOnlyField = false;
+        // set initail allocation json to empty
+        vm.initial_alloc = {};
         if (project_id != undefined) {
             NectarRequestService.getProjectRequestById(request_id).then(function (response) {
                 if (response.success) {
                     vm.alloc = response.data[0];
+                    // deep copy allocation json data for a later comparision
+                    vm.initial_alloc = angular.copy(response.data[0]);
                     // sort the question responses in form oder
                     var question_responses = CramsUtils.sortQuestionResponseInFormOrder(vm.alloc);
                     vm.alloc.project_question_responses = question_responses.project_question_responses;
@@ -39,7 +43,6 @@
                 } else {
                     var msg = "Failed to get NeCTAR allocation request, " + response.message;
                     FlashService.Error(msg);
-                    //alert(msg);
                     console.error(msg);
                 }
             });
@@ -113,6 +116,14 @@
                     console.error(msg);
                 }
             });
+        }
+
+        // pre-fill the title
+        vm.prefillTitle = function () {
+            //preset title as description
+            if (vm.alloc.description == null || vm.alloc.description == undefined) {
+                vm.alloc.description = vm.alloc.project_ids[0].identifier;
+            }
         }
 
         //DatePicker settings
@@ -247,33 +258,53 @@
                 });
 
                 if (project_id != undefined) {
-                    NectarRequestService.updateProjectRequest(vm.alloc, project_id).then(function (response) {
-                        if (response.success) {
-                            FlashService.Success('Updating request successfully', true);
-                            $location.path('/' + current_path);
-                        } else {
-                            var msg = "Failed to update request, server error - " + response.message;
-                            FlashService.Error(msg);
-                            //alert(msg);
-                            console.error("Failure, server error - " + response.message)
+                    //reformat estimated users json, then compare changes when updating
+                    angular.forEach(vm.initial_alloc.requests[0].request_question_responses, function (q_resp, key) {
+                        if (q_resp.question.key == 'estimatedusers') {
+                            vm.initial_alloc.requests[0].request_question_responses[key].question_response =
+                                parseInt(q_resp.question_response);
                         }
                     });
+                    var no_changes = angular.equals(angular.toJson(vm.initial_alloc), angular.toJson(vm.alloc));
+                    //if no changes, show no changes error to stop updating
+                    if (no_changes) {
+                        var msg = "No changes";
+                        // scroll to top of the page
+                        $anchorScroll();
+                        FlashService.Error(msg);
+                    } else {
+                        NectarRequestService.updateProjectRequest(vm.alloc, project_id).then(function (response) {
+                            if (response.success) {
+                                FlashService.Success('Request updated', true);
+                                $location.path('/' + current_path);
+                            } else {
+                                var msg = "Failed to update request, server error - " + response.message;
+                                FlashService.Error(msg);
+                                // scroll to top of the page
+                                $anchorScroll();
+                                console.error(msg);
+                            }
+                        });
+                    }
                 } else {
                     NectarRequestService.createProjectRequest(vm.alloc).then(function (response) {
                         if (response.success) {
-                            FlashService.Success('Creating request successfully', true);
+                            FlashService.Success('Request created', true);
                             $location.path('/' + current_path);
                         } else {
                             var msg = "Failed to create request, server error - " + response.message;
                             FlashService.Error(msg);
-                            //alert(msg);
-                            console.error("Failure, server error - " + response.message)
+                            // scroll to top of the page
+                            $anchorScroll();
+                            console.error(msg);
                         }
                     });
                 }
             } else {
                 var msg = "Please fix up the below errors";
                 FlashService.Error(msg);
+                // scroll to top of the page
+                $anchorScroll();
             }
         };
 
@@ -312,6 +343,7 @@
             vm.convert_project_trial_invalid = false;
             vm.instances_invalid = false;
             vm.cores_invalid = false;
+            vm.cores_less_invalid = false;
             vm.core_hours_invalid = false;
             vm.storageForm_sp_invalid = false;
             vm.storageForm_sp_quota_invalid = false;
@@ -353,6 +385,13 @@
 
             if (!vm.request_form.cores.$valid) {
                 vm.cores_invalid = true;
+            } else {
+                var cores = vm.alloc.requests[0].compute_requests[0].cores;
+                var ins = vm.alloc.requests[0].compute_requests[0].instances;
+                // cores can not be less than instances.
+                if (cores < ins) {
+                    vm.cores_less_invalid = true;
+                }
             }
 
             if (!vm.request_form.core_hours.$valid) {
@@ -525,6 +564,8 @@
                     vm.domains.push(dom);
                 }
             });
+            //simplify the FOR code domains
+            vm.initial_alloc.domains = angular.copy(vm.domains);
 
             var d_lens = vm.domains.length;
             if (d_lens < 3) {
@@ -716,7 +757,7 @@
                             }
                         },
                         {
-                            "question_response": 0,
+                            "question_response": 1,
                             "question": {
                                 "key": "estimatedusers"
                             }

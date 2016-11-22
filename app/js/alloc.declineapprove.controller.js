@@ -48,11 +48,9 @@
         };
 
         vm.decline_alloc = function () {
-            var approval_notes = vm.declineParams.approval_notes;
-
-            NectarRequestService.declineRequest({'approval_notes': approval_notes}, request_id).then(function (response) {
+            NectarRequestService.declineRequest({'approval_notes': vm.approval_notes}, request_id).then(function (response) {
                 if (response.success) {
-                    FlashService.Success('Successfully declined the request', true);
+                    FlashService.Success('Request declined', true);
                     $location.path('/' + current_path);
                 } else {
                     var msg = "Failed to decline the request, server error - " + response.message;
@@ -69,7 +67,7 @@
                 //alert(JSON.stringify(ar));
                 NectarRequestService.approveRequest(ar, req.id).then(function (response) {
                     if (response.success) {
-                        FlashService.Success('Successfully approved the request', true);
+                        FlashService.Success('Request approved', true);
                         $location.path('/' + current_path);
                     } else {
                         var msg = "Failed to approve the request, server error - " + response.message;

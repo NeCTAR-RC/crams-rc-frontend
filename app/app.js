@@ -36,7 +36,7 @@
                 templateUrl: 'templates/show_aaf_login.html',
                 controllerAs: 'vm'
             })
-            .when('/ks-login/', {   //#Do not remove trailing slash
+            .when('/ks-login', {
                 controller: "KsLoginController",
                 templateUrl: 'templates/ks_login.html',
                 controllerAs: 'vm'
@@ -159,7 +159,7 @@
 
         $rootScope.$on('$locationChangeStart', function (event, next, current) {
             // redirect to login page if not logged in and trying to access a restricted page
-            var restrictedPage = $.inArray($location.path(), ['/login', '/ks-login/', '/crams-login', '/show_error', '/terms_condtions']) === -1;
+            var restrictedPage = $.inArray($location.path(), ['/login', '/ks-login', '/crams-login', '/show_error', '/terms_condtions']) === -1;
             var loggedIn = $rootScope.globals.currentUser;
             if (restrictedPage && !loggedIn) {
                 $location.path('/login');

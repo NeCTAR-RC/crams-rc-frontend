@@ -8,7 +8,8 @@
                 <th>Volume</th>
                 <td>
                     A persistent volume looks and acts like a hard drive that can be attached to your virtual
-                    machines. The data on it will persist between runs of your virtual machine. Specify the total
+                    machines. Volumes and their data persist independently of virtual machine instances and volumes can
+                    be dynamically attached and detached to/from different virtual machine instances. Specify the total
                     size in gigabytes that the project will need. More information is available on the
                     <a href="http://support.rc.nectar.org.au/docs/volumes" target="_blank">
                         Persistent Volumes support page
@@ -95,9 +96,9 @@
                         </span>
 
                         <div class="form-group"
-                              ng-class="{'has-error':storageForm.nectar_sp_quota.$dirty && storageForm.nectar_sp_quota.$invalid}">
+                             ng-class="{'has-error':storageForm.nectar_sp_quota.$dirty && storageForm.nectar_sp_quota.$invalid}">
                             <input type="number" name="nectar_sp_quota" id="id-nectar_sp_quota"
-                                   class="form-control" ng-model="storage_request.quota" style="float:left;width: 84%" />
+                                   class="form-control" ng-model="storage_request.quota" style="float:left;width: 84%"/>
                             <span class="input-group-btn">
                                 <button type="button" class="btn">GB</button>
                             </span>

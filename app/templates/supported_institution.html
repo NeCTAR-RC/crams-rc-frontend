@@ -7,7 +7,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-5">
         <label>
             Supported Institutions <i class="glyphicon glyphicon-asterisk text-primary"></i>
         </label>
@@ -29,8 +29,9 @@
             <ng-form name="instForm">
                 <span class="input-append">
                     <input type="text" name="institution" ng-model="inst.institution" class="form-control"
-                           style="float:left;width: 74%" ng-change="vm.resetInstInvalidFlag()" required/> &nbsp;&nbsp;
-                        <button class="mbtn" ng-if="$index > 0" ng-click="vm.removeInst($index)" type="button" title="Remove">
+                           style="float:left;max-width:455px;" ng-change="vm.resetInstInvalidFlag()" required/> &nbsp;&nbsp;
+                        <button class="mbtn" ng-if="$index > 0" ng-click="vm.removeInst($index)" type="button"
+                                title="Remove">
                             <i class="remove-icon glyphicon glyphicon-remove text-danger"></i>
                         </button>
                 </span>
@@ -48,7 +49,8 @@
 <div class="row">
     <div class="col-md-3">
         <div class="form-group">
-            <input class="btn btn-default" type="button" value="Add Supported Institution" ng-click="vm.addInst($event)">
+            <input class="btn btn-default" type="button" value="Add Supported Institution"
+                   ng-click="vm.addInst($event)">
         </div>
     </div>
 </div>

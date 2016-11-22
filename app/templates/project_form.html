@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-4">
         <label for="id-project_project_ids_0_identifier">
             Project Identifier <i class="glyphicon glyphicon-asterisk text-primary"></i>
         </label>
@@ -10,13 +10,15 @@
             </modal>
         </span>
 
-        <div class="form-group" ng-class="{'has-error': vm.project_ids_identifier_invalid || vm.project_ids_identifier_start_pt_invalid}">
+        <div class="form-group"
+             ng-class="{'has-error': vm.project_ids_identifier_invalid || vm.project_ids_identifier_start_pt_invalid || vm.request_form.project_identifier.$error.pattern}">
             <input type="text" name="project_identifier" id="id-project_project_ids_0_identifier" class="form-control"
                    ng-model="vm.alloc.project_ids[0].identifier" ng-readonly="vm.readyOnlyField"
-                   ng-pattern="/^[a-zA-Z][-_a-zA-Z0-9]{1,31}$/"required maxlength="32"/>
+                   ng-pattern="/^[a-zA-Z][-_a-zA-Z0-9]{1,31}$/" required maxlength="32" ng-blur="vm.prefillTitle()"/>
             <input type="hidden" ng-model="vm.alloc.project_ids[0].system"
                    value="{{vm.alloc.project_ids[0].system}}"/>
-            <span class="help-block" ng-show="vm.project_ids_identifier_invalid">
+            <span class="help-block"
+                  ng-show="vm.project_ids_identifier_invalid || vm.request_form.project_identifier.$error.pattern">
                 Invalid project identifier. (Letters, numbers, underscores and hyphens only. Must start with a letter and be less than 32 characters)
             </span>
             <span class="help-block" ng-show="vm.project_ids_identifier_start_pt_invalid">
@@ -27,12 +29,12 @@
 </div>
 
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-4">
         <label for="id-project_description">
             Project Allocation Title <i class="glyphicon glyphicon-asterisk text-primary"></i>
         </label>
 
-       <span ng-controller="PopupController">
+        <span ng-controller="PopupController">
             <span ng-click="showHelp()" class="help-icon-sp"><img class="help-icon" src="images/help.png"></span>
             <modal title="{{ help.project_description.title }}" visible="showModal">
                 <span ng-bind-html="help.project_description.text"></span>
@@ -48,12 +50,12 @@
 </div>
 
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-4">
         <label for="id-start_date">
             Start Date <i class="glyphicon glyphicon-asterisk text-primary"></i>
         </label>
 
-         <span ng-controller="PopupController">
+        <span ng-controller="PopupController">
             <span ng-click="showHelp()" class="help-icon-sp"><img class="help-icon" src="images/help.png"></span>
             <modal title="{{ help.start_date.title }}" visible="showModal">
                 <span ng-bind-html="help.start_date.text"></span>
@@ -66,7 +68,7 @@
                    datepicker-popup='yyyy-MM-dd' is-open="vm.opened" ng-click="vm.openCalendar($event)"
                    ng-change="vm.updateCoreHours()" datepicker-options="vm.date_options" show-button-bar="false"
                    ng-change="vm.closeCalendar()"/>
-                <span class="input-group-btn">
+            <span class="input-group-btn">
                     <button type="button" class="btn btn-default" ng-click="vm.openCalendar($event)">
                         <i class="glyphicon glyphicon-calendar"></i>
                     </button>
@@ -76,7 +78,7 @@
 </div>
 
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-4">
         <label for="id-estimated_duration">
             Estimated Project Duration <i class="glyphicon glyphicon-asterisk text-primary"></i>
         </label>
@@ -90,7 +92,8 @@
 
         <div class="form-group" ng-class="{'has-error': vm.estimated_duration_invalid}">
             <select name="estimated_duration" id="id-estimated_duration" class="form-control"
-                    ng-model="vm.alloc.requests[0].request_question_responses[0].question_response" ng-change="vm.updateCoreHours()"
+                    ng-model="vm.alloc.requests[0].request_question_responses[0].question_response"
+                    ng-change="vm.updateCoreHours()"
                     ng-options="key as value for (key,value) in vm.durations" required>
                 <option value="">--- Select ---</option>
             </select>
@@ -101,7 +104,7 @@
 </div>
 
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-4">
         <label for="id-convert_project_trial">
             Convert Trial Project ?
         </label>
@@ -119,7 +122,7 @@
                     ng-options="obj.value as obj.label for obj in vm.project_trial_options" required>
                 <option value="">--- Select ---</option>
             </select>
-                        <span class="help-block" ng-show="vm.convert_project_trial_invalid">
+            <span class="help-block" ng-show="vm.convert_project_trial_invalid">
                             Please indicate whether move resources from my pt- project to this new project
                         </span>
         </div>

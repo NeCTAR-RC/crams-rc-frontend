@@ -31,7 +31,7 @@
 </div>
 
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-4">
         <div class="form-group" ng-repeat="proj_contact in vm.alloc.project_contacts">
             <div ng-if="proj_contact.contact_role.id == 2">
                 <input type="text" name="vm.display_ci" id="id-display_ci" class="form-control"
@@ -65,7 +65,7 @@
 
         <div class="form-group">
              <textarea name="additional_researchers" id="id-additional_researchers"
-                       class="form-control" rows="5" style="height:120px; width:420px"
+                       class="form-control" rows="5" style="height:120px; width:450px"
                        ng-model="vm.alloc.project_question_responses[0].question_response">
              </textarea>
         </div>
