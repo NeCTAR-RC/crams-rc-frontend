@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7adec928_53585c32",
+        "filename": "app/js/nectar.request.controller.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2016-11-29T23:33:14Z",
+      "side": 1,
+      "message": "should this be \u003c 1 here?",
+      "range": {
+        "startLine": 405,
+        "startChar": 48,
+        "endLine": 405,
+        "endChar": 52
+      },
+      "revId": "5efc3e6673dd881bca154078cfa7979370a03e40",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7adec928_3353d018",
+        "filename": "app/templates/storage_product_form.html",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2016-11-29T23:33:14Z",
+      "side": 1,
+      "message": "should the min be 1 here? doesn\u0027t make any sense to ask for 0 storage",
+      "range": {
+        "startLine": 100,
+        "startChar": 54,
+        "endLine": 100,
+        "endChar": 55
+      },
+      "revId": "5efc3e6673dd881bca154078cfa7979370a03e40",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
