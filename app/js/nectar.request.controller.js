@@ -398,19 +398,17 @@
                 vm.core_hours_invalid = true;
             }
 
-            if (vm.request_form.storageForm != undefined) {
-                angular.forEach(vm.alloc.requests[0].storage_requests, function (each_storage_prod_req, key) {
-                    if (each_storage_prod_req.storage_product.id == 0) {
-                        vm.storageForm_sp_invalid = true;
-                    }
-                    if (each_storage_prod_req.quota <= 0) {
-                        vm.storageForm_sp_quota_invalid = true;
-                    }
-                });
-
-                if (vm.storageForm_sp_invalid || vm.storageForm_sp_quota_invalid) {
-                    vm.request_form.$valid = false;
+            angular.forEach(vm.alloc.requests[0].storage_requests, function (each_storage_prod_req, key) {
+                if (each_storage_prod_req.storage_product.id == 0) {
+                    vm.storageForm_sp_invalid = true;
                 }
+                if (each_storage_prod_req.quota <= 0) {
+                    vm.storageForm_sp_quota_invalid = true;
+                }
+            });
+
+            if (vm.storageForm_sp_invalid || vm.storageForm_sp_quota_invalid) {
+                vm.request_form.$valid = false;
             }
 
             if (vm.request_form.pubForm != undefined) {
