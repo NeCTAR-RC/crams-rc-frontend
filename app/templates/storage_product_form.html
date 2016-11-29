@@ -81,7 +81,6 @@
                         </div>
                     </div>
 
-
                     <div class="col-md-10">
                         <label for="id-nectar_sp_quota">
                             Requested Quota <i class="glyphicon glyphicon-asterisk text-primary"></i>
@@ -97,7 +96,7 @@
 
                         <div class="form-group"
                              ng-class="{'has-error':storageForm.nectar_sp_quota.$dirty && storageForm.nectar_sp_quota.$invalid}">
-                            <input type="number" name="nectar_sp_quota" id="id-nectar_sp_quota"
+                            <input type="number" min="1" name="nectar_sp_quota" id="id-nectar_sp_quota"
                                    class="form-control" ng-model="storage_request.quota" style="float:left;width: 84%"/>
                             <span class="input-group-btn">
                                 <button type="button" class="btn">GB</button>

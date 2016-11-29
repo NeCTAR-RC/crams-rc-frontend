@@ -4,34 +4,32 @@
             Project Name: {{vm.alloc_project_request.title}}
         </div>
     </div>
-    <div class="blank_separator"></div>
-
-    <div class="col-md-12">
-        <div class="col-md-6">
-            <div class="sub_title">
-                <i class="fa fa-users"></i> Project Contacts
-            </div>
-            <table class="data_tab">
-                <tr ng-repeat="contact in vm.alloc_project_request.project_contacts">
-                    <th width="50%">{{ contact.contact_role.name }}</th>
-                    <td width="50%">{{ contact.contact.email }}</td>
-                </tr>
-            </table>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="sub_title">
+            <i class="fa fa-users"></i> Project Contacts
         </div>
-        <div class="col-md-6">
-            <div class="sub_title">
-                <i class="fa fa-crosshairs"></i> System IDs
-            </div>
-            <table class="data_tab">
-                <tr ng-repeat="projid in vm.alloc_project_request.project_ids">
-                    <th width="50%">{{ projid.system.system }}</th>
-                    <td width="50%">{{ projid.identifier }}</td>
-                </tr>
-            </table>
-        </div>
+        <table class="data_tab">
+            <tr ng-repeat="contact in vm.alloc_project_request.project_contacts">
+                <th width="50%">{{ contact.contact_role.name }}</th>
+                <td width="50%">{{ contact.contact.email }}</td>
+            </tr>
+        </table>
     </div>
-    <div class="blank_separator"></div>
-
+    <div class="col-md-6">
+        <div class="sub_title">
+            <i class="fa fa-crosshairs"></i> System IDs
+        </div>
+        <table class="data_tab">
+            <tr ng-repeat="projid in vm.alloc_project_request.project_ids">
+                <th width="50%">{{ projid.system.system }}</th>
+                <td width="50%">{{ projid.identifier }}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="row">
     <div class="col-md-12">
         <div class="sub_title">
             <span class="sub_title"><i class="fa fa-paper-plane-o"></i> FOR Code</span>
@@ -40,8 +38,8 @@
             <thead>
             <tr>
                 <th width="30%">FOR Code</th>
-                <th width="30%">Description</th>
-                <th width="40%">Percentage</th>
+                <th width="40%">Description</th>
+                <th width="30%">Percentage</th>
             </tr>
             </thead>
             <tbody>
@@ -54,7 +52,6 @@
         </table>
     </div>
     <div class="blank_separator"></div>
-
     <div class="col-md-12">
         <div class="sub_title">
             <span class="sub_title"><i class="fa fa-th-list"></i> Supported Institutions</span>
