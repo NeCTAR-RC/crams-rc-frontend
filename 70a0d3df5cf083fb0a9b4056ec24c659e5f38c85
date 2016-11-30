@@ -16,6 +16,24 @@
       "revId": "70a0d3df5cf083fb0a9b4056ec24c659e5f38c85",
       "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7adec928_3331105b",
+        "filename": "app/js/nectar.request.controller.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1000133
+      },
+      "writtenOn": "2016-11-30T05:39:48Z",
+      "side": 1,
+      "message": "for this one, don\u0027t need to add. there are two ways validation in angular js, one is here, another one is inside of input core_hours in html form.",
+      "parentUuid": "7adec928_330af08a",
+      "revId": "70a0d3df5cf083fb0a9b4056ec24c659e5f38c85",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
     }
   ]
 }
