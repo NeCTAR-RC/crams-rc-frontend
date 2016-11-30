@@ -391,6 +391,7 @@
                 // cores can not be less than instances.
                 if (cores < ins) {
                     vm.cores_less_invalid = true;
+                    vm.request_form.$valid = false;
                 }
             }
 
