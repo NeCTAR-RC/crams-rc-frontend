@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7adec928_330af08a",
+        "filename": "app/js/nectar.request.controller.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2016-11-30T05:07:24Z",
+      "side": 1,
+      "message": "just wondering if you should be also setting this below here too? an other places below?",
+      "revId": "70a0d3df5cf083fb0a9b4056ec24c659e5f38c85",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
