@@ -18,30 +18,21 @@
             </modal>
         </span>
 
-        <div ng-class="{'has-error': vm.instForm_institution_invalid}">
-            <span class="help-block has-error" ng-show="vm.instForm_institution_invalid">
-               Please enter supported institution
-            </span>
-        </div>
-
         <div ng-repeat="inst in vm.alloc.institutions track by $index"
-             ng-class="{'has-error': instForm.institution.$dirty && instForm.institution.$invalid}">
-            <ng-form name="instForm">
-                <span class="input-append">
-                    <input type="text" name="institution" ng-model="inst.institution" class="form-control"
-                           style="float:left;max-width:455px;" ng-change="vm.resetInstInvalidFlag()" required/> &nbsp;&nbsp;
-                        <button class="mbtn" ng-if="$index > 0" ng-click="vm.removeInst($index)" type="button"
-                                title="Remove">
-                            <i class="remove-icon glyphicon glyphicon-remove text-danger"></i>
-                        </button>
-                </span>
-                <span class="help-block" ng-show="instForm.institution.$dirty && instForm.institution.$invalid">
-                    <br/>Please enter supported institution
-                </span>
-
-                <div style="clear: both"/>
-                <br/>
-            </ng-form>
+             ng-class="{'has-error':  vm.request_form['institution_' + $index].$invalid}">
+            <span class="input-append">
+                <input type="text" name="institution_{{$index}}" ng-model="inst.institution" class="form-control"
+                       style="float:left;max-width:455px;"/> &nbsp;&nbsp;
+                <button class="mbtn" ng-if="$index > 0" ng-click="vm.removeInst($index)" type="button"
+                        title="Remove">
+                    <i class="remove-icon glyphicon glyphicon-remove text-danger"></i>
+                </button>
+            </span>
+            <span class="help-block" ng-show="vm.request_form['institution_' + $index].$invalid">
+                <br/>Please enter supported institution
+            </span>
+            <div style="clear: both"/>
+            <br/>
         </div>
     </div>
 </div>

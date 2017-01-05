@@ -19,29 +19,23 @@
                 </modal>
             </span>
         </div>
-        <div ng-class="{'has-error': vm.pubForm_publication_invalid}">
-            <span class="help-block has-error" ng-show="vm.pubForm_publication_invalid">
-                Please enter publication/output
-            </span>
-        </div>
 
         <div ng-repeat="pub in vm.alloc.publications track by $index"
-             ng-class="{'has-error': pubForm.reference.$dirty && pubForm.reference.$invalid}">
-            <ng-form name="pubForm">
-                <span class="input-append">
-                    <input type="text" name="reference" ng-model="pub.reference" class="form-control"
-                           style="float:left;width: 74%" ng-change="vm.resetPubInvalidFlag()" required/> &nbsp;&nbsp;
-                        <button class="mbtn" ng-click="vm.removePublication($index)" type="button" title="Remove">
-                            <i class="remove-icon glyphicon glyphicon-remove text-danger"></i>
-                        </button>
-                </span>
-                <span class="help-block" ng-show="pubForm.reference.$dirty && pubForm.reference.$invalid">
+             ng-class="{'has-error': vm.request_form['pub_reference_' + $index].$invalid}">
+            <span class="input-append">
+                <input type="text" name="pub_reference_{{$index}}" id="id-pub_reference_{{$index}}"
+                       ng-model="pub.reference" class="form-control"
+                       style="float:left;width: 74%"/> &nbsp;&nbsp;
+                    <button class="mbtn" ng-click="vm.removePublication($index)" type="button" title="Remove">
+                        <i class="remove-icon glyphicon glyphicon-remove text-danger"></i>
+                    </button>
+            </span>
+            <span class="help-block"
+                  ng-show="vm.request_form['pub_reference_' + $index].$invalid">
                     <br/>Please enter publication/output
-                </span>
-
-                <div style="clear: both"/>
-                <br/>
-            </ng-form>
+            </span>
+            <div style="clear: both"/>
+            <br/>
         </div>
     </div>
 </div>

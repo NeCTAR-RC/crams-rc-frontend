@@ -22,12 +22,17 @@
         </span>
 
         <div class="form-group"
-             ng-class="{'has-error': vm.instances_invalid || (vm.request_form.instances.$dirty && vm.request_form.instances.$invalid)}">
-            <input type="number" min="1" name="instances" id="id-instances" class="form-control"
-                   ng-model="vm.alloc.requests[0].compute_requests[0].instances" required/>
+             ng-class="{'has-error': vm.instances_invalid || vm.zero_instances_invalid || (vm.request_form.instances.$dirty && vm.request_form.instances.$invalid)}">
+            <input type="number" min="0" name="instances" id="id-instances" class="form-control"
+                   ng-model="vm.alloc.requests[0].compute_requests[0].instances"
+                   ng-change="vm.checkInstanceAndCore()" required/>
             <span class="help-block"
                   ng-show="vm.instances_invalid || (vm.request_form.instances.$dirty && vm.request_form.instances.$invalid)">
                 Please enter the maximum number of virtual machine instances
+            </span>
+            <span class="help-block"
+                  ng-show="vm.zero_instances_invalid">
+                Invalid, core without any virtual machine instances
             </span>
         </div>
     </div>
@@ -47,14 +52,14 @@
 
         <div class="form-group"
              ng-class="{'has-error': vm.cores_invalid || vm.cores_less_invalid || (vm.request_form.cores.$dirty && vm.request_form.cores.$invalid)}">
-            <input type="number" min="1" name="cores" id="id-cores" class="form-control"
+            <input type="number" min="0" name="cores" id="id-cores" class="form-control"
                    ng-model="vm.alloc.requests[0].compute_requests[0].cores" ng-change="vm.updateCoreHours()" required/>
             <span class="help-block"
                   ng-show="vm.cores_invalid || (vm.request_form.cores.$dirty && vm.request_form.cores.$invalid)">
                 Please enter the maximum number of cores
             </span>
             <span class="help-block" ng-show="vm.cores_less_invalid">
-                Cores can't be less than instances
+                Cores must be equal or great than instances
             </span>
         </div>
     </div>
@@ -73,14 +78,25 @@
         </span>
 
         <div class="form-group"
-             ng-class="{'has-error': vm.core_hours_invalid || (vm.request_form.core_hours.$dirty && vm.request_form.core_hours.$invalid)}">
-            <input type="number" min="1" name="core_hours" id="id-core_hours" class="form-control"
-                   ng-model="vm.alloc.requests[0].compute_requests[0].core_hours" required/>
+             ng-class="{'has-error': (vm.core_hours_invalid || vm.zero_core_hour_invalid || vm.non_zero_core_hours_invalid
+             || (vm.request_form.core_hours.$dirty && vm.request_form.core_hours.$invalid)),
+             'has-warning': vm.below_recommend_core_hours_warn}">
+            <input type="number" min="0" name="core_hours" id="id-core_hours" class="form-control"
+                   ng-model="vm.alloc.requests[0].compute_requests[0].core_hours"
+                   ng-change="vm.checkInstanceAndCore()" required/>
             <span class="help-block"
                   ng-show="vm.core_hours_invalid || (vm.request_form.core_hours.$dirty && vm.request_form.core_hours.$invalid)">
                 Please enter the number of core hours
             </span>
-
+            <span class="help-block" ng-show="vm.zero_core_hour_invalid">
+                 Invalid,  can't be zero core hour
+            </span>
+            <span class="help-block" ng-show="vm.non_zero_core_hours_invalid">
+                 Invalid, must be zero core hour
+            </span>
+            <span class="help-block" ng-show="vm.below_recommend_core_hours_warn">
+                The recommended core hours is {{vm.estimated_core_hours}} or above
+            </span>
         </div>
     </div>
 </div>

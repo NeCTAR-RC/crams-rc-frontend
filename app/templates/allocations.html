@@ -23,8 +23,26 @@
                 <td>
                     <div class="row" ng-repeat="comp_request in nc_req.compute_requests">
                         <div class="col-md-12">
-                            {{comp_request.compute_product.name}}: {{comp_request.cores}} Cores,
-                            {{comp_request.core_hours}} VCPU Hours
+                            {{comp_request.compute_product.name}}:
+                            <span ng-if="nc_req.request_status.code !='N' && nc_req.request_status.code !='E' && nc_req.request_status.code !='X'">
+                                {{comp_request.approved_instances}}
+                            </span>
+                            <span ng-if="nc_req.request_status.code =='N' || nc_req.request_status.code =='E' || nc_req.request_status.code =='X'">
+                                {{comp_request.instances}}
+                            </span> Instances,
+                            <span ng-if="nc_req.request_status.code !='N' && nc_req.request_status.code !='E' && nc_req.request_status.code !='X'">
+                                {{comp_request.approved_cores}}
+                            </span>
+                            <span ng-if="nc_req.request_status.code =='N' || nc_req.request_status.code =='E' || nc_req.request_status.code =='X'">
+                                {{comp_request.cores}}
+                            </span> Cores,
+
+                            <span ng-if="nc_req.request_status.code !='N' && nc_req.request_status.code !='E' && nc_req.request_status.code !='X'">
+                                {{comp_request.approved_core_hours}}
+                            </span>
+                            <span ng-if="nc_req.request_status.code =='N' || nc_req.request_status.code =='E' || nc_req.request_status.code =='X'">
+                                {{comp_request.core_hours}}
+                            </span> VCPU Hours
                         </div>
                     </div>
                     <div class="row" ng-repeat="storage_request in nc_req.storage_requests">

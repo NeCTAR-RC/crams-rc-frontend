@@ -19,6 +19,8 @@
         vm.readyOnlyField = false;
         // set initail allocation json to empty
         vm.initial_alloc = {};
+        var previous_project_identifier = null;
+
         if (project_id != undefined) {
             NectarRequestService.getProjectRequestById(request_id).then(function (response) {
                 if (response.success) {
@@ -27,6 +29,7 @@
                     vm.initial_alloc = angular.copy(response.data[0]);
                     // sort the question responses in form oder
                     var question_responses = CramsUtils.sortQuestionResponseInFormOrder(vm.alloc);
+                    previous_project_identifier = vm.alloc.project_ids[0].identifier;
                     vm.alloc.project_question_responses = question_responses.project_question_responses;
                     vm.alloc.requests[0].request_question_responses = question_responses.request_question_responses;
 
@@ -37,7 +40,7 @@
                     var estimated_users = vm.alloc.requests[0].request_question_responses[6].question_response;
                     vm.alloc.requests[0].request_question_responses[6].question_response = parseInt(estimated_users);
                     var req_status = vm.alloc.requests[0].request_status.code;
-                    if (req_status == 'P' || req_status == 'X' || req_status == 'J') {
+                    if (req_status == 'P') {
                         vm.readyOnlyField = true;
                     }
                 } else {
@@ -67,9 +70,7 @@
                 console.error(msg);
             }
         });
-
         vm.project_trial_options = defaultProjTrialOptions();
-
 
         //Populate nectar storage product lookup
         LookupService.ncStorageProducts().then(function (response) {
@@ -120,11 +121,32 @@
 
         // pre-fill the title
         vm.prefillTitle = function () {
+            vm.project_ids_identifier_invalid = false;
+            vm.project_ids_identifier_start_pt_invalid = false;
+            vm.project_description_invalid = false;
+            vm.project_ids_already_exists_invalid = false;
             //preset title as description
             if (vm.alloc.description == null || vm.alloc.description == undefined) {
                 vm.alloc.description = vm.alloc.project_ids[0].identifier;
             }
-        }
+
+            if (previous_project_identifier != vm.alloc.project_ids[0].identifier) {
+                //check project identifier
+                LookupService.checkProjectIdentifier(1, vm.alloc.project_ids[0].identifier).then(function (response) {
+                    if (response.success) {
+                        var exists_json = response.data;
+                        var existed = exists_json.exists;
+                        if (existed) {
+                            vm.project_ids_already_exists_invalid = true;
+                            vm.request_form.$valid = false;
+                        }
+                    } else {
+                        var msg = "Failed to check project identifier, " + response.message;
+                        console.error(msg);
+                    }
+                })
+            }
+        };
 
         //DatePicker settings
         vm.date_options = {
@@ -147,6 +169,12 @@
 
         // core hours update method
         vm.updateCoreHours = function () {
+            vm.calculate_core_hours();
+            vm.alloc.requests[0].compute_requests[0].core_hours = vm.estimated_core_hours;
+            vm.checkInstanceAndCore();
+        };
+
+        vm.calculate_core_hours = function () {
             var start_date_str = $filter('date')(vm.alloc.requests[0].start_date, "yyyy-MM-dd");
             var duration = vm.alloc.requests[0].request_question_responses[0].question_response;
             var one_hour_time = 1000 * 60 * 60;
@@ -157,12 +185,42 @@
             vm.alloc.requests[0].end_date = end_date.toISOString().substring(0, 10);
             var hours_diff = Math.round((end_date.getTime() - start_date.getTime()) / one_hour_time);
             var num_of_cores = vm.alloc.requests[0].compute_requests[0].cores;
-            var estimated_core_hours = Math.round(num_of_cores * hours_diff * 0.5);
-            vm.alloc.requests[0].compute_requests[0].core_hours = estimated_core_hours;
-            //copy the estimcated core hours as default approved core hours
-            vm.alloc.requests[0].compute_requests[0].approved_core_hours = estimated_core_hours;
+            vm.estimated_core_hours = Math.round(num_of_cores * hours_diff * 0.5);
         };
 
+        vm.checkInstanceAndCore = function () {
+            vm.zero_instances_invalid = false;
+            vm.cores_less_invalid = false;
+            vm.below_recommend_core_hours_warn = false;
+            vm.zero_core_hour_invalid = false;
+            vm.non_zero_core_hours_invalid = false;
+            var num_of_cores = vm.alloc.requests[0].compute_requests[0].cores;
+            var ins = vm.alloc.requests[0].compute_requests[0].instances;
+            if (num_of_cores < ins) {
+                vm.cores_less_invalid = true;
+                vm.request_form.$valid = false;
+            }
+
+            if (ins <= 0 && num_of_cores != 0) {
+                vm.zero_instances_invalid = true;
+                vm.request_form.$valid = false;
+            }
+            var core_hours = vm.alloc.requests[0].compute_requests[0].core_hours;
+
+            vm.calculate_core_hours();
+            //if core hours is less than recommended core hours. just give a warning message
+            if (core_hours > 0 && (core_hours < vm.estimated_core_hours)) {
+                vm.below_recommend_core_hours_warn = true;
+            }
+            if (core_hours <= 0 && num_of_cores != 0) {
+                vm.zero_core_hour_invalid = true;
+                vm.request_form.$valid = false;
+            }
+            if (core_hours > 0 && num_of_cores == 0) {
+                vm.non_zero_core_hours_invalid = true;
+                vm.request_form.$valid = false;
+            }
+        };
 
         // add publication
         vm.addPublication = function ($event) {
@@ -176,11 +234,6 @@
 
         };
 
-        // rest publication invalid flag
-        vm.resetPubInvalidFlag = function () {
-            vm.pubForm_publication_invalid = false;
-        };
-
         // add supported_institution
         vm.addInst = function ($event) {
             $event.preventDefault();
@@ -192,11 +245,6 @@
             vm.alloc.institutions.splice(index, 1);
         };
 
-        // rest supported institution invalid flag
-        vm.resetInstInvalidFlag = function () {
-            vm.instForm_institution_invalid = false;
-        };
-
         // add nectar storage product
         vm.addNcSpQutoa = function ($event) {
             $event.preventDefault();
@@ -204,15 +252,17 @@
             vm.alloc.requests[0].storage_requests.push(storageQuota);
         };
 
-        // remove research grant
+        // remove nectar storage product
         vm.removeNcSpQuota = function (index) {
             vm.alloc.requests[0].storage_requests.splice(index, 1);
         };
 
         //check storage product duplicate
         vm.checkNcSpDuplicate = function (scope, index) {
+            vm.clearDuplatedFlag();
             var found_duplicated = false;
             var currentStorageRequest = vm.alloc.requests[0].storage_requests[index];
+
             angular.forEach(vm.alloc.requests[0].storage_requests, function (each_sp_req, key) {
                 if (key != index) {
                     if (each_sp_req.storage_product.id == currentStorageRequest.storage_product.id) {
@@ -220,7 +270,13 @@
                     }
                 }
             });
-            scope.storageForm.nectar_sp.$setValidity('isdup', !found_duplicated);
+            vm.request_form['nectar_sp_' + index].$setValidity('isdup', !found_duplicated);
+        };
+
+        vm.clearDuplatedFlag = function () {
+            angular.forEach(vm.alloc.requests[0].storage_requests, function (each_sp_req, key) {
+                vm.request_form['nectar_sp_' + key].$setValidity('isdup', true);
+            });
         };
 
         // add research grant
@@ -235,27 +291,13 @@
             vm.alloc.grants.splice(index, 1);
         };
 
-        // reset grant invalid flag
-        vm.resetGrantInvalidFlag = function () {
-            vm.grantFrom_invalid = false;
-        };
-
         // submitReq method
         vm.submitReq = function () {
-            var validForm = validateForm();
-            if (validForm) {
+            if (vm.validateForm()) {
                 // convert datepicker date object into string date in 'yyyy-MM-dd format.
                 vm.alloc.requests[0].start_date = $filter('date')(vm.alloc.requests[0].start_date, "yyyy-MM-dd");
                 //set title as description
                 vm.alloc.title = vm.alloc.description;
-
-                vm.alloc.requests[0].compute_requests[0].approved_instances = vm.alloc.requests[0].compute_requests[0].instances;
-                vm.alloc.requests[0].compute_requests[0].approved_cores = vm.alloc.requests[0].compute_requests[0].cores;
-                //copy the requested quota as a default approved quota
-                angular.forEach(vm.alloc.requests[0].storage_requests, function (each_storage_req, key) {
-                    //set the approved_quota as requested quota
-                    each_storage_req.approved_quota = each_storage_req.quota;
-                });
 
                 if (project_id != undefined) {
                     //reformat estimated users json, then compare changes when updating
@@ -335,27 +377,20 @@
             vm.alloc.requests[0].end_date = end_date.toISOString().substring(0, 10);
         }
 
-        function validateForm() {
+        vm.validateForm = function () {
             vm.project_ids_identifier_invalid = false;
             vm.project_ids_identifier_start_pt_invalid = false;
             vm.project_description_invalid = false;
             vm.estimated_duration_invalid = false;
             vm.convert_project_trial_invalid = false;
-            vm.instances_invalid = false;
-            vm.cores_invalid = false;
-            vm.cores_less_invalid = false;
-            vm.core_hours_invalid = false;
-            vm.storageForm_sp_invalid = false;
-            vm.storageForm_sp_quota_invalid = false;
             vm.use_case_invalid = false;
             vm.allocation_home_invalid = false;
             vm.estimated_users_invalid = false;
             vm.chief_investigator_invalid = false;
-            vm.instForm_institution_invalid = false;
 
-            vm.pubForm_publication_invalid = false;
-
-            vm.grantFrom_invalid = false;
+            if (vm.project_ids_already_exists_invalid) {
+                vm.request_form.$valid = false;
+            }
 
             if (!vm.request_form.project_identifier.$valid) {
                 vm.project_ids_identifier_invalid = true;
@@ -379,64 +414,57 @@
                 vm.convert_project_trial_invalid = true;
             }
 
-            if (!vm.request_form.instances.$valid) {
-                vm.instances_invalid = true;
-            }
+            //check Instances and cores
+            vm.checkInstanceAndCore();
 
-            if (!vm.request_form.cores.$valid) {
-                vm.cores_invalid = true;
-            } else {
-                var cores = vm.alloc.requests[0].compute_requests[0].cores;
-                var ins = vm.alloc.requests[0].compute_requests[0].instances;
-                // cores can not be less than instances.
-                if (cores < ins) {
-                    vm.cores_less_invalid = true;
-                    vm.request_form.$valid = false;
-                }
-            }
-
-            if (!vm.request_form.core_hours.$valid) {
-                vm.core_hours_invalid = true;
-            }
-
+            //check storage products
             angular.forEach(vm.alloc.requests[0].storage_requests, function (each_storage_prod_req, key) {
                 if (each_storage_prod_req.storage_product.id == 0) {
-                    vm.storageForm_sp_invalid = true;
+                    vm.request_form['nectar_sp_' + key].$invalid = true;
+                    vm.request_form.$valid = false;
                 }
                 if (each_storage_prod_req.quota < 1) {
-                    vm.storageForm_sp_quota_invalid = true;
+                    vm.request_form['nectar_sp_quota_' + key].$invalid = true;
+                    vm.request_form.$valid = false;
                 }
             });
 
-            if (vm.storageForm_sp_invalid || vm.storageForm_sp_quota_invalid) {
-                vm.request_form.$valid = false;
-            }
+            angular.forEach(vm.alloc.publications, function (each_pub, key) {
+                if (each_pub.reference == '' || each_pub.reference == null) {
+                    vm.request_form['pub_reference_' + key].$invalid = true;
+                    vm.request_form.$valid = false;
+                }
+            });
 
-            if (vm.request_form.pubForm != undefined) {
-                if (!vm.request_form.pubForm.reference.$valid) {
-                    vm.pubForm_publication_invalid = true;
+            angular.forEach(vm.alloc.institutions, function (each_ins, key) {
+                if (each_ins.institution == '' || each_ins.institution == null) {
+                    vm.request_form['institution_' + key].$invalid = true;
+                    vm.request_form.$valid = false;
                 }
-            }
+            });
 
-            if (vm.request_form.instForm != undefined) {
-                if (!vm.request_form.instForm.institution.$valid) {
-                    vm.instForm_institution_invalid = true;
+            angular.forEach(vm.alloc.grants, function (each_grant, key) {
+                if (each_grant.grant_type.id == 0 || each_grant.grant_type.id == undefined) {
+                    vm.request_form['grant_type_' + key].$invalid = true;
+                    vm.request_form.$valid = false;
                 }
-            }
-
-            if (vm.request_form.grantForm != undefined) {
-                if (!vm.request_form.grantForm.funding_body_and_scheme.$valid) {
-                    vm.grantFrom_invalid = true;
+                if (each_grant.funding_body_and_scheme == '' || each_grant.funding_body_and_scheme == null) {
+                    vm.request_form['funding_body_and_scheme_' + key].$invalid = true;
+                    vm.request_form.$valid = false;
                 }
-                if (!vm.request_form.grantForm.start_year.$valid) {
-                    vm.grantFrom_invalid = true;
+                if (each_grant.start_year < 1970) {
+                    vm.request_form['start_year_' + key].$invalid = true;
+                    vm.request_form.$valid = false;
                 }
-                angular.forEach(vm.alloc.requests[0].grants, function (each_grant, key) {
-                    if (each_grant.grant_type.id == 0) {
-                        vm.grantFrom_invalid = true;
-                    }
-                });
-            }
+                if (each_grant.duration < 1) {
+                    vm.request_form['grant_duration_' + key].$invalid = true;
+                    vm.request_form.$valid = false;
+                }
+                if (each_grant.total_funding < 1) {
+                    vm.request_form['total_funding_' + key].$invalid = true;
+                    vm.request_form.$valid = false;
+                }
+            });
 
             angular.forEach(vm.alloc.project_contacts, function (p_contact, index) {
                 if (p_contact.contact.email == undefined || p_contact.contact.email == null) {
@@ -511,7 +539,6 @@
                 }
             }
 
-
             //clean any existed domains
             vm.alloc.domains = [];
             //copy vm.domains to vm.alloc.project.domains
@@ -520,9 +547,8 @@
                     vm.alloc.domains.push(each_domain);
                 }
             });
-
             return vm.request_form.$valid;
-        }
+        };
 
         //check duplicated FOR Code
         vm.checkFORDuplicate = function (scope, index) {
@@ -613,14 +639,15 @@
             "funding_body_and_scheme": null,
             "grant_id": null,
             "start_year": null,
-            "total_funding": 0.0
+            "duration": null,
+            "total_funding": null
         }
     }
 
     function newEmptyStorageQuota() {
         return {
             "quota": 1,
-            "approved_quota": 1,
+            "approved_quota": 0,
             "storage_product": {
                 "id": 0
             }
@@ -707,11 +734,11 @@
                     "compute_requests": [
                         {
                             "instances": 2,
-                            "approved_instances": 2,
+                            "approved_instances": 0,
                             "cores": 2,
-                            "approved_cores": 2,
+                            "approved_cores": 0,
                             "core_hours": 744,
-                            "approved_core_hours": 744,
+                            "approved_core_hours": 0,
                             "compute_product": {
                                 "id": 1
                             }

@@ -13,17 +13,16 @@
     </div>
 
 </div>
-<table width="60%">
+<table width="70%">
     <tbody>
     <tr ng-repeat="grant in vm.alloc.grants track by $index">
         <td width="50%">
-            <ng-form name="grantForm">
-                <div class="border_div">
-                    <div class="col-md-10">
-                        <label for="id-grant_type">
-                            Type <i class="glyphicon glyphicon-asterisk text-primary"></i>
-                        </label>
-                        <span ng-controller="PopupController">
+            <div class="border_div">
+                <div class="col-md-10">
+                    <label for="id-grant_type_{{$index}}">
+                        Type <i class="glyphicon glyphicon-asterisk text-primary"></i>
+                    </label>
+                    <span ng-controller="PopupController">
                             <span ng-click="showHelp()" class="help-icon-sp">
                                 <img class="help-icon" src="images/help.png">
                             </span>
@@ -32,100 +31,130 @@
                             </modal>
                         </span>
 
-                        <div class="form-group"
-                             ng-class="{'has-error': grantForm.grant_type.$dirty && grantForm.grant_type.$invalid}">
-                            <select name="grant_type" id="id-grant_type"
-                                    class="form-control" ng-model="grant.grant_type.id"
-                                    ng-options="gtype.id as gtype.desc for gtype in vm.grant_types" required>
-                                <option value="">--- Select ---</option>
-                            </select>
-                            <span class="help-block"
-                                  ng-show="grantForm.grant_type.$dirty && grantForm.grant_type.$invalid">
+                    <div class="form-group"
+                         ng-class="{'has-error': vm.request_form['grant_type_' + $index].$invalid}">
+                        <select name="grant_type_{{$index}}" id="id-grant_type_{{$index}}"
+                                class="form-control" ng-model="grant.grant_type.id"
+                                ng-options="gtype.id as gtype.desc for gtype in vm.grant_types" required>
+                            <option value="">--- Select ---</option>
+                        </select>
+                        <span class="help-block"
+                              ng-show="vm.request_form['grant_type_' + $index].$invalid">
                                 Please select grant type
                             </span>
-                        </div>
                     </div>
+                </div>
 
-                    <div class="col-md-10">
-                        <label for="id-funding_body_and_scheme">
-                            Funding Body and Scheme<i class="glyphicon glyphicon-asterisk text-primary"></i>
-                        </label>
-                        <span ng-controller="PopupController">
+                <div class="col-md-10">
+                    <label for="id-funding_body_and_scheme_{{$index}}">
+                        Funding Body and Scheme<i class="glyphicon glyphicon-asterisk text-primary"></i>
+                    </label>
+                    <span ng-controller="PopupController">
                             <span ng-click="showHelp()" class="help-icon-sp">
                                 <img class="help-icon" src="images/help.png">
                             </span>
                             <modal title="{{ help.funding_body_scheme.title }}" visible="showModal">
                                 <span ng-bind-html="help.funding_body_scheme.text"></span>
                             </modal>
-                        </span>
+                    </span>
 
-                        <div class="form-group"
-                             ng-class="{'has-error': grantForm.funding_body_and_scheme.$dirty && grantForm.funding_body_and_scheme.$invalid}">
-                            <input type="text" min="1" name="funding_body_and_scheme" id="id-funding_body_and_scheme" class="form-control"
-                                   ng-model="grant.funding_body_and_scheme" ng-change="vm.resetGrantInvalidFlag()" required/>
-                            <span class="help-block"
-                                  ng-show="grantForm.funding_body_and_scheme.$dirty && grantForm.funding_body_and_scheme.$invalid">
+                    <div class="form-group"
+                         ng-class="{'has-error': vm.request_form['funding_body_and_scheme_'+ $index].$invalid}">
+                        <input type="text" min="1" name="funding_body_and_scheme_{{$index}}"
+                               id="id-funding_body_and_scheme_{{$index}}" class="form-control"
+                               ng-model="grant.funding_body_and_scheme"/>
+                        <span class="help-block"
+                              ng-show="vm.request_form['funding_body_and_scheme_'+ $index].$invalid">
                                 Please enter the funding body and scheme
-                            </span>
-                        </div>
+                        </span>
                     </div>
+                </div>
 
-                    <div class="col-md-10">
-                        <label for="id-start_year">
-                            First Year Funded <i class="glyphicon glyphicon-asterisk text-primary"></i>
-                        </label>
-                        <span ng-controller="PopupController">
+                <div class="col-md-10">
+                    <label for="id-start_year_{{$index}}">
+                        First Year Funded <i class="glyphicon glyphicon-asterisk text-primary"></i>
+                    </label>
+                    <span ng-controller="PopupController">
                             <span ng-click="showHelp()" class="help-icon-sp">
                                 <img class="help-icon" src="images/help.png">
                             </span>
                             <modal title="{{ help.start_year.title }}" visible="showModal">
                                 <span ng-bind-html="help.start_year.text"></span>
                             </modal>
+                    </span>
+
+                    <div class="form-group"
+                         ng-class="{'has-error': vm.request_form['start_year_'+ $index].$invalid}">
+                        <input type="number" min="1971" name="start_year_{{$index}}" id="id-start_year_{{$index}}"
+                               class="form-control" ng-model="grant.start_year"/>
+                        <span class="help-block"
+                              ng-show="vm.request_form['start_year_'+ $index].$invalid">
+                                Please enter the first year funded, ensure this value is greater than or equal to 1970.
                         </span>
-
-                        <div class="form-group"
-                             ng-class="{'has-error': grantForm.start_year.$dirty && grantForm.start_year.$invalid}">
-                            <input type="number" min="1" name="start_year" id="id-start_year"
-                                   class="form-control" ng-model="grant.start_year" ng-change="vm.resetGrantInvalidFlag()" required/>
-                            <span class="help-block"
-                                  ng-show="grantForm.start_year.$dirty && grantForm.start_year.$invalid">
-                                Please enter the first year funded
-                            </span>
-                        </div>
                     </div>
+                </div>
 
-                    <div class="col-md-10">
-                        <label for="id-total_funding">
-                            Total Funding <i class="glyphicon glyphicon-asterisk text-primary"></i>
-                        </label>
-                        <span ng-controller="PopupController">
+                <div class="col-md-10">
+                    <label for="id-grant_duration_{{$index}}">
+                        Duration<i class="glyphicon glyphicon-asterisk text-primary"></i>
+                    </label>
+                    <span ng-controller="PopupController">
+                            <span ng-click="showHelp()" class="help-icon-sp">
+                                <img class="help-icon" src="images/help.png">
+                            </span>
+                            <modal title="{{ help.grant_duration.title }}" visible="showModal">
+                                <span ng-bind-html="help.grant_duration.text"></span>
+                            </modal>
+                    </span>
+
+                    <div class="form-group"
+                         ng-class="{'has-error': vm.request_form['grant_duration_'+ $index].$invalid}">
+                        <input type="number" min="1" max="1000" name="grant_duration_{{$index}}"
+                               id="id-grant_duration_{{$index}}"
+                               class="form-control" ng-model="grant.duration" style="float:left;width: 80%"/>
+                        <span class="input-group-btn">
+                                <button type="button" class="btn">Months</button>
+                        </span>
+                        <span class="help-block"
+                              ng-show="vm.request_form['grant_duration_'+ $index].$invalid">
+                                Please enter the grant duration (1 to 1000 Months).
+                        </span>
+                    </div>
+                </div>
+
+                <div class="col-md-10">
+                    <label for="id-total_funding_{{$index}}">
+                        Total Funding <i class="glyphicon glyphicon-asterisk text-primary"></i>
+                    </label>
+                    <span ng-controller="PopupController">
                             <span ng-click="showHelp()" class="help-icon-sp">
                                 <img class="help-icon" src="images/help.png">
                             </span>
                             <modal title="{{ help.total_funding.title }}" visible="showModal">
                                 <span ng-bind-html="help.total_funding.text"></span>
                             </modal>
-                        </span>
+                    </span>
 
-                        <div class="form-group"
-                             ng-class="{'has-error':grantForm.total_funding.$dirty && grantForm.total_funding.$invalid}">
-                            <input type="number" min="1" name="total_funding" id="id-total_funding"
-                                   class="form-control" ng-model="grant.total_funding" style="float:left;width: 81%" required/>
-                            <span class="input-group-btn">
+                    <div class="form-group"
+                         ng-class="{'has-error':vm.request_form['total_funding_' + $index].$invalid}">
+                        <input type="number" min="1" name="total_funding_{{$index}}"
+                               id="id-total_funding_{{$index}}"
+                               class="form-control" ng-model="grant.total_funding" style="float:left;width: 80%"/>
+                        <span class="input-group-btn">
                                 <button type="button" class="btn">AUD</button>
-                            </span>
-                            <span class="help-block"
-                                   ng-show="grantForm.total_funding.$dirty && grantForm.total_funding.$invalid">
+                        </span>
+                        <span class="help-block"
+                              ng-show="vm.request_form['total_funding_' + $index].$invalid">
                                 Please enter the total amount of funding
-                            </span>
-                        </div>
+                        </span>
                     </div>
+                </div>
 
-                    <div class="col-md-10">
-                        <label for="id-grant_id">
-                            Grant ID
-                        </label>
-                        <span ng-controller="PopupController">
+                <div class="col-md-10">
+                    <label for="id-grant_id">
+                        Grant ID
+                    </label>
+                    <span ng-controller="PopupController">
                             <span ng-click="showHelp()" class="help-icon-sp">
                                 <img class="help-icon" src="images/help.png">
                             </span>
@@ -134,14 +163,13 @@
                             </modal>
                         </span>
 
-                        <div class="form-group">
-                            <input type="text" min="1" name="grant_id" id="id-grant_id"
-                                   class="form-control" ng-model="grant.grant_id"/>
-                        </div>
+                    <div class="form-group">
+                        <input type="text" min="1" name="grant_id" id="id-grant_id"
+                               class="form-control" ng-model="grant.grant_id"/>
                     </div>
-
                 </div>
-            </ng-form>
+
+            </div>
         </td>
         <td>
             <button class="btn btn-default" id="delete-grant" type="button" ng-click="vm.removeGrant($index)">

@@ -5,7 +5,7 @@
         </p>
     </div>
 </div>
-
+{{vm.approve_form.$valid}}
 <div class="row">
     <div class="col-md-12">
         <span class="alert-info"> <strong>Info: </strong></span>Required fields are marked with an
@@ -14,7 +14,7 @@
     </div>
 </div>
 <hr/>
-<form name="approve_form" ng-submit="vm.approve_alloc()" novalidate>
+<form name="vm.approve_form" ng-submit="vm.approve_alloc()" novalidate>
 
     <div class="row">
         <div class="col-md-6">
@@ -121,25 +121,68 @@
                                         <th width="30%">Virtual Machine Instances</th>
                                         <td width="30%">{{vm.alloc.requests[0].compute_requests[0].instances}}</td>
                                         <td width="40%">
-                                            <input type="text" class="form-control" id="approved_instances"
-                                                   ng-model="vm.alloc.requests[0].compute_requests[0].approved_instances"/>
+                                            <div class="form-group"
+                                                 ng-class="{'has-error': vm.approved_instances_invalid || vm.zero_approved_instances_invalid || (vm.approve_form.approved_instances.$dirty && vm.approve_form.approved_instances.$invalid)}">
+                                                <input type="number" min="0" class="form-control"
+                                                       id="approved_instances"
+                                                       name="approved_instances"
+                                                       ng-model="vm.alloc.requests[0].compute_requests[0].approved_instances"
+                                                       ng-change="vm.checkInstanceAndCore()" required/>
+                                                <span class="help-block"
+                                                      ng-show="vm.approved_instances_invalid || (vm.approve_form.approved_instances.$dirty && vm.approve_form.approved_instances.$invalid)">
+                                                    Invalid,  please enter the maximum number of virtual machine instances
+                                                </span>
+                                                <span class="help-block"
+                                                      ng-show="vm.zero_approved_instances_invalid">
+                                                    Invalid, core without any virtual machine instances
+                                                </span>
+                                            </div>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>Core</th>
                                         <td>{{vm.alloc.requests[0].compute_requests[0].cores}}</td>
                                         <td>
-                                            <input type="text" class="form-control" id="approved_cores"
-                                                   ng-model="vm.alloc.requests[0].compute_requests[0].approved_cores"
-                                                   ng-change="vm.update_core_hours()" required/>
+                                            <div class="form-group"
+                                                 ng-class="{'has-error': vm.approved_cores_invalid || vm.approved_cores_less_invalid || (vm.approve_form.approved_cores.$dirty && vm.approve_form.approved_cores.$invalid)}">
+                                                <input type="number" min="0" id="approved_cores"
+                                                       name="approved_cores" class="form-control"
+                                                       ng-model="vm.alloc.requests[0].compute_requests[0].approved_cores"
+                                                       ng-change="vm.update_core_hours()" required/>
+                                                <span class="help-block"
+                                                      ng-show="vm.approved_cores_invalid || (vm.approve_form.approved_cores.$dirty && vm.approve_form.approved_cores.$invalid)">
+                                                    Please enter the maximum number of cores
+                                                </span>
+                                                <span class="help-block" ng-show="vm.approved_cores_less_invalid">
+                                                    Cores must be equal or great than instances
+                                                </span>
+                                            </div>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>Core Hours</th>
                                         <td>{{vm.alloc.requests[0].compute_requests[0].core_hours}}</td>
                                         <td>
-                                            <input type="text" class="form-control" id="approved_core_hours"
-                                                   ng-model="vm.alloc.requests[0].compute_requests[0].approved_core_hours"/>
+                                            <div class="form-group"
+                                                 ng-class="{'has-error': (vm.approved_core_hours_invalid || vm.zero_core_hour_invalid || vm.non_zero_core_hours_invalid || (vm.approve_form.approved_core_hours.$dirty && vm.approve_form.approved_core_hours.$invalid)), 'has-warning': vm.below_recommend_core_hours_warn}">
+                                                <input type="number" class="form-control" id="approved_core_hours"
+                                                       name="approved_core_hours"
+                                                       ng-model="vm.alloc.requests[0].compute_requests[0].approved_core_hours"
+                                                       ng-change="vm.checkInstanceAndCore()" required/>
+                                                <span class="help-block"
+                                                      ng-show="vm.approved_core_hours_invalid || (vm.approve_form.approved_core_hours.$dirty && vm.approve_form.approved_core_hours.$invalid)">
+                                                    Invalid approved core hours
+                                                </span>
+                                                <span class="help-block" ng-show="vm.zero_core_hour_invalid">
+                                                     Invalid, can't be zero core hour
+                                                </span>
+                                                <span class="help-block" ng-show="vm.non_zero_core_hours_invalid">
+                                                     Invalid, must be zero core hour
+                                                </span>
+                                                <span class="help-block" ng-show="vm.below_recommend_core_hours_warn">
+                                                    The recommended core hours is {{vm.estimated_core_hours}} or above
+                                                </span>
+                                            </div>
                                         </td>
                                     </tr>
                                 </table>
@@ -177,8 +220,16 @@
                                         <th width="30%">Quota</th>
                                         <td width="30%">{{storage.quota}}</td>
                                         <td width="40%">
-                                            <input type="text" class="form-control" id="approved_quota"
-                                                   ng-model="storage.approved_quota"/>
+                                            <div class="form-group"
+                                                 ng-class="{'has-error': vm.approve_form['approved_quota_' + $index].$invalid}">
+                                                <input type="number" min="0" class="form-control"
+                                                       name="approved_quota_{{$index}}" id="approved_quota_{{$index}}"
+                                                       ng-model="storage.approved_quota" ng-required="true"/>
+                                                <span class="help-block"
+                                                      ng-show="vm.approve_form['approved_quota_' + $index].$invalid">
+                                                        Invalid approved quota
+                                                </span>
+                                            </div>
                                         </td>
                                     </tr>
                                 </table>
@@ -188,6 +239,63 @@
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <label for="id-national_percent">
+                    Nationally Funded Percentage [0..100]
+                </label>
+                <span ng-controller="PopupController">
+                <span ng-click="showHelp()" class="help-icon-sp"><img class="help-icon" src="images/help.png"></span>
+                    <modal title="{{ help.national_percent.title }}" visible="showModal">
+                        <span ng-bind-html="help.national_percent.text"></span>
+                    </modal>
+                </span>
+                <div class="form-group"
+                     ng-class="{'has-error': vm.approve_form['national_percent'].$invalid || vm.national_100_funding_node_invalid}">
+                    <input type="number" min="0" max="100" name="national_percent" id="id-national_percent"
+                           class="form-control"
+                           ng-model="vm.alloc.requests[0].national_percent" style="width:320px;"/>
+                    <span class="help-block"
+                          ng-show="vm.approve_form['national_percent'].$invalid">
+                            Invalid, must be in  range 0 to 100.
+                     </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <label for="id-node_funding">
+                    Node Funding Remainder (if applicable)
+                </label>
+                <span ng-controller="PopupController">
+                <span ng-click="showHelp()" class="help-icon-sp"><img class="help-icon" src="images/help.png"></span>
+                <modal title="{{ help.node_funding.title }}" visible="showModal">
+                    <span ng-bind-html="help.node_funding.text"></span>
+                </modal>
+                </span>
+                <div class="form-group"
+                     ng-class="{'has-error': vm.national_100_funding_node_invalid || vm.national_less_100_funding_node_not_provided}">
+                    <select name="allocation_home" id="id-node_funding" class="form-control"
+                            ng-model="vm.alloc.requests[0].allocation_node"
+                            ng-options="key as value for (key,value) in vm.funding_nodes" style="width:320px;">
+                        <option value=""> ---------</option>
+                    </select>
+
+                    <span class="help-block"
+                          ng-show="vm.national_100_funding_node_invalid">
+                            Funding node cannot be set if National Percent is 100.
+                     </span>
+
+                    <span class="help-block"
+                          ng-show="vm.national_less_100_funding_node_not_provided">
+                            Please select funding node.
+                     </span>
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-md-6">
                 <label for="id-approval_notes">
@@ -198,7 +306,7 @@
                 <modal title="{{ help.approve_comment.title }}" visible="showModal">
                     <span ng-bind-html="help.approve_comment.text"></span>
                 </modal>
-            </span>
+                </span>
 
                 <div class="form-group">
                 <textarea name="approval_notes" id="id-approval_notes"

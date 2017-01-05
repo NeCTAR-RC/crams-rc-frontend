@@ -29,18 +29,6 @@
                 </td>
             </tr>
         </table>
-
-        <div ng-class="{'has-error': vm.storageForm_sp_invalid}">
-            <span class="help-block has-error" ng-show="vm.storageForm_sp_invalid">
-                Please select a storage product
-            </span>
-        </div>
-
-        <div ng-class="{'has-error': vm.storageForm_sp_quota_invalid}">
-            <span class="help-block has-error" ng-show="vm.storageForm_sp_quota_invalid">
-                Please specify the total size in gigabytes
-            </span>
-        </div>
     </div>
 </div>
 
@@ -48,13 +36,12 @@
     <tbody>
     <tr ng-repeat="storage_request in vm.alloc.requests[0].storage_requests track by $index">
         <td width="50%">
-            <ng-form name="storageForm">
-                <div class="border_div">
-                    <div class="col-md-10">
-                        <label for="id-nectar_sp">
-                            Storage Product <i class="glyphicon glyphicon-asterisk text-primary"></i>
-                        </label>
-                        <span ng-controller="PopupController">
+            <div class="border_div">
+                <div class="col-md-10">
+                    <label for="id-nectar_sp_{{$index}}">
+                        Storage Product <i class="glyphicon glyphicon-asterisk text-primary"></i>
+                    </label>
+                    <span ng-controller="PopupController">
                             <span ng-click="showHelp()" class="help-icon-sp">
                                 <img class="help-icon" src="images/help.png">
                             </span>
@@ -63,29 +50,30 @@
                             </modal>
                         </span>
 
-                        <div class="form-group"
-                             ng-class="{'has-error': storageForm.nectar_sp.$invalid || storageForm.$error.isdup}">
-                            <select name="nectar_sp" id="id-nectar_sp" class="form-control"
-                                    ng-model="storage_request.storage_product.id"
-                                    ng-options="nc_sp.id as nc_sp.name for nc_sp in vm.ncStorageProducts"
-                                    ng-change="vm.checkNcSpDuplicate(this, $index)" required>
-                                <option value="">--- Select ---</option>
-                            </select>
-                            <span class="help-block"
-                                  ng-show="storageForm.nectar_sp.$invalid && !storageForm.$error.isdup">
+                    <div class="form-group"
+                         ng-class="{'has-error': vm.request_form['nectar_sp_' + $index].$invalid || vm.request_form['nectar_sp_' + $index].$error.isdup}">
+                        <select name="nectar_sp_{{$index}}" id="id-nectar_sp_{{$index}}" class="form-control"
+                                ng-model="storage_request.storage_product.id"
+                                ng-options="nc_sp.id as nc_sp.name for nc_sp in vm.ncStorageProducts"
+                                ng-change="vm.checkNcSpDuplicate(this, $index)" required>
+                            <option value="">--- Select ---</option>
+                        </select>
+
+                        <span class="help-block"
+                              ng-show="vm.request_form['nectar_sp_' + $index].$invalid && !vm.request_form['nectar_sp_' + $index].$error.isdup">
                                 Please select a storage product
                             </span>
-                            <span class="help-block" ng-show="storageForm.$error.isdup">
+                        <span class="help-block" ng-show="vm.request_form['nectar_sp_' + $index].$error.isdup">
                                 Duplicated storage product
-                            </span>
-                        </div>
+                        </span>
                     </div>
+                </div>
 
-                    <div class="col-md-10">
-                        <label for="id-nectar_sp_quota">
-                            Requested Quota <i class="glyphicon glyphicon-asterisk text-primary"></i>
-                        </label>
-                        <span ng-controller="PopupController">
+                <div class="col-md-10">
+                    <label for="id-nectar_sp_quota_{{$index}}">
+                        Requested Quota <i class="glyphicon glyphicon-asterisk text-primary"></i>
+                    </label>
+                    <span ng-controller="PopupController">
                             <span ng-click="showHelp()" class="help-icon-sp">
                                 <img class="help-icon" src="images/help.png">
                             </span>
@@ -94,21 +82,21 @@
                             </modal>
                         </span>
 
-                        <div class="form-group"
-                             ng-class="{'has-error':storageForm.nectar_sp_quota.$dirty && storageForm.nectar_sp_quota.$invalid}">
-                            <input type="number" min="1" name="nectar_sp_quota" id="id-nectar_sp_quota"
-                                   class="form-control" ng-model="storage_request.quota" style="float:left;width: 84%"/>
-                            <span class="input-group-btn">
+                    <div class="form-group"
+                         ng-class="{'has-error':vm.request_form['nectar_sp_quota_' + $index].$dirty && vm.request_form['nectar_sp_quota_' + $index].$invalid}">
+                        <input type="number" min="1" name="nectar_sp_quota_{{$index}}"
+                               id="id-nectar_sp_quota_{{$index}}"
+                               class="form-control" ng-model="storage_request.quota" style="float:left;width: 84%"/>
+                        <span class="input-group-btn">
                                 <button type="button" class="btn">GB</button>
-                            </span>
-                            <span class="help-block"
-                                  ng-show="storageForm.nectar_sp_quota.$dirty && storageForm.nectar_sp_quota.$invalid">
+                        </span>
+                        <span class="help-block"
+                              ng-show="vm.request_form['nectar_sp_quota_' + $index].$dirty && vm.request_form['nectar_sp_quota_' + $index].$invalid">
                             Specify the total size in gigabytes that the project will need
                             </span>
-                        </div>
                     </div>
                 </div>
-            </ng-form>
+            </div>
         </td>
         <td>
             <button class="btn btn-default" id="delete-grant" type="button" ng-click="vm.removeNcSpQuota($index)">
@@ -118,6 +106,7 @@
     </tr>
     </tbody>
 </table>
+
 <div class="row">
     <div class="col-md-3">
         <div class="form-group">
