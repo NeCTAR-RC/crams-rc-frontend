@@ -22,19 +22,42 @@
                 <td><a href="#/{{ nav.first_path }}/view_request/{{req.id}}">{{project.title}}</a>
                 </td>
                 <td>
-                    {{req.status}}
+                    {{req.status.status}}
                     <provision-details projectid="{{ project.id }}" project="project"></provision-details>
                 </td>
                 <td>
                     <div class="row" ng-repeat="compute_req in req.compute_requests">
                         <div class="col-md-12">
-                            {{compute_req.compute_product.name}}: {{compute_req.cores}} Cores,
-                            {{compute_req.core_hours}} VCPU Hours
+                            {{compute_req.compute_product.name}}:
+                            <span ng-if="req.status.code !='N' && req.status.code !='E' && req.status.code !='X'">
+                                {{compute_req.approved_instances}}
+                            </span>
+                            <span ng-if="req.status.code =='N' || req.status.code =='E' || req.status.code =='X'">
+                                {{compute_req.instances}}
+                            </span> Instances,
+                            <span ng-if="req.status.code !='N' && req.status.code !='E' && req.status.code !='X'">
+                                {{compute_req.approved_cores}}
+                            </span>
+                            <span ng-if="req.status.code =='N' || req.status.code =='E' || req.status.code =='X'">
+                                {{compute_req.cores}}
+                            </span> Cores,
+                            <span ng-if="req.status.code !='N' && req.status.code !='E' && req.status.code !='X'">
+                                {{compute_req.approved_core_hours}}
+                            </span>
+                            <span ng-if="req.status.code =='N' || req.status.code =='E' || req.status.code =='X'">
+                                {{compute_req.core_hours}}
+                            </span> VCPU Hours
                         </div>
                     </div>
                     <div class="row" ng-repeat="storage_req in req.storage_requests">
                         <div class="col-md-12">
-                            {{storage_req.storage_product.name}}: {{storage_req.quota}} GB
+                            {{storage_req.storage_product.name}}:
+                            <span ng-if="req.status.code !='N' && req.status.code !='E' && req.status.code !='X'">
+                            {{storage_req.approved_quota}}
+                            </span>
+                            <span ng-if="req.status.code =='N' || req.status.code =='E' || req.status.code =='X'">
+                            {{storage_req.quota}}
+                            </span> GB
                         </div>
                     </div>
                 </td>
@@ -46,6 +69,9 @@
                 </td>
                 <td>
                     <a href="#/{{ nav.first_path }}/history/{{req.id}}">History</a>
+                    <span ng-if="req.status.code =='E' || req.status.code =='X'">
+                        | <a href="#/{{ nav.first_path }}/edit_request/{{project.id}}/{{req.id}}">Edit</a>
+                    </span>
                 </td>
             </tr>
             </tbody>

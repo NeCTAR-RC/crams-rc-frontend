@@ -156,7 +156,11 @@
             },
             "start_year": {
                 "title": "First Year Funded",
-                "text": "Please enter the first year funded"
+                "text": "Please enter the first year funded, ensure this value is greater than or equal to 1970."
+            },
+            "grant_duration": {
+                "title": "Duration",
+                "text": "Please enter the duration of grant."
             },
             "total_funding": {
                 "title": "Total Funding (AUD)",
@@ -173,6 +177,14 @@
             "decline_reason": {
                 "title": "Reason",
                 "text": "A brief explanation of the reason the request has been sent back to the user for changes."
+            },
+            "national_percent": {
+                "title": "Nationally Funded Percentage [0..100]",
+                "text": "Percentage funded under the National Allocation Scheme."
+            },
+            "node_funding": {
+                "title": "Node Funding Remainder (if applicable)",
+                "text": "You can choose the node that complements the National Funding."
             },
             "approve_comment": {
                 "title": "Comment",

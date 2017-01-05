@@ -106,11 +106,12 @@
 
         <div class="form-group"
              ng-class="{'has-error':vm.estimated_users_invalid || (vm.request_form.estimated_users.$dirty && vm.request_form.estimated_users.$invalid)}">
-            <input type="number" min="1" name="estimated_users" id="id-estimated_users" class="form-control"
+            <input type="number" min="1" max="100000000" name="estimated_users" id="id-estimated_users"
+                   class="form-control"
                    ng-model="vm.alloc.requests[0].request_question_responses[6].question_response" required/>
             <span class="help-block"
                   ng-show="vm.estimated_users_invalid || (vm.request_form.estimated_users.$dirty && vm.request_form.estimated_users.$invalid)">
-                Please enter the estimated number of users
+                Please enter the estimated number of users (1 to 100000000).
             </span>
         </div>
     </div>

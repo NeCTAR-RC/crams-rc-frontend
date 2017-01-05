@@ -87,12 +87,29 @@
             <tr ng-repeat="grant in vm.alloc_project_request.grants">
                 <td>{{grant.grant_type.description}} - {{ grant.funding_body_and_scheme }} -
                     {{grant.grant_id}} -
-                    {{grant.start_year}} - AUD: {{grant.total_funding}}
+                    {{grant.start_year}} - {{grant.duration}} - AUD: {{grant.total_funding}}
                 </td>
             </tr>
             </tbody>
         </table>
     </div>
+
+    <div class="col-md-12">
+        <div class="sub_title">
+            <span class="sub_title"><i class="fa fa-money"></i> Funding </span>
+        </div>
+        <table class="data_tab">
+            <tbody>
+            <tr ng-repeat="req in vm.alloc_project_request.requests">
+                <th width="30%">National</th>
+                <td width="20%">{{req.national_percent}} %</td>
+                <th width="20%">Node</th>
+                <td width="30%">{{req.allocation_node}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
     <div class="blank_separator"></div>
 
     <div class="col-md-12">
@@ -164,17 +181,21 @@
                         <tr>
                             <th width="30%">Virtual Machine Instances</th>
                             <td width="30%">{{compute.instances}}</td>
-                            <td width="40%">{{compute.approved_instances}}</td>
+                            <td width="40%"><span
+                                    ng-if="req.request_status.code =='A' || req.request_status.code =='p'">{{compute.approved_instances}}</span>
+                            </td>
                         </tr>
                         <tr>
                             <th>Core</th>
                             <td>{{compute.cores}}</td>
-                            <td>{{compute.approved_cores}}</td>
+                            <td><span ng-if="req.request_status.code =='A' || req.request_status.code =='p'">{{compute.approved_cores}}</span>
+                            </td>
                         </tr>
                         <tr>
                             <th>Core Hours</th>
                             <td>{{compute.core_hours}}</td>
-                            <td>{{compute.approved_core_hours}}</td>
+                            <td><span ng-if="req.request_status.code =='A' || req.request_status.code =='p'">{{compute.approved_core_hours}}</span>
+                            </td>
                         </tr>
                     </table>
                 </td>
@@ -208,7 +229,9 @@
                         <tr>
                             <th width="30%">Quota</th>
                             <td width="30%">{{storage.quota}}</td>
-                            <td width="40%">{{storage.approved_quota}}</td>
+                            <td width="40%"><span
+                                    ng-if="req.request_status.code =='A' || req.request_status.code =='p'">{{storage.approved_quota}}</span>
+                            </td>
                         </tr>
                     </table>
                 </td>

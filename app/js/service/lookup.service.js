@@ -18,6 +18,7 @@
         service.contacts = loadContacts;
         service.forCodes = loadFORCodes;
         service.fundingBody = loadFundingBody;
+        service.checkProjectIdentifier = checkProjectId;
 
         return service;
 
@@ -52,6 +53,10 @@
 
         function loadFundingBody() {
             return fetchLookup('user_funding_body/')
+        }
+
+        function checkProjectId(systemId, projectIdentifier) {
+            return fetchLookup('exists/project_id/' + systemId + '/' + projectIdentifier+'/')
         }
 
         //private functions

@@ -11,7 +11,7 @@
         </span>
 
         <div class="form-group"
-             ng-class="{'has-error': vm.project_ids_identifier_invalid || vm.project_ids_identifier_start_pt_invalid || vm.request_form.project_identifier.$error.pattern}">
+             ng-class="{'has-error': vm.project_ids_identifier_invalid || vm.project_ids_already_exists_invalid || vm.project_ids_identifier_start_pt_invalid || vm.request_form.project_identifier.$error.pattern}">
             <input type="text" name="project_identifier" id="id-project_project_ids_0_identifier" class="form-control"
                    ng-model="vm.alloc.project_ids[0].identifier" ng-readonly="vm.readyOnlyField"
                    ng-pattern="/^[a-zA-Z][-_a-zA-Z0-9]{1,31}$/" required maxlength="32" ng-blur="vm.prefillTitle()"/>
@@ -23,6 +23,10 @@
             </span>
             <span class="help-block" ng-show="vm.project_ids_identifier_start_pt_invalid">
                 Invalid project identifier. (Project names cannot start with 'pt-')
+            </span>
+
+            <span class="help-block" ng-show="vm.project_ids_already_exists_invalid">
+                Project identifier already exists
             </span>
         </div>
     </div>
