@@ -111,7 +111,7 @@
             if (vm.validate()) {
                 _.each(vm.alloc.requests, function (req, index, list) {
                     // alert('req: ' + angular.toJson(req));
-                    var ar = _.pick(req, 'compute_requests', 'storage_requests', 'national_percent', 'allocation_node', 'approval_notes');
+                    var ar = _.pick(req, 'compute_requests', 'storage_requests', 'national_percent', 'allocation_home', 'approval_notes');
                     NectarRequestService.approveRequest(ar, req.id).then(function (response) {
                         if (response.success) {
                             FlashService.Success('Request approved', true);
@@ -134,7 +134,7 @@
             vm.national_100_funding_node_invalid = false;
             vm.national_less_100_funding_node_not_provided = false;
             var national_percent = vm.alloc.requests[0].national_percent;
-            var funding_node = vm.alloc.requests[0].allocation_node;
+            var funding_node = vm.alloc.requests[0].allocation_home;
             if (national_percent == 100 && funding_node != null) {
                 vm.national_100_funding_node_invalid = true;
                 vm.approve_form.$valid = false;

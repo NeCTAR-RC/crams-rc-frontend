@@ -277,7 +277,7 @@
                 <div class="form-group"
                      ng-class="{'has-error': vm.national_100_funding_node_invalid || vm.national_less_100_funding_node_not_provided}">
                     <select name="allocation_home" id="id-node_funding" class="form-control"
-                            ng-model="vm.alloc.requests[0].allocation_node"
+                            ng-model="vm.alloc.requests[0].allocation_home"
                             ng-options="key as value for (key,value) in vm.funding_nodes" style="width:320px;">
                         <option value=""> ---------</option>
                     </select>
