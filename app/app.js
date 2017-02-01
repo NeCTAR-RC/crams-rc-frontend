@@ -9,6 +9,8 @@
         $httpProvider.defaults.xsrfCookieName = 'csrftoken';
         $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
         $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+        //remove the hash-prefix exclamation mark in the url if using angular1.6
+        $locationProvider.hashPrefix('');
         // provide an interceptor to checkout 401 error:
         $httpProvider.interceptors.push(function ($q, $location, $rootScope, $cookieStore) {
             return {
