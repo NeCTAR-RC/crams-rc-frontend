@@ -20,6 +20,13 @@
                 var question_responses = CramsUtils.sortQuestionResponseInFormOrder(vm.alloc);
                 vm.alloc.project_question_responses = question_responses.project_question_responses;
                 vm.alloc.requests[0].request_question_responses = question_responses.request_question_responses;
+                //copy the estimated value as default approved value
+                vm.alloc.requests[0].compute_requests[0].approved_instances = vm.alloc.requests[0].compute_requests[0].instances;
+                vm.alloc.requests[0].compute_requests[0].approved_cores = vm.alloc.requests[0].compute_requests[0].cores;
+                vm.alloc.requests[0].compute_requests[0].approved_core_hours = vm.alloc.requests[0].compute_requests[0].core_hours;
+                angular.forEach(vm.alloc.requests[0].storage_requests, function (each_storage_req, key) {
+                    each_storage_req.approved_quota = each_storage_req.quota;
+                });
             } else {
                 var msg = "Failed to get NeCTAR allocation request, " + response.message;
                 FlashService.Error(msg);
