@@ -191,7 +191,6 @@
         vm.checkInstanceAndCore = function () {
             vm.zero_instances_invalid = false;
             vm.cores_less_invalid = false;
-            vm.below_recommend_core_hours_warn = false;
             vm.zero_core_hour_invalid = false;
             vm.non_zero_core_hours_invalid = false;
             var num_of_cores = vm.alloc.requests[0].compute_requests[0].cores;
@@ -208,10 +207,6 @@
             var core_hours = vm.alloc.requests[0].compute_requests[0].core_hours;
 
             vm.calculate_core_hours();
-            //if core hours is less than recommended core hours. just give a warning message
-            if (core_hours > 0 && (core_hours < vm.estimated_core_hours)) {
-                vm.below_recommend_core_hours_warn = true;
-            }
             if (core_hours <= 0 && num_of_cores != 0) {
                 vm.zero_core_hour_invalid = true;
                 vm.request_form.$valid = false;
@@ -257,20 +252,26 @@
             vm.alloc.requests[0].storage_requests.splice(index, 1);
         };
 
-        //check storage product duplicate
+        //check storage product duplications
         vm.checkNcSpDuplicate = function (scope, index) {
             vm.clearDuplatedFlag();
             var found_duplicated = false;
-            var currentStorageRequest = vm.alloc.requests[0].storage_requests[index];
-
+            var all_storage_requests = angular.copy(vm.alloc.requests[0].storage_requests);
             angular.forEach(vm.alloc.requests[0].storage_requests, function (each_sp_req, key) {
-                if (key != index) {
-                    if (each_sp_req.storage_product.id == currentStorageRequest.storage_product.id) {
-                        found_duplicated = true;
+                angular.forEach(all_storage_requests, function (a_sp_req, akey) {
+                    if (key != akey) {
+                        if ((each_sp_req.storage_product.id == a_sp_req.storage_product.id)
+                            && each_sp_req.storage_product.id != 0
+                            && a_sp_req.storage_product.id != 0
+                            && each_sp_req.storage_product.id != undefined
+                            && a_sp_req.storage_product.id != undefined) {
+                            found_duplicated = true;
+                            vm.request_form['nectar_sp_' + akey].$setValidity('isdup', !found_duplicated);
+                            vm.request_form['nectar_sp_' + key].$setValidity('isdup', !found_duplicated);
+                        }
                     }
-                }
+                });
             });
-            vm.request_form['nectar_sp_' + index].$setValidity('isdup', !found_duplicated);
         };
 
         vm.clearDuplatedFlag = function () {

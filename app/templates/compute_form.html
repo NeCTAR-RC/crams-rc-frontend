@@ -79,8 +79,7 @@
 
         <div class="form-group"
              ng-class="{'has-error': (vm.core_hours_invalid || vm.zero_core_hour_invalid || vm.non_zero_core_hours_invalid
-             || (vm.request_form.core_hours.$dirty && vm.request_form.core_hours.$invalid)),
-             'has-warning': vm.below_recommend_core_hours_warn}">
+             || (vm.request_form.core_hours.$dirty && vm.request_form.core_hours.$invalid))}">
             <input type="number" min="0" name="core_hours" id="id-core_hours" class="form-control"
                    ng-model="vm.alloc.requests[0].compute_requests[0].core_hours"
                    ng-change="vm.checkInstanceAndCore()" required/>
@@ -93,9 +92,6 @@
             </span>
             <span class="help-block" ng-show="vm.non_zero_core_hours_invalid">
                  Invalid, must be zero core hour
-            </span>
-            <span class="help-block" ng-show="vm.below_recommend_core_hours_warn">
-                The recommended core hours is {{vm.estimated_core_hours}} or above
             </span>
         </div>
     </div>

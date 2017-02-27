@@ -71,7 +71,6 @@
         vm.checkInstanceAndCore = function () {
             vm.zero_approved_instances_invalid = false;
             vm.approved_cores_less_invalid = false;
-            vm.below_recommend_core_hours_warn = false;
             vm.zero_core_hour_invalid = false;
             vm.non_zero_core_hours_invalid = false;
             var num_of_cores = vm.alloc.requests[0].compute_requests[0].approved_cores;
@@ -87,10 +86,6 @@
             }
             var approved_core_hours = vm.alloc.requests[0].compute_requests[0].approved_core_hours;
             vm.calculate_core_hours();
-            //if approved core hours is less than recommended core hours. just give a warning message
-            if (approved_core_hours > 0 && (approved_core_hours < vm.estimated_core_hours)) {
-                vm.below_recommend_core_hours_warn = true;
-            }
             if (approved_core_hours <= 0 && num_of_cores != 0) {
                 vm.zero_core_hour_invalid = true;
                 vm.approve_form.$valid = false;

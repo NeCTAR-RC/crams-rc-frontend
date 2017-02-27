@@ -14,7 +14,6 @@
         service.durations = loadDurations;
         service.grantTypes = loadGrantTypes;
         service.ncStorageProducts = loadNectarSps;
-        service.vnStorageProducts = loadVicnodeSps;
         service.contacts = loadContacts;
         service.forCodes = loadFORCodes;
         service.fundingBody = loadFundingBody;
@@ -39,10 +38,6 @@
             return fetchLookup('nectar_sps');
         }
 
-        function loadVicnodeSps() {
-            return fetchLookup('vicnode_sps');
-        }
-
         function loadContacts() {
             return fetchLookup('contacts')
         }
@@ -56,7 +51,7 @@
         }
 
         function checkProjectId(systemId, projectIdentifier) {
-            return fetchLookup('exists/project_id/' + systemId + '/' + projectIdentifier+'/')
+            return fetchLookup('exists/project_id/' + systemId + '/' + projectIdentifier + '/')
         }
 
         //private functions

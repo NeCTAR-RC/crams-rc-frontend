@@ -20,29 +20,16 @@
                     <a href="#/approval" ng-class="{ active: isCurrentPath('/approval') }">
                         <i class="fa fa-cubes"></i> Approval
                     </a>
-                <!--</li>-->
-                <!--<li>-->
-                    <!--<a href="#/reports" ng-class="{ active: isCurrentPath('/reports') }">-->
-                        <!--<i class="fa fa-file-text-o"></i> Reports-->
-                    <!--</a>-->
-                <!--</li>-->
-                <!--<li>-->
-                    <!--<a href="#/settings" ng-class="{ active: isCurrentPath('/settings') }">-->
-                        <!--<i class="fa fa-cogs"></i> Settings-->
-                    <!--</a>-->
-                <!--</li>-->
-                <!--<li>-->
-                    <!--<a href="#/contact_us" ng-class="{ active: isCurrentPath('/contact_us') }">-->
-                        <!--<i class="fa fa-fax"></i> Contact Us-->
-                    <!--</a>-->
-                <!--</li>-->
+                </li>
             </ul>
         </div>
         <div class="nav-menu-right">
-            <div class="collapse navbar-collapse navbar-responsive-collapse" ng-controller="AAFLoginController as loginCtr">
+            <div class="collapse navbar-collapse navbar-responsive-collapse"
+                 ng-controller="AAFLoginController as loginCtr">
                 <ul class="nav navbar-nav navbar-right" id="user_menu">
                     <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown">{{ globals.currentUser.username }}<b class="caret"></b></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown">{{ globals.currentUser.username }}<b
+                                class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="#/allocations">My Allocations</a></li>
                             <li><a ng-click="loginCtr.logout()">Logout</a></li>

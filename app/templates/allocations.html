@@ -66,20 +66,10 @@
                 </td>
                 <td>
                     <span ng-if="nc_req.request_status.code =='E' || nc_req.request_status.code =='N'">
-                        <span ng-if="nc_req.funding_scheme.funding_scheme.indexOf('NeCTAR') > -1">
-                            <a href="#/{{ nav.first_path }}/edit_request/{{nc_req.project}}/{{nc_req.id}}">Edit</a> |
-                        </span>
-                        <span ng-if="nc_req.funding_scheme.funding_scheme.indexOf('VicNode') > -1">
-                            <a href="#/{{ nav.first_path }}/edit_vicnode_request/{{nc_req.project}}/{{nc_req.id}}">Edit</a> |
-                        </span>
+                        <a href="#/{{ nav.first_path }}/edit_request/{{nc_req.project}}/{{nc_req.id}}">Edit</a> |
                     </span>
                     <span ng-if="nc_req.request_status.code !='N' && nc_req.request_status.code !='E' && nc_req.request_status.code !='A'">
-                        <span ng-if="nc_req.funding_scheme.funding_scheme.indexOf('NeCTAR') > -1">
-                            <a href="#/{{ nav.first_path }}/edit_request/{{nc_req.project}}/{{nc_req.id}}">Amend/Extend allocation</a> |
-                        </span>
-                        <span ng-if="nc_req.funding_scheme.funding_scheme.indexOf('VicNode') > -1">
-                            <a href="#/{{ nav.first_path }}/edit_vicnode_request/{{nc_req.project}}/{{nc_req.id}}">Amend/Extend allocation</a> |
-                        </span>
+                        <a href="#/{{ nav.first_path }}/edit_request/{{nc_req.project}}/{{nc_req.id}}">Amend/Extend allocation</a> |
                     </span>
                     <a href="#/{{ nav.first_path }}/history/{{nc_req.id}}">History</a>
                 </td>

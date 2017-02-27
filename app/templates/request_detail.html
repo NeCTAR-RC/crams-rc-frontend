@@ -262,54 +262,27 @@
         <div class="col-md-2" ng-if="vm.isEditable(nav.first_path)">
             <div class="form-group">
                 <span ng-if="req.request_status.code =='E' && !req.parent_request">
-                    <span ng-if="req.funding_scheme.funding_scheme.indexOf('NeCTAR') > -1">
-                        <a href="#/allocations/edit_request/{{vm.alloc_project_request.id}}/{{req.id}}">
-                            <input class="btn bg-primary" type="button" value="Edit Request">
-                        </a>
-                    </span>
-                    <span ng-if="req.funding_scheme.funding_scheme.indexOf('VicNode') > -1">
-                        <a href="#/allocations/edit_vicnode_request/{{vm.alloc_project_request.id}}/{{req.id}}">
-                            <input class="btn bg-primary" type="button" value="Edit Request">
-                        </a>
-                    </span>
+                    <a href="#/allocations/edit_request/{{vm.alloc_project_request.id}}/{{req.id}}">
+                        <input class="btn bg-primary" type="button" value="Edit Request">
+                    </a>
                 </span>
                 <span ng-if="req.request_status.code !='E' && req.request_status.code !='A' && !req.parent_request">
-                     <span ng-if="req.funding_scheme.funding_scheme.indexOf('NeCTAR') > -1">
-                         <a href="#/allocations/edit_request/{{vm.alloc_project_request.id}}/{{req.id}}">
-                             <input class="btn bg-primary" type="button" value="Amend/Extend allocation">
-                         </a>
-                     </span>
-                     <span ng-if="req.funding_scheme.funding_scheme.indexOf('VicNode') > -1">
-                         <a href="#/allocations/edit_vicnode_request/{{vm.alloc_project_request.id}}/{{req.id}}">
-                             <input class="btn bg-primary" type="button" value="Amend/Extend allocation">
-                         </a>
-                     </span>
+                     <a href="#/allocations/edit_request/{{vm.alloc_project_request.id}}/{{req.id}}">
+                         <input class="btn bg-primary" type="button" value="Amend/Extend allocation">
+                     </a>
                  </span>
             </div>
         </div>
         <div class="col-md-2" ng-if="vm.isApprovable(req.request_status.code, nav.first_path) && !req.parent_request">
-            <span ng-if="req.funding_scheme.funding_scheme.indexOf('NeCTAR') > -1">
-                <a href="#/approval/approve_request/{{req.id}}">
-                    <input class="btn bg-primary" type="button" value="Approve Request"/>
-                </a>
-            </span>
-            <span ng-if="req.funding_scheme.funding_scheme.indexOf('VicNode') > -1">
-                <a href="#/approval/approve_vicnode_request/{{req.id}}">
-                    <input class="btn bg-primary" type="button" value="Approve Request"/>
-                </a>
-            </span>
+
+            <a href="#/approval/approve_request/{{req.id}}">
+                <input class="btn bg-primary" type="button" value="Approve Request"/>
+            </a>
         </div>
         <div class="col-md-2" ng-if="vm.isDeclinable(req.request_status.code, nav.first_path) && !req.parent_request">
-            <span ng-if="req.funding_scheme.funding_scheme.indexOf('NeCTAR') > -1">
-                <a href="#/approval/decline_request/{{req.id}}">
-                    <input class="btn bg-primary" type="button" value="Decline Request"/>
-                </a>
-            </span>
-            <span ng-if="req.funding_scheme.funding_scheme.indexOf('VicNode') > -1">
-                 <a href="#/approval/decline_vicnode_request/{{req.id}}">
-                     <input class="btn bg-primary" type="button" value="Decline Request"/>
-                 </a>
-            </span>
+            <a href="#/approval/decline_request/{{req.id}}">
+                <input class="btn bg-primary" type="button" value="Decline Request"/>
+            </a>
         </div>
         <div class="col-md-2" ng-if="!req.parent_request">
             <a href="#/{{ nav.first_path }}/history/{{req.id}}">

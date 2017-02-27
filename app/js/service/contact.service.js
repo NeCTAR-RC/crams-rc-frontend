@@ -10,12 +10,10 @@
     ContactService.$inject = ['$http', 'ENV'];
     function ContactService($http, ENV) {
 
-
         var service = {};
         service.createContact = createContact;
         service.findContact = findContact;
         service.makeNewChiefInvestigator = makeNewChiefInvestigator;
-        service.makeNewTechnicalContact = makeNewTechnicalContact;
 
         return service;
 
@@ -43,16 +41,7 @@
         function makeNewChiefInvestigator() {
             var newContact = {};
             newContact.contact = makeNewContactTemplate();
-            newContact.contact_role = {"id": 2}
-
-            return newContact;
-        }
-
-        function makeNewTechnicalContact() {
-            var newContact = {};
-            newContact.contact = makeNewContactTemplate();
-            newContact.contact_role = {"id": 3}
-
+            newContact.contact_role = {"id": 2};
             return newContact;
         }
 
@@ -66,7 +55,6 @@
                 "organisation": null
             }
         }
-
 
         //private functions
         function handleSuccess(response) {
