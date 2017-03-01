@@ -250,11 +250,12 @@
         // remove nectar storage product
         vm.removeNcSpQuota = function (index) {
             vm.alloc.requests[0].storage_requests.splice(index, 1);
+            vm.checkNcSpDuplicate();
         };
 
         //check storage product duplications
         vm.checkNcSpDuplicate = function (scope, index) {
-            vm.clearDuplatedFlag();
+            vm.clearDuplicatedFlag();
             var found_duplicated = false;
             var all_storage_requests = angular.copy(vm.alloc.requests[0].storage_requests);
             angular.forEach(vm.alloc.requests[0].storage_requests, function (each_sp_req, key) {
@@ -274,7 +275,7 @@
             });
         };
 
-        vm.clearDuplatedFlag = function () {
+        vm.clearDuplicatedFlag = function () {
             angular.forEach(vm.alloc.requests[0].storage_requests, function (each_sp_req, key) {
                 vm.request_form['nectar_sp_' + key].$setValidity('isdup', true);
             });
